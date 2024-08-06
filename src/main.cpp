@@ -1,24 +1,14 @@
 #include "vex.h"
 
+// Competition
+
+#include "Competition/user-control.h"
+#include "Autonomous/autonomous.h"
+#include "Autonomous/pre-auton.h"
+
 using namespace vex;
 
 competition Competition;
-
-void pre_auton(void) {
-
-  vexcodeInit();
-}
-
-void autonomous(void) {
-
-}
-
-void usercontrol(void) {
-  while (1) {
-    wait(20, msec);
-
-  }
-}
 
 int main() {
   Competition.autonomous(autonomous);
