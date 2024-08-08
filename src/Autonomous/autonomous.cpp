@@ -1,4 +1,3 @@
-#include "vex.h"
 #include "Autonomous/autonomous.h"
 
 using namespace vex;

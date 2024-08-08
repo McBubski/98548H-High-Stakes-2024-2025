@@ -6,6 +6,10 @@
 #include "Autonomous/autonomous.h"
 #include "Autonomous/pre-auton.h"
 
+// GUI
+
+#include "GUI/gui-main.h"
+
 using namespace vex;
 
 competition Competition;
@@ -16,7 +20,11 @@ int main() {
 
   pre_auton();
 
+  task guiTask = task(drawScreen);
+
   while (true) {
     wait(100, msec);
   }
 }
+
+
