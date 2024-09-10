@@ -19,4 +19,19 @@ extern motor motorBR;
 
 extern motor_group rightDrive;
 
+// Lift
+
+extern motor ringIntake;
+extern motor ringLift;
+extern motor_group lift;
+
+// Sensors
+
+extern pot lift_potentiometer;
+extern inertial inertial_sensor;
+
+// Pneumatics
+
+extern digital_out goal_clamp;
+
 void vexcodeInit(void);

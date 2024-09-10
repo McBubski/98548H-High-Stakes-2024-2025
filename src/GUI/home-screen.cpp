@@ -18,4 +18,8 @@ void drawHomeScreen(void) {
     // Draw Coordinates
     drawText(" X: 12.03", 0, 20, mono20);
     drawText(" Y: -5.65", 0, 40, mono20);
+
+    // Test Info
+
+    Brain.Screen.printAt(100, 100, "Pot.: %f", lift_potentiometer.angle(degrees));
 }
