@@ -1,3 +1,5 @@
+#include "Autonomous/odometry.h"
+
 using namespace vex;
 
 extern brain Brain;
@@ -30,8 +32,15 @@ extern motor_group lift;
 extern pot lift_potentiometer;
 extern inertial inertial_sensor;
 
+extern rotation sidewaysTrackingWheel;
+extern rotation forwardTrackingWheel;
+
 // Pneumatics
 
 extern digital_out goal_clamp;
+
+// Odometry
+
+extern Odometry Position_Tracking;
 
 void vexcodeInit(void);

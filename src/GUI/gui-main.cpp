@@ -3,6 +3,8 @@
 
 #include "GUI/Screens/home-screen.h"
 
+#include <iostream>
+
 using namespace vex;
 
 int drawScreen(void) {

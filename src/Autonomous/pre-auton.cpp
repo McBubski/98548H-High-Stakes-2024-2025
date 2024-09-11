@@ -1,4 +1,5 @@
 #include "Autonomous/pre-auton.h"
+#include <iostream>
 
 using namespace vex;
 
@@ -7,5 +8,11 @@ void pre_auton(void) {
     rightDrive.setStopping(coast);
 
     lift.setStopping(brake);
+
+    wait(100, msec);
+
+    // Zero out sensors
+
+    forwardTrackingWheel.resetPosition();
+    sidewaysTrackingWheel.resetPosition();
 }
-    

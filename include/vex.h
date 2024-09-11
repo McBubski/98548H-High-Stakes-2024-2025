@@ -8,10 +8,6 @@
 
 #include "robot-config.h"
 
-// My Stuff
-
-
-
 #define waitUntil(condition)                                                   \
   do {                                                                         \
     wait(5, msec);                                                             \

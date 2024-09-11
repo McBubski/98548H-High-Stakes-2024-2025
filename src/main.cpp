@@ -22,6 +22,10 @@ int main() {
 
   task guiTask = task(drawScreen);
 
+  // Odometry
+
+  task odometryTask = task(UpdateOdometry);
+
   while (true) {
     wait(100, msec);
   }

@@ -33,9 +33,16 @@ motor_group lift = motor_group(ringIntake, ringLift);
 pot lift_potentiometer = pot(Brain.ThreeWirePort.C);
 inertial inertial_sensor = inertial(PORT21);
 
+rotation sidewaysTrackingWheel = rotation(PORT5, false);
+rotation forwardTrackingWheel = rotation(PORT7, false);
+
 // Pneumatics
 
 digital_out goal_clamp = digital_out(Brain.ThreeWirePort.B);
+
+// Odometry
+
+Odometry Position_Tracking = Odometry(2.75 / 2, 1.25, 1.25, 0.0, 0.0, 0.0);
 
 void vexcodeInit(void) {
   
