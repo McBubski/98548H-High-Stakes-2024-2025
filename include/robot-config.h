@@ -1,5 +1,3 @@
-#include "Autonomous/odometry.h"
-
 using namespace vex;
 
 extern brain Brain;

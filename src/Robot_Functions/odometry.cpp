@@ -78,7 +78,7 @@ void Odometry::Update(void) {
     // Saves robot heading (DEGREES)
     Heading = inertial_sensor.heading(rotationUnits::deg);
 
-    // Saves robot heding (RADIANS)
+    // Saves robot heading (RADIANS)
     headingInRadians = Heading * M_PI / 180.0;
 
     // Calculates change in angle in RADIANS 

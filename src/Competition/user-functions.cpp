@@ -16,7 +16,7 @@ void initializeUserControl(void) {
     ringIntake.setStopping(brake);
 
     // Connects controller inputs to functions
-    Controller.ButtonUp.pressed(toggleGoalClamp);
+    Controller.ButtonDown.pressed(toggleGoalClamp);
 }
 
 void toggleGoalClamp(void) {

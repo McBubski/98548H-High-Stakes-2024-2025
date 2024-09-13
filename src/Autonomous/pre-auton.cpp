@@ -1,5 +1,4 @@
 #include "Autonomous/pre-auton.h"
-#include <iostream>
 
 using namespace vex;
 
