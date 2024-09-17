@@ -8,7 +8,6 @@
 #include "v5_vcs.h"
 
 #include "robot-config.h"
-#include "Robot_Functions/odometry.h"
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \

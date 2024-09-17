@@ -1,5 +1,5 @@
 #include "vex.h"
-#include "Autonomous/odometry.h"
+#include "Robot_Functions/odometry.h"
 
 #include <iostream>
 
@@ -106,7 +106,7 @@ void Odometry::Update(void) {
     GlobalYPos += deltaYGlobal;
 }
 
-// Update Odometry Task
+// Update Odometry Task gyatt gyatt rizz rizz ohio ohio skibidi skibidi !!! !!! !!!
 
 int UpdateOdometry(void) {
     while (true) {

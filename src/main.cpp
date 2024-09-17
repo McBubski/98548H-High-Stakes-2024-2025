@@ -6,8 +6,6 @@
 #include "Autonomous/autonomous.h"
 #include "Autonomous/pre-auton.h"
 
-// GUI
-
 #include "GUI/gui-main.h"
 
 using namespace vex;
@@ -21,9 +19,6 @@ int main() {
   pre_auton();
 
   task guiTask = task(drawScreen);
-
-  // Odometry
-
   task odometryTask = task(UpdateOdometry);
 
   while (true) {

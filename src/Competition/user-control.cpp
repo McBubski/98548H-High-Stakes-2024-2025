@@ -6,8 +6,8 @@ using namespace vex;
 int slowIntakeSpeed = 25;
 int fastIntakeSpeed = 75;
 
-float liftMaxAngle = 88;
-float liftMinAngle = 132;
+float liftMaxAngle = 198;
+float liftMinAngle = 213;
 
 void usercontrol(void) {
   // Initializes robot before driving

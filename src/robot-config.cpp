@@ -39,9 +39,11 @@ rotation forwardTrackingWheel = rotation(PORT7, false);
 // Pneumatics
 
 digital_out goal_clamp = digital_out(Brain.ThreeWirePort.B);
+digital_out corner_arm = digital_out(Brain.ThreeWirePort.D);
 
 // Odometry
 
+// Tracking Wheel Radius, Forward Tracking Wheel Distance, Sideways Tracking Wheel Distance, Starting Heading, Starting X, Starting Y
 Odometry Position_Tracking = Odometry(2.75 / 2, 1.25, 1.25, 0.0, 0.0, 0.0);
 
 void vexcodeInit(void) {

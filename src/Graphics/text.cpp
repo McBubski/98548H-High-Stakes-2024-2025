@@ -1,4 +1,4 @@
-#include "GUI/text.h"
+#include "Graphics/text.h"
 
 using namespace vex;
 

@@ -17,10 +17,15 @@ void initializeUserControl(void) {
 
     // Connects controller inputs to functions
     Controller.ButtonDown.pressed(toggleGoalClamp);
+    Controller.ButtonRight.pressed(toggleCornerArm);
 }
 
 void toggleGoalClamp(void) {
     goal_clamp.set(!goal_clamp.value());
+}
+
+void toggleCornerArm(void) {
+  corner_arm.set(!corner_arm.value());
 }
 
 void toggleIntakeSpeed(void) {

@@ -1,5 +1,7 @@
 using namespace vex;
 
+#include "Robot_Functions/odometry.h"
+
 extern brain Brain;
 extern controller Controller;
 
@@ -36,6 +38,7 @@ extern rotation forwardTrackingWheel;
 // Pneumatics
 
 extern digital_out goal_clamp;
+extern digital_out corner_arm;
 
 // Odometry
 

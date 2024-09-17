@@ -1,7 +1,7 @@
 #include "GUI/gui-main.h"
-#include "GUI_Functions/text.h"
+#include "Graphics/text.h"
 
-#include "GUI_Screens/home-screen.h"
+#include "Screens/home-screen.h"
 
 #include <iostream>
 
