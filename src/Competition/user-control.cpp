@@ -8,6 +8,9 @@ int fastIntakeSpeed = 75;
 
 float liftMaxAngle = 196;
 float liftMinAngle = 213;
+float intakeLiftMinAngle = 212.5;
+
+bool intakeSpinning = false;
 
 void usercontrol(void) {
   // Initializes robot before driving
@@ -41,7 +44,11 @@ void usercontrol(void) {
         ringLift.stop();
       }
     } else {
-      ringLift.stop();
+      if (intakeSpinning && lift_potentiometer.angle(degrees) > intakeLiftMinAngle) {
+        ringLift.spin(forward, 75, percent);
+      } else {
+        ringLift.stop();
+      }
     }
 
     // Sets intakeSpeed to however fast it should be
@@ -58,12 +65,16 @@ void usercontrol(void) {
 
     if (Controller.ButtonR1.pressing()) {
       ringIntake.spin(forward, intakeSpeed, percent);
+      intakeSpinning = true;
     } else if (Controller.ButtonR2.pressing()) {
         ringIntake.spin(reverse, intakeSpeed, percent);
+        intakeSpinning = true;
     } else {
       ringIntake.stop();
+      intakeSpinning = false;
     }
 
+    std::cout << "Spinning: " << lift_potentiometer.angle(degrees) << std::endl;
   }
 }
 
