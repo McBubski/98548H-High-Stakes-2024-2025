@@ -3,7 +3,6 @@
 void drawHomeScreen(void);
 
 void ShowCalibrateButton(void);
-
 void CalibrateInertial(void);
 
 void SwitchToOdometryWindow(void);

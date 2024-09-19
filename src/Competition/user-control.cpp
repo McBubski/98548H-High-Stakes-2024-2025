@@ -6,7 +6,7 @@ using namespace vex;
 int slowIntakeSpeed = 25;
 int fastIntakeSpeed = 75;
 
-float liftMaxAngle = 198;
+float liftMaxAngle = 196;
 float liftMinAngle = 213;
 
 void usercontrol(void) {

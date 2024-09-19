@@ -1,4 +1,5 @@
 #include "Screens/home-screen.h"
+#include "GUI/gui-main.h"
 
 #include "Graphics/text.h"
 #include "Graphics/button.h"
@@ -101,10 +102,10 @@ void CalibrateInertial(void) {
 // Switches screen to odometry window
 
 void SwitchToOdometryWindow(void) {
-
+    window = "Odometry";
 }
 void SwitchToSystemWindow(void) {
-
+    window = "System";
 }
 
 // Auton Buttons

@@ -1,5 +1,5 @@
 #include "vex.h"
 
-extern bool screenDebounce;
+extern const char* window;
 
 int drawScreen(void);

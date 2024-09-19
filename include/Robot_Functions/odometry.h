@@ -31,8 +31,7 @@ private:
     double totalDeltaSideways;
 
     // Heading (RADIANS)
-
-    double headingInRadians;
+    
     double previousHeadingInRadians;
 
     // Change in Heading (RADIANS)
