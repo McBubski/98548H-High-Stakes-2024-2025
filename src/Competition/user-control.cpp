@@ -8,7 +8,7 @@ int fastIntakeSpeed = 75;
 
 float liftMaxAngle = 196;
 float liftMinAngle = 213;
-float intakeLiftMinAngle = 212.5;
+float intakeLiftMinAngle = 213;
 
 bool intakeSpinning = false;
 
@@ -32,23 +32,15 @@ void usercontrol(void) {
     // Moves lift up and down
 
     if (Controller.ButtonL1.pressing()) {
-      if (lift_potentiometer.angle(degrees) > liftMaxAngle) {
-        ringLift.spin(forward, 75, percent);
-      } else {
-        ringLift.stop();
-      }
+      ringLift.spin(forward, 75, percent);
     } else if (Controller.ButtonL2.pressing()) {
-      if (lift_potentiometer.angle(degrees) < liftMinAngle) {
-        ringLift.spin(reverse, 75, percent);
-      } else {
-        ringLift.stop();
-      }
+      ringLift.spin(reverse, 75, percent);
     } else {
-      if (intakeSpinning && lift_potentiometer.angle(degrees) > intakeLiftMinAngle) {
-        ringLift.spin(forward, 75, percent);
-      } else {
+      //if (intakeSpinning && lift_potentiometer.angle(degrees) > intakeLiftMinAngle) {
+      //  ringLift.spin(forward, 75, percent);
+      //} else {
         ringLift.stop();
-      }
+      //}
     }
 
     // Sets intakeSpeed to however fast it should be
@@ -73,8 +65,6 @@ void usercontrol(void) {
       ringIntake.stop();
       intakeSpinning = false;
     }
-
-    std::cout << "Spinning: " << lift_potentiometer.angle(degrees) << std::endl;
   }
 }
 

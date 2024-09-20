@@ -21,6 +21,10 @@ int drawScreen(void) {
             drawOdometryScreen();
         }
 
+
+        ai_vision.takeSnapshot(aivision::ALL_AIOBJS);
+        std::cout << "Objects: " << ai_vision.objectCount << std::endl;
+
         // Renders then clears screen
 
         Brain.Screen.render();

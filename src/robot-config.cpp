@@ -36,6 +36,8 @@ inertial inertial_sensor = inertial(PORT21);
 rotation sidewaysTrackingWheel = rotation(PORT5, false);
 rotation forwardTrackingWheel = rotation(PORT7, false);
 
+aivision ai_vision = aivision(PORT8);
+
 // Pneumatics
 
 digital_out goal_clamp = digital_out(Brain.ThreeWirePort.B);

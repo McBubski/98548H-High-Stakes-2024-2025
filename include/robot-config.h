@@ -35,6 +35,8 @@ extern inertial inertial_sensor;
 extern rotation sidewaysTrackingWheel;
 extern rotation forwardTrackingWheel;
 
+extern aivision ai_vision;
+
 // Pneumatics
 
 extern digital_out goal_clamp;

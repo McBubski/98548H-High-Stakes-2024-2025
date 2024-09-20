@@ -36,6 +36,7 @@ private:
 
     // Change in Heading (RADIANS)
 
+    double headingInRadians;
     double deltaHeadingInRadians;
     double averageHeadingForArc;
 
