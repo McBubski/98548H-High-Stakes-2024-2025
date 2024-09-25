@@ -1,5 +1,6 @@
 #include "vex.h"
 #include "Robot_Functions/odometry.h"
+#include "Autonomous/autonomous.h"
 
 #include <iostream>
 
@@ -104,6 +105,20 @@ void Odometry::Update(void) {
 
     GlobalXPos += deltaXGlobal;
     GlobalYPos += deltaYGlobal;
+}
+
+void Odometry::SetAuton(int path) {
+    for (int i = 0; i < 5; i++) {
+        int newHeading = startingPositions[auton_path - 1][2];
+
+        headingInRadians = newHeading * M_PI / 180.0;
+        previousHeadingInRadians = headingInRadians;
+
+        inertial_sensor.setHeading(newHeading, degrees);
+
+        GlobalXPos = startingPositions[auton_path - 1][0];
+        GlobalYPos = startingPositions[auton_path - 1][1];
+    }
 }
 
 // Update Odometry Task gyatt gyatt rizz rizz ohio ohio skibidi skibidi !!! !!! !!!

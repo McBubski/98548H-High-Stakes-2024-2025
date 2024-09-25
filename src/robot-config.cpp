@@ -15,28 +15,28 @@ motor_group leftDrive = motor_group(motorTL, motorML, motorBL);
 
 // Right Drive
 
-motor motorTR = motor(PORT10, ratio6_1, false);
-motor motorMR = motor(PORT9, ratio6_1, true);
+motor motorTR = motor(PORT8, ratio6_1, false);
+motor motorMR = motor(PORT1, ratio6_1, true);
 motor motorBR = motor(PORT19, ratio6_1, false);
 
 motor_group rightDrive = motor_group(motorTR, motorMR, motorBR);
 
 // Lift
 
-motor ringIntake = motor(PORT1, ratio36_1, false);
-motor ringLift = motor(PORT12, ratio36_1, true);
+motor ringIntake = motor(PORT21, ratio36_1, false);
+motor ringLift = motor(PORT13, ratio36_1, true);
 
 motor_group lift = motor_group(ringIntake, ringLift);
 
 // Sensors
 
 pot lift_potentiometer = pot(Brain.ThreeWirePort.C);
-inertial inertial_sensor = inertial(PORT21);
+inertial inertial_sensor = inertial(PORT10);
 
 rotation sidewaysTrackingWheel = rotation(PORT5, false);
 rotation forwardTrackingWheel = rotation(PORT7, false);
 
-aivision ai_vision = aivision(PORT8);
+aivision ai_vision = aivision(PORT9);
 
 // Pneumatics
 

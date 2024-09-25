@@ -68,6 +68,7 @@ public:
     Odometry(double tracking_radius, double forward_tracking_distance, double sideways_tracking_distance, double start_orientation, double start_x_pos, double start_y_pos);
 
     void Update(void);
+    void SetAuton(int path);
 };
 
 int UpdateOdometry(void);

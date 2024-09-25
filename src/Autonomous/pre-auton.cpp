@@ -1,8 +1,10 @@
 #include "Autonomous/pre-auton.h"
+#include "Autonomous/autonomous.h"
 
 using namespace vex;
 
 void pre_auton(void) {
+    Position_Tracking.SetAuton(auton_path);
     leftDrive.setStopping(coast);
     rightDrive.setStopping(coast);
 

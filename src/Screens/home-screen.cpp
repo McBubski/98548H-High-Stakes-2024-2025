@@ -4,6 +4,8 @@
 #include "Graphics/text.h"
 #include "Graphics/button.h"
 
+#include "Autonomous/autonomous.h"
+
 bool screenDebounce = false;
 
 // Calibrate Button
@@ -30,29 +32,29 @@ void drawHomeScreen(void) {
     Brain.Screen.setPenColor(white);
     Brain.Screen.setFillColor(black);
 
-    drawText("98548H | Revamped", 230 - Brain.Screen.getStringWidth("98548H | Revamped") / 2, 35, mono20);
+    drawText("98548H | Revamped", 230 - Brain.Screen.getStringWidth("98548H | Revamped") / 2, 25, mono20);
+
+    ShowBatteryLevel();
 
     // Draw Heading
+    Brain.Screen.setPenColor(white);
     drawText("Heading: ", 480 - Brain.Screen.getStringWidth("Heading: "), 25, mono20);
-    //drawText("120.0°", 480 - Brain.Screen.getStringWidth("120.0°") * 1.25, 40, mono20);
     Brain.Screen.printAt(400, 45, "%.1f°", inertial_sensor.heading(degrees));
-
-    // Draw Coordinates
-    //drawText(" X: 12.03", 0, 20, mono20);
-    //drawText(" Y: -5.65", 0, 40, mono20);
 
     Brain.Screen.printAt(10, 25, "X: %.2f", Position_Tracking.GlobalXPos);
     Brain.Screen.printAt(10, 45, "Y: %.2f", Position_Tracking.GlobalYPos);
     
     // Auton Info
 
-    drawText(auton, 170 - Brain.Screen.getStringWidth(auton) / 2, 120, mono40);
+    Brain.Screen.setFont(mono40);
+    Brain.Screen.printAt(240 - Brain.Screen.getStringWidth(auton) / 2, 120, auton);
 
     Brain.Screen.setFont(mono20);
 
     // Display Buttons
 
     ShowCalibrateButton();
+    UpdateAutonInformation();
 
     OdometryWindowButton.display();
     SystemWindowButton.display();
@@ -89,11 +91,43 @@ void ShowCalibrateButton(void) {
     CalibrateButton.display();
 }
 
+void ShowBatteryLevel(void) {
+    int batteryLevel = Brain.Battery.capacity(percent);
+
+    if (batteryLevel > 60) {
+        Brain.Screen.setPenColor(green);
+    } else if (batteryLevel <= 60 && batteryLevel > 30) {
+        Brain.Screen.setPenColor(yellow);
+    } else if (batteryLevel <= 30) {
+        Brain.Screen.setPenColor(red);
+    }
+
+   Brain.Screen.printAt(205, 45, "%d%s", batteryLevel, "%");
+}
+
+void UpdateAutonInformation(void) {
+    switch (auton_path) {
+        case 1:
+            auton = "Left Side Auton";
+            break;
+        case 2:
+            auton = "Right Side Auton";
+            break;
+        case 3:
+            auton = "Skills";
+            break;
+        default:
+            auton = "Left Side Auton";
+    }
+}
+
 
 //////   BUTTON FUNCTIONS
 
 
 void CalibrateInertial(void) {
+    Position_Tracking.SetAuton(auton_path);
+
     if (!inertial_sensor.isCalibrating()) {
         inertial_sensor.calibrate();
     }
@@ -111,10 +145,10 @@ void SwitchToSystemWindow(void) {
 // Auton Buttons
 
 void SwitchAutonLeft(void) {
-
+    changeAuton(-1);
 }
 void SwitchAutonRight(void) {
-
+    changeAuton(1);
 }
 
 // Checks for button presses
