@@ -60,6 +60,10 @@ Odometry::Odometry(double tracking_radius, double forward_tracking_distance, dou
 // Update Odometry
 
 void Odometry::Update(void) {
+    if (inertial_sensor.isCalibrating()) {
+        return;
+    }
+
     // Rotation Sensor Values (DEGREES)
     forwardPos = forwardTrackingWheel.position(rotationUnits::deg);
     sidewaysPos = sidewaysTrackingWheel.position(rotationUnits::deg);
@@ -108,17 +112,15 @@ void Odometry::Update(void) {
 }
 
 void Odometry::SetAuton(int path) {
-    for (int i = 0; i < 5; i++) {
-        int newHeading = startingPositions[auton_path - 1][2];
+    float newHeading = startingPositions[auton_path - 1][2];
 
-        headingInRadians = newHeading * M_PI / 180.0;
-        previousHeadingInRadians = headingInRadians;
+    headingInRadians = newHeading * M_PI / 180.0;
+    previousHeadingInRadians = headingInRadians;
 
-        inertial_sensor.setHeading(newHeading, degrees);
+    inertial_sensor.setHeading(newHeading, degrees);
 
-        GlobalXPos = startingPositions[auton_path - 1][0];
-        GlobalYPos = startingPositions[auton_path - 1][1];
-    }
+    GlobalXPos = startingPositions[auton_path - 1][0];
+    GlobalYPos = startingPositions[auton_path - 1][1];
 }
 
 // Update Odometry Task gyatt gyatt rizz rizz ohio ohio skibidi skibidi !!! !!! !!!

@@ -25,7 +25,7 @@ int drawScreen(void) {
 
         Brain.Screen.render();
 
-        wait(20, msec);
+        wait(100, msec);
 
         Brain.Screen.clearScreen();
     }

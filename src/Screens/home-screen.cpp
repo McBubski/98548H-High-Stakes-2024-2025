@@ -50,6 +50,7 @@ void drawHomeScreen(void) {
     Brain.Screen.printAt(240 - Brain.Screen.getStringWidth(auton) / 2, 120, auton);
 
     Brain.Screen.setFont(mono20);
+    Brain.Screen.setPenWidth(2);
 
     // Display Buttons
 
@@ -126,11 +127,11 @@ void UpdateAutonInformation(void) {
 
 
 void CalibrateInertial(void) {
-    Position_Tracking.SetAuton(auton_path);
-
     if (!inertial_sensor.isCalibrating()) {
         inertial_sensor.calibrate();
     }
+
+    Position_Tracking.SetAuton(auton_path);
 }
 
 // Switches screen to odometry window

@@ -121,3 +121,7 @@ void driveTo(double x, double y, double speed, vex::directionType dir) {
         driveFor(-dist, speed);
     }
 }
+
+void moveLiftByDegrees(float degrees) {
+ 
+}
