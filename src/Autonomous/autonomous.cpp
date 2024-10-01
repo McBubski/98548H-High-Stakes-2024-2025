@@ -46,7 +46,7 @@ void autonomous(void) {
 
     ringIntake.stop();
     corner_arm.set(true);
-    turnToHeading(85, 100); 
+    turnToHeading(45, 100); 
 
     //ringIntake.spin(forward, 100, percent);
     //wait(300, msec);

@@ -7,41 +7,41 @@ controller Controller;
 
 // Left Drive
 
-motor motorTL = motor(PORT2, ratio6_1, true);
-motor motorML = motor(PORT3, ratio6_1, false);
-motor motorBL = motor(PORT17, ratio6_1, true);
+motor motorTL = motor(PORT6, ratio6_1, false);
+motor motorML = motor(PORT5, ratio6_1, true);
+motor motorBL = motor(PORT10, ratio6_1, true);
 
 motor_group leftDrive = motor_group(motorTL, motorML, motorBL);
 
 // Right Drive
 
-motor motorTR = motor(PORT8, ratio6_1, false);
-motor motorMR = motor(PORT1, ratio6_1, true);
-motor motorBR = motor(PORT19, ratio6_1, false);
+motor motorTR = motor(PORT2, ratio6_1, true);
+motor motorMR = motor(PORT1, ratio6_1, false);
+motor motorBR = motor(PORT8, ratio6_1, false);
 
 motor_group rightDrive = motor_group(motorTR, motorMR, motorBR);
 
 // Lift
 
 motor ringIntake = motor(PORT21, ratio36_1, false);
-motor ringLift = motor(PORT13, ratio36_1, true);
+motor ringLift = motor(PORT12, ratio36_1, true);
 
 motor_group lift = motor_group(ringIntake, ringLift);
 
 // Sensors
 
 pot lift_potentiometer = pot(Brain.ThreeWirePort.C);
-inertial inertial_sensor = inertial(PORT10);
+inertial inertial_sensor = inertial(PORT9);
 
-rotation sidewaysTrackingWheel = rotation(PORT5, false);
-rotation forwardTrackingWheel = rotation(PORT7, false);
+rotation sidewaysTrackingWheel = rotation(PORT7, false);
+rotation forwardTrackingWheel = rotation(PORT3, false);
 
-aivision ai_vision = aivision(PORT9);
+aivision ai_vision = aivision(PORT4);
 
 // Pneumatics
 
-digital_out goal_clamp = digital_out(Brain.ThreeWirePort.B);
-digital_out corner_arm = digital_out(Brain.ThreeWirePort.D);
+digital_out goal_clamp = digital_out(Brain.ThreeWirePort.A);
+digital_out corner_arm = digital_out(Brain.ThreeWirePort.B);
 
 // Odometry
 

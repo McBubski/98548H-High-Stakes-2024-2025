@@ -109,16 +109,16 @@ void ShowBatteryLevel(void) {
 void UpdateAutonInformation(void) {
     switch (auton_path) {
         case 1:
-            auton = "Left Side Auton";
+            auton = "Blue Auton";
             break;
         case 2:
-            auton = "Right Side Auton";
+            auton = "Red Auton";
             break;
         case 3:
             auton = "Skills";
             break;
         default:
-            auton = "Left Side Auton";
+            auton = "Blue Auton";
     }
 }
 
