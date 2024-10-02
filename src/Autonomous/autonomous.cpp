@@ -6,47 +6,109 @@ using namespace vex;
 int auton_path = 1;
 
 double startingPositions[3][3] = {
-    {63.5, -63.5, 0}, // Left Side Auton
+    {-60.75, 0, 90}, // Left Side Auton
     {10, 10, 90}, // Right Side Auton
     {40, 40, 180} // Skills
 };
 
 void autonomous(void) {
-    ringLift.setStopping(hold);
-    ringIntake.spin(reverse, 100, percent);
-    driveFor(20, 100);
-    ringIntake.stop();
-    turnToHeading(270, 100);
-    driveFor(-4, 100);
+    // SKILLS
 
-    ringLift.spin(forward, 80, percent);
-    wait(600, msec);
-    ringLift.stop();
-
-    driveFor(8, 100);
-
-    ringLift.spin(reverse, 80, percent);
-    wait(400, msec);
-    ringLift.setStopping(coast);
-    ringLift.stop();   
-
-    driveFor(-16, 100); 
-
-    turnToHeading(320, 100);
-    driveFor(-38, 40);
-    goal_clamp.set(true);
-    turnToHeading(180, 100);
-
+    // Spin first ring onto alliance stake
     ringIntake.spin(forward, 100, percent);
-    driveFor(28, 100);
-    wait(1500, msec);
-    driveFor(-26, 100);
-    turnToHeading(110, 100);
-    driveFor(8, 100);
-
+    wait(300, msec);
     ringIntake.stop();
-    corner_arm.set(true);
-    turnToHeading(45, 100); 
+
+    // Get first goal
+    driveFor(16, 100);
+    driveTo(-48, 26, 30, reverse);
+    goal_clamp.set(true);
+
+    // Gets rings
+
+    // Ring 1
+    ringIntake.spin(forward, 80, percent);
+    turnToHeading(90, 100);
+    driveFor(24, 100);
+
+    // Ring 2
+
+    driveTo(-24, 58, 100, forward);
+
+    // Ring 3
+
+    driveTo(-44, 56, 100, forward);
+    driveFor(-8, 100);
+
+    // Ring 4
+
+    driveTo(-48, 48, 100, forward);
+
+    // Ring 5
+
+    driveTo(-58, 46, 100, forward);
+    wait(300, msec);
+
+    // Drop off goal
+
+    driveTo(-62, 56, 100, reverse);
+    goal_clamp.set(false);
+    ringIntake.stop();
+
+    // Get second goal
+
+    driveTo(-48, 24, 100, forward);
+    driveTo(-44, -26, 100, reverse);
+    goal_clamp.set(true);
+    
+    // Ring 1
+
+    ringIntake.spin(forward, 75, percent);
+    driveTo(-26, -26, 100, reverse);
+
+    // Ring 2
+
+    driveTo(-24, -58, 100, forward);
+
+   // OLD
+
+    //ringLift.setStopping(hold);
+    //ringIntake.spin(reverse, 100, percent);
+    //driveFor(20, 100);
+    //ringIntake.stop();
+    //turnToHeading(270, 100);
+    //driveFor(-4, 100);
+//
+    //ringLift.spin(forward, 80, percent);
+    //wait(600, msec);
+    //ringLift.stop();
+//
+    //driveFor(8, 100);
+//
+    //ringLift.spin(reverse, 80, percent);
+    //wait(400, msec);
+    //ringLift.setStopping(coast);
+    //ringLift.stop();   
+//
+    //driveFor(-16, 100); 
+//
+    //turnToHeading(320, 100);
+    //driveFor(-38, 40);
+    //goal_clamp.set(true);
+    //turnToHeading(180, 100);
+//
+    //ringIntake.spin(forward, 100, percent);
+    //driveFor(28, 100);
+    //wait(1500, msec);
+    //driveFor(-26, 100);
+    //turnToHeading(110, 100);
+    //driveFor(8, 100);
+//
+    //ringIntake.stop();
+    //corner_arm.set(true);
+    //turnToHeading(45, 100); 
+
+    // OLD OLD
 
     //ringIntake.spin(forward, 100, percent);
     //wait(300, msec);

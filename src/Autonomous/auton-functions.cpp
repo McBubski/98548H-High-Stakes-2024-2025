@@ -23,7 +23,7 @@ void turnToHeading(double heading, double turnSpeed) {
     double previousError = error;
     double previousTime = Brain.Timer.system();
 
-    double timeout = std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.5 + 600;
+    double timeout = std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 3 + 800;
 
     bool notDone = true;
     PID turnPid = PID(0.58, 0, 0.3, 1, 5, 100, &notDone, timeout, 800);//0.48, 0.0001, 2.75,
@@ -61,7 +61,7 @@ void driveFor(double distance, double speed) {
     bool driving = true;
     bool turning = true;
 
-    int timeout = (std::abs(distance) / 12) * 220 + 350;
+    int timeout = (std::abs(distance) / 12) * 250 + 550;
 
     PID drivePID = PID(3.5, 0, 1, 1, 10, speed, &driving, timeout, 100);
     PID turnPID = PID(0.58, 0, 0.3, 100, 3, speed, &turning, 9999999, 50);
