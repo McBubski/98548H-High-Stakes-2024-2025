@@ -16,12 +16,12 @@ void autonomous(void) {
 
     // Spin first ring onto alliance stake
     ringIntake.spin(forward, 100, percent);
-    wait(300, msec);
+    wait(400, msec);
     ringIntake.stop();
-
+//
     // Get first goal
     driveFor(16, 100);
-    driveTo(-48, 26, 30, reverse);
+    driveTo(-48, 28, 40, reverse);
     goal_clamp.set(true);
 
     // Gets rings
@@ -33,11 +33,11 @@ void autonomous(void) {
 
     // Ring 2
 
-    driveTo(-24, 58, 100, forward);
+    driveTo(-26, 58, 100, forward);
 
     // Ring 3
 
-    driveTo(-44, 56, 100, forward);
+    driveTo(-46, 59, 100, forward);
     driveFor(-8, 100);
 
     // Ring 4
@@ -47,7 +47,7 @@ void autonomous(void) {
     // Ring 5
 
     driveTo(-58, 46, 100, forward);
-    wait(300, msec);
+    wait(400, msec);
 
     // Drop off goal
 
@@ -58,17 +58,54 @@ void autonomous(void) {
     // Get second goal
 
     driveTo(-48, 24, 100, forward);
-    driveTo(-44, -26, 100, reverse);
+    driveTo(-48, -50, 35, reverse);
     goal_clamp.set(true);
     
     // Ring 1
 
     ringIntake.spin(forward, 75, percent);
-    driveTo(-26, -26, 100, reverse);
+    driveTo(-20, -16, 100, forward);
 
     // Ring 2
 
-    driveTo(-24, -58, 100, forward);
+    driveTo(-26, -54, 100, forward);
+
+    // Ring 3
+
+    driveTo(-48, -58, 100, forward);
+    driveFor(-12, 100);
+
+    // Ring 4
+
+    driveTo(-48, -44, 100, forward);
+//
+    //// Ring 5
+//
+    driveTo(-60, -46, 100, forward);
+    wait(300, msec);
+//
+    //// Drop off goal
+//
+    driveTo(-64, -58, 100, reverse);
+    ringIntake.spin(reverse, 100, percent);
+    wait(100, msec);
+    ringIntake.stop();
+
+    goal_clamp.set(false);
+    ringIntake.stop();
+//
+    driveFor(22, 100);
+
+    // Elevate
+
+    while (lift_potentiometer.angle(degrees) >= 198.0) {
+        ringLift.spin(forward, 50, percent);
+        wait(20, msec);
+    }
+    ringLift.setStopping(hold);
+    ringLift.stop();
+
+    driveTo(-6, -6, 100, forward);
 
    // OLD
 

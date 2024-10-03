@@ -63,7 +63,7 @@ void driveFor(double distance, double speed) {
 
     int timeout = (std::abs(distance) / 12) * 250 + 550;
 
-    PID drivePID = PID(3.5, 0, 1, 1, 10, speed, &driving, timeout, 100);
+    PID drivePID = PID(3.5, 0, 1, 0.25, 10, speed, &driving, timeout, 100);
     PID turnPID = PID(0.58, 0, 0.3, 100, 3, speed, &turning, 9999999, 50);
 
     double driveError = distance;
