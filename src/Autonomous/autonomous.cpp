@@ -18,6 +18,9 @@ void autonomous(void) {
     ringIntake.spin(forward, 100, percent);
     wait(400, msec);
     ringIntake.stop();
+
+    ringLift.spinFor(150, degrees, true);
+    ringLift.spinFor(-150, degrees, true);
 //
     // Get first goal
     driveFor(16, 100);
@@ -105,7 +108,8 @@ void autonomous(void) {
     ringLift.setStopping(hold);
     ringLift.stop();
 
-    driveTo(-6, -6, 100, forward);
+    driveTo(0, 0, 100, forward);
+    ringLift.spinFor(-200, degrees);
 
    // OLD
 

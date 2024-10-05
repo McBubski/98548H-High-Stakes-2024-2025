@@ -5,5 +5,7 @@ void toggleGoalClamp(void);
 void toggleRingClamp(void);
 void toggleCornerArm(void);
 void toggleIntakeSpeed(void);
+void raiseArmToElevationHeight(void);
 
 extern bool slowIntake;
+extern bool liftRaising;

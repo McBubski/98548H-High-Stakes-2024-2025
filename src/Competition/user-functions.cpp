@@ -3,6 +3,7 @@
 using namespace vex;
 
 bool slowIntake = false;
+bool liftRaising = false;
 
 void initializeUserControl(void) {
     // Sets drivetrain stopping to coast
@@ -18,6 +19,7 @@ void initializeUserControl(void) {
     // Connects controller inputs to functions
     Controller.ButtonDown.pressed(toggleGoalClamp);
     Controller.ButtonRight.pressed(toggleCornerArm);
+    Controller.ButtonB.pressed(raiseArmToElevationHeight);
 }
 
 void toggleGoalClamp(void) {
@@ -30,4 +32,14 @@ void toggleCornerArm(void) {
 
 void toggleIntakeSpeed(void) {
   slowIntake = !slowIntake;
+}
+
+void raiseArmToElevationHeight(void) {
+  liftRaising = true;
+  while (lift_potentiometer.angle(degrees) >= 200.0) {
+    ringLift.spin(forward, 50, percent);
+    wait(20, msec);
+  }
+  liftRaising = false;
+  ringLift.stop();
 }

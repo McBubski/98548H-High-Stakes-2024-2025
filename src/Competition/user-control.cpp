@@ -31,7 +31,8 @@ void usercontrol(void) {
 
     // Moves lift up and down
 
-    if (Controller.ButtonL1.pressing()) {
+    if (!liftRaising) {
+      if (Controller.ButtonL1.pressing()) {
       ringLift.spin(forward, 75, percent);
     } else if (Controller.ButtonL2.pressing()) {
       ringLift.spin(reverse, 75, percent);
@@ -41,6 +42,7 @@ void usercontrol(void) {
       //} else {
         ringLift.stop();
       //}
+      }
     }
 
     // Sets intakeSpeed to however fast it should be

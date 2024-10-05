@@ -19,6 +19,8 @@ int drawScreen(void) {
             drawHomeScreen();
         } else if (strncmp(window, "Odometry", 2) == 0) {
             drawOdometryScreen();
+        } else if (strncmp(window, "System", 2)) {
+           
         }
 
         // Renders then clears screen
