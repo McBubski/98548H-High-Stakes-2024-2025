@@ -14,7 +14,9 @@ double startingPositions[3][3] = {
 };
 
 void autonomous(void) {
-    Skills_Auton();
+    driveFor(24, 100);
+    driveFor(-24, 100);
+    //Skills_Auton();
    // OLD
 
     //ringLift.setStopping(hold);
