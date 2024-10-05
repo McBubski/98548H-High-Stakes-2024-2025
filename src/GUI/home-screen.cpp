@@ -1,4 +1,4 @@
-#include "Screens/home-screen.h"
+#include "GUI/home-screen.h"
 #include "GUI/gui-main.h"
 
 #include "Graphics/text.h"
@@ -51,6 +51,8 @@ void drawHomeScreen(void) {
 
     Brain.Screen.setFont(mono20);
     Brain.Screen.setPenWidth(2);
+
+    Brain.Screen.printAt(100, 100, "%f", lift_potentiometer.angle(degrees));
 
     // Display Buttons
 

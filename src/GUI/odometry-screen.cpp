@@ -1,4 +1,4 @@
-#include "Screens/odometry-screen.h"
+#include "GUI/odometry-screen.h"
 #include "GUI/gui-main.h"
 
 #include "Graphics/text.h"
@@ -17,6 +17,17 @@ void drawOdometryScreen(void) {
 
     drawRobotGraphic();
 
+    // Displays robot info
+
+    Brain.Screen.setPenColor(white);
+    Brain.Screen.setFillColor(black);
+
+    drawText("Heading: ", 480 - Brain.Screen.getStringWidth("Heading: "), 75, mono20);
+    Brain.Screen.printAt(400, 95, "%.1f°", inertial_sensor.heading(degrees));
+
+    Brain.Screen.printAt(240, 75, "X: %.2f", Position_Tracking.GlobalXPos);
+    Brain.Screen.printAt(240, 95, "Y: %.2f", Position_Tracking.GlobalYPos);
+
     // Draw Button
     Brain.Screen.setPenWidth(2);
     ReturnButton.display();
@@ -25,10 +36,12 @@ void drawOdometryScreen(void) {
 }
 
 void drawRobotGraphic(void) {
+    // Calculates where robot should be drawn
     float pixelsPerInch = (110.0 / 72.0);
     float XOnBrainScreen = 120 + (pixelsPerInch * Position_Tracking.GlobalXPos);
     float YOnbrainScreen = 120 + (-pixelsPerInch * Position_Tracking.GlobalYPos);
 
+    // Calculates line offsets for drawing border
     float headingInRadians = (inertial_sensor.angle(degrees) * M_PI / 180.0);
 
     float lineOffset1 = sqrt(2) * robotSize * cos(-headingInRadians + M_PI_4);
@@ -37,16 +50,18 @@ void drawRobotGraphic(void) {
     float headingX = sin(headingInRadians);
     float headingY = cos(headingInRadians);
 
+    // Fills in robot first
     Brain.Screen.setPenColor(cyan);
-    Brain.Screen.setPenWidth(robotSize * 2 - 2);
-
+    Brain.Screen.setPenWidth(robotSize * 2);
+    
     Brain.Screen.drawLine(
-        XOnBrainScreen - (-headingX * robotSize - 2), 
-        YOnbrainScreen - (headingY * robotSize - 2), 
-        XOnBrainScreen + (-headingX * robotSize - 2), 
-        YOnbrainScreen + (headingY * robotSize - 2)
+        XOnBrainScreen - headingX * robotSize, 
+        YOnbrainScreen + headingY * robotSize, 
+        XOnBrainScreen + headingX * robotSize, 
+        YOnbrainScreen - headingY * robotSize
     );
 
+    // Draws border around robot
     Brain.Screen.setPenColor(black);
     Brain.Screen.setPenWidth(4);
 
@@ -55,6 +70,7 @@ void drawRobotGraphic(void) {
     Brain.Screen.drawLine(XOnBrainScreen - lineOffset1, YOnbrainScreen + lineOffset2, XOnBrainScreen - lineOffset2, YOnbrainScreen - lineOffset1);
     Brain.Screen.drawLine(XOnBrainScreen - lineOffset2, YOnbrainScreen - lineOffset1, XOnBrainScreen + lineOffset1, YOnbrainScreen - lineOffset2);
 
+    // Draws heading indication arrow
     Brain.Screen.setPenColor(red);
     Brain.Screen.setPenWidth(4);
     

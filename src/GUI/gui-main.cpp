@@ -1,8 +1,8 @@
 #include "GUI/gui-main.h"
 #include "Graphics/text.h"
 
-#include "Screens/home-screen.h"
-#include "Screens/odometry-screen.h"
+#include "GUI/home-screen.h"
+#include "GUI/odometry-screen.h"
 
 #include <iostream>
 #include <string.h>

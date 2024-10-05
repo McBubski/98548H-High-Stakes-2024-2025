@@ -8,7 +8,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "vex.h"
-#include "Robot_Functions/PID.h"
+#include "Robot/PID.h"
 #include <cmath>
 
 int GetSign(double number)

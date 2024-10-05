@@ -20,6 +20,7 @@ void initializeUserControl(void) {
     Controller.ButtonDown.pressed(toggleGoalClamp);
     Controller.ButtonRight.pressed(toggleCornerArm);
     Controller.ButtonB.pressed(raiseArmToElevationHeight);
+    Controller.ButtonY.pressed(raiseArmToWallStakeHeight);
 }
 
 void toggleGoalClamp(void) {
@@ -35,9 +36,29 @@ void toggleIntakeSpeed(void) {
 }
 
 void raiseArmToElevationHeight(void) {
-  liftRaising = true;
-  while (lift_potentiometer.angle(degrees) >= 200.0) {
-    ringLift.spin(forward, 50, percent);
+  if (liftRaising == true) {
+    return;
+  } else {
+    liftRaising = true;
+  }
+
+  while (lift_potentiometer.angle(degrees) >= 198.5) {
+    ringLift.spin(forward, 100, percent);
+    wait(20, msec);
+  }
+  liftRaising = false;
+  ringLift.stop();
+}
+
+void raiseArmToWallStakeHeight(void) {
+  if (liftRaising == true) {
+    return;
+  } else {
+    liftRaising = true;
+  }
+
+  while (lift_potentiometer.angle(degrees) >= 207.0) {
+    ringLift.spin(forward, 100, percent);
     wait(20, msec);
   }
   liftRaising = false;
