@@ -15,7 +15,7 @@ motor_group leftDrive = motor_group(motorTL, motorML, motorBL);
 
 // Right Drive
 
-motor motorTR = motor(PORT2, ratio6_1, true);
+motor motorTR = motor(PORT3, ratio6_1, true);
 motor motorMR = motor(PORT1, ratio6_1, false);
 motor motorBR = motor(PORT8, ratio6_1, false);
 
@@ -34,7 +34,7 @@ pot lift_potentiometer = pot(Brain.ThreeWirePort.C);
 inertial inertial_sensor = inertial(PORT9);
 
 rotation sidewaysTrackingWheel = rotation(PORT7, false);
-rotation forwardTrackingWheel = rotation(PORT3, false);
+rotation forwardTrackingWheel = rotation(PORT2, false);
 
 aivision ai_vision = aivision(PORT4);
 

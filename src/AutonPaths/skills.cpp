@@ -9,95 +9,100 @@ void Skills_Auton(void) {
     wait(400, msec);
     ringIntake.stop();
 
-    ringLift.spinFor(150, degrees, true);
-    ringLift.spinFor(-150, degrees, true);
+    ringLift.spinFor(forward, 150, degrees, false);
 //
     // Get first goal
     driveFor(16, 100);
-    driveTo(-48, 28, 40, reverse);
+    ringLift.spinFor(reverse, 150, degrees, false);
+    driveTo(-46.5, 23, 30, reverse);
     goal_clamp.set(true);
 
     // Gets rings
 
     // Ring 1
     ringIntake.spin(forward, 80, percent);
+    turnToHeading(85, 100);
+    driveFor(24, 100);
+
+    // Ring 2
+
+    driveTo(2, 52, 100, forward);
+
+    // Ring 3
+
+    driveTo(-24, 48, 100, forward);
+
+    // Rings 4 & 5
+
+    driveTo(-60, 46, 55, forward);
+
+    wait(1000, msec);
+
+    // Ring 6
+
+    driveFor(-30, 100);
+
+    driveTo(-46, 58, 100, forward);
+
+    // Corner
+
+    turnToHeading(125, 100);
+    driveFor(-22, 100);
+    ringIntake.spinFor(reverse, 50, degrees, false);
+    goal_clamp.set(false);
+
+    driveFor(8, 100);
+
+    // Get second goal
+
+    driveTo(-48, 0, 100, forward);
+    driveTo(-48, -46.5, 35, reverse);
+    goal_clamp.set(true);
+
+    // Ring 1
+
+    ringIntake.spin(forward, 80, percent);
     turnToHeading(90, 100);
     driveFor(24, 100);
 
     // Ring 2
 
-    driveTo(-26, 58, 100, forward);
+    driveTo(0, -54, 100, forward);
 
     // Ring 3
 
-    driveTo(-46, 59, 100, forward);
-    driveFor(-8, 100);
+    driveTo(-24, -48, 100, forward);
 
-    // Ring 4
+    // Rings 4 & 5
 
-    driveTo(-48, 48, 100, forward);
+    driveTo(-60, -46, 55, forward);
 
-    // Ring 5
+    wait(1000, msec);
 
-    driveTo(-58, 46, 100, forward);
-    wait(400, msec);
+    // Ring 6
 
-    // Drop off goal
+    driveFor(-30, 100);
 
-    driveTo(-62, 56, 100, reverse);
-    goal_clamp.set(false);
-    ringIntake.stop();
-
-    // Get second goal
-
-    driveTo(-48, 24, 100, forward);
-    driveTo(-48, -50, 35, reverse);
-    goal_clamp.set(true);
+    driveTo(-46, -58, 100, forward);
     
-    // Ring 1
+    // Corner
 
-    ringIntake.spin(forward, 75, percent);
-    driveTo(-20, -16, 100, forward);
-
-    // Ring 2
-
-    driveTo(-26, -54, 100, forward);
-
-    // Ring 3
-
-    driveTo(-48, -58, 100, forward);
-    driveFor(-12, 100);
-
-    // Ring 4
-
-    driveTo(-48, -44, 100, forward);
-//
-    //// Ring 5
-//
-    driveTo(-60, -46, 100, forward);
-    wait(300, msec);
-//
-    //// Drop off goal
-//
-    driveTo(-64, -58, 100, reverse);
-    ringIntake.spin(reverse, 100, percent);
-    wait(100, msec);
-    ringIntake.stop();
-
+    turnToHeading(45, 100);
+    driveFor(-22, 100);
+    ringIntake.spinFor(reverse, 50, degrees, false);
     goal_clamp.set(false);
-    ringIntake.stop();
+
+    driveFor(8, 100);
 //
-    driveFor(22, 100);
-
-    // Elevate
-
-    while (lift_potentiometer.angle(degrees) >= 198.0) {
-        ringLift.spin(forward, 50, percent);
-        wait(20, msec);
-    }
-    ringLift.setStopping(hold);
-    ringLift.stop();
-
-    driveTo(0, 0, 100, forward);
-    ringLift.spinFor(-200, degrees);
+    //// Elevate
+//
+    //while (lift_potentiometer.angle(degrees) >= 198.0) {
+    //    ringLift.spin(forward, 50, percent);
+    //    wait(20, msec);
+    //}
+    //ringLift.setStopping(hold);
+    //ringLift.stop();
+//
+    //driveTo(0, 0, 100, forward);
+    //ringLift.spinFor(-200, degrees);
 }

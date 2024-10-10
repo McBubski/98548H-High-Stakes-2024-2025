@@ -2,59 +2,25 @@
 #include "Autonomous/auton-functions.h"
 
 #include "AutonPaths/skills.h"
+#include "AutonPaths/blue.h"
+#include "AutonPaths/red.h"
 
 using namespace vex;
 
-int auton_path = 1;
+int auton_path = 5;
 
-double startingPositions[3][3] = {
-    {-60.75, 0, 90}, // Left Side Auton
-    {10, 10, 90}, // Right Side Auton
-    {40, 40, 180} // Skills
+double startingPositions[6][3] = {
+    {-56.5, -62.0, 270}, // Goal Rush Right
+    {56.5, 16.5, 90}, // Goal Fill Right    //// NEW POSITION
+    {56.5, -62.0, 90}, // Goal Rush Left
+    {-56.5, 16.5, 270}, // Goal Fill Left
+    {-60.75, 0, 90}, // Skills
+    {61.25, 17, 180} // Failsafe Auton
 };
 
 void autonomous(void) {
-    driveFor(24, 100);
-    driveFor(-24, 100);
-    //Skills_Auton();
-   // OLD
-
-    //ringLift.setStopping(hold);
-    //ringIntake.spin(reverse, 100, percent);
-    //driveFor(20, 100);
-    //ringIntake.stop();
-    //turnToHeading(270, 100);
-    //driveFor(-4, 100);
-//
-    //ringLift.spin(forward, 80, percent);
-    //wait(600, msec);
-    //ringLift.stop();
-//
-    //driveFor(8, 100);
-//
-    //ringLift.spin(reverse, 80, percent);
-    //wait(400, msec);
-    //ringLift.setStopping(coast);
-    //ringLift.stop();   
-//
-    //driveFor(-16, 100); 
-//
-    //turnToHeading(320, 100);
-    //driveFor(-38, 40);
-    //goal_clamp.set(true);
-    //turnToHeading(180, 100);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //driveFor(28, 100);
-    //wait(1500, msec);
-    //driveFor(-26, 100);
-    //turnToHeading(110, 100);
-    //driveFor(8, 100);
-//
-    //ringIntake.stop();
-    //corner_arm.set(true);
-    //turnToHeading(45, 100); 
-
+    //Blue_Left_Auton();
+    Skills_Auton();
     // OLD OLD
 
     //ringIntake.spin(forward, 100, percent);
@@ -83,8 +49,8 @@ void changeAuton(int direction) {
     auton_path += direction;
 
     if (auton_path < 1) {
-        auton_path = 3;
-    } else if (auton_path > 3) {
+        auton_path = 6;
+    } else if (auton_path > 6) {
         auton_path = 1;
     }
 

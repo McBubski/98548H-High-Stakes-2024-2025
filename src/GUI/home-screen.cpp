@@ -52,8 +52,6 @@ void drawHomeScreen(void) {
     Brain.Screen.setFont(mono20);
     Brain.Screen.setPenWidth(2);
 
-    Brain.Screen.printAt(100, 100, "%f", lift_potentiometer.angle(degrees));
-
     // Display Buttons
 
     ShowCalibrateButton();
@@ -111,13 +109,22 @@ void ShowBatteryLevel(void) {
 void UpdateAutonInformation(void) {
     switch (auton_path) {
         case 1:
-            auton = "Blue Auton";
+            auton = "Goal Rush Right";
             break;
         case 2:
-            auton = "Red Auton";
+            auton = "Goal Fill Right";
             break;
         case 3:
+            auton = "Goal Rush Left";
+            break;
+        case 4:
+            auton = "Goal Fill Left";
+            break;
+        case 5:
             auton = "Skills";
+            break;
+        case 6:
+            auton = "Failsafe";
             break;
         default:
             auton = "Blue Auton";
