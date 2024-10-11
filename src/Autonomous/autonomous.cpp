@@ -19,8 +19,28 @@ double startingPositions[6][3] = {
 };
 
 void autonomous(void) {
-    //Blue_Left_Auton();
-    Skills_Auton();
+    switch (auton_path) {
+        case 1:
+            Red_Right_Auton();
+            break;
+        case 2:
+            Blue_Right_Auton();
+            break;
+        case 3:
+            Blue_Left_Auton();
+            break;
+        case 4:
+            Red_Left_Auton();
+            break;
+        case 5:
+            Skills_Auton();
+            break;
+        case 6:
+            Failsafe();
+            break;
+        default:
+            Failsafe();
+    }
     // OLD OLD
 
     //ringIntake.spin(forward, 100, percent);

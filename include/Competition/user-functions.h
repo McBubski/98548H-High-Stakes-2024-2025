@@ -7,6 +7,7 @@ void toggleCornerArm(void);
 void toggleIntakeSpeed(void);
 void raiseArmToElevationHeight(void);
 void raiseArmToWallStakeHeight(void);
+void autoSkillsStart(void);
 
 extern bool slowIntake;
 extern bool liftRaising;

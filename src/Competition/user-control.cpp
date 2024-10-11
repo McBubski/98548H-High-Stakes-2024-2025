@@ -8,6 +8,7 @@ float liftMinAngle = 213;
 float intakeLiftMinAngle = 213;
 
 bool intakeSpinning = false;
+bool skillsSetupHasRun = false;
 
 void usercontrol(void) {
   // Initializes robot before driving
@@ -53,6 +54,18 @@ void usercontrol(void) {
     } else {
       ringIntake.stop();
       intakeSpinning = false;
+    }
+
+    if (Controller.ButtonX.pressing()) {  
+        if (!skillsSetupHasRun) {
+          skillsSetupHasRun = true;
+          ringLift.spinFor(forward, 200, degrees, false);
+          ringIntake.spin(forward, 100, percent);
+          wait(400, msec);
+          ringIntake.stop();
+          wait(400, msec);
+          ringLift.spinFor(reverse, 200, degrees, true);
+        }
     }
   }
 }

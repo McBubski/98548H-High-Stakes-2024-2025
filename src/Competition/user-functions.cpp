@@ -21,6 +21,17 @@ void initializeUserControl(void) {
     Controller.ButtonRight.pressed(toggleCornerArm);
     Controller.ButtonB.pressed(raiseArmToElevationHeight);
     Controller.ButtonY.pressed(raiseArmToWallStakeHeight);
+    
+    // Macro
+
+    Controller.ButtonX.pressed(autoSkillsStart);
+
+    corner_arm.set(false);
+}
+
+void autoSkillsStart(void) {
+
+    std::cout << "boop!" << std::endl;
 }
 
 void toggleGoalClamp(void) {
@@ -42,7 +53,7 @@ void raiseArmToElevationHeight(void) {
     liftRaising = true;
   }
 
-  while (lift_potentiometer.angle(degrees) >= 198.5) {
+  while (lift_potentiometer.angle(degrees) >= 196.5) {
     ringLift.spin(forward, 100, percent);
     wait(20, msec);
   }
@@ -57,7 +68,7 @@ void raiseArmToWallStakeHeight(void) {
     liftRaising = true;
   }
 
-  while (lift_potentiometer.angle(degrees) >= 207.0) {
+  while (lift_potentiometer.angle(degrees) >= 205.0) {
     ringLift.spin(forward, 100, percent);
     wait(20, msec);
   }
