@@ -14,7 +14,7 @@ void Skills_Auton(void) {
     // Get first goal
     driveFor(16, 100);
     ringLift.spinFor(reverse, 150, degrees, false);
-    driveTo(-46.5, 23, 30, reverse);
+    driveTo(-44, 23, 30, reverse);
     goal_clamp.set(true);
 
     // Gets rings
@@ -34,7 +34,7 @@ void Skills_Auton(void) {
 
     // Rings 4 & 5
 
-    driveTo(-60, 46, 55, forward);
+    driveTo(-60, 46, 35, forward);
 
     wait(1400, msec);
 
@@ -59,21 +59,21 @@ void Skills_Auton(void) {
 
     // Get second goal
 
-    driveTo(-46.5, 24, 100, forward);
-    pointAt(-46.5, -22, 100, reverse);
-    driveTo(-46.5, -22, 50, reverse);
+    driveTo(-42.5, 24, 100, forward);
+    pointAt(-42.5, -22, 100, reverse);
+    driveTo(-42.5, -22, 50, reverse);
     goal_clamp.set(true);
 
     // Ring 1
 
     ringIntake.spin(forward, 80, percent);
 //
-    driveTo(-19, -21, 100, forward);
+    driveTo(-19, -18, 100, forward);
 //
 ////
     //// Ring 2
 ////
-    driveTo(-1, -52, 100, forward);
+    driveTo(-1, -50, 100, forward);
 ////
     ////// Ring 3
 ////
@@ -81,7 +81,7 @@ void Skills_Auton(void) {
 ////
     ////// Rings 4 & 5
 ////
-    driveTo(-55.5, -43.5, 55, forward);
+    driveTo(-55.5, -43.5, 35, forward);
 ////
     wait(1000, msec);
 ////
@@ -104,23 +104,27 @@ void Skills_Auton(void) {
     // Get third goal (rip)
 
     driveTo(0, -48, 100, forward);
-    driveTo(48.5, -27, 100, forward);
+    driveTo(54, 0, 100, forward);
+    //driveTo(48.5, -27, 100, forward);
 
-    pointAt(55.5, -22, 100, reverse);
-    driveTo(57.5, -20, 40, reverse);
+    turnToHeading(330, 100);
+    driveFor(-60, 100);
 
-    goal_clamp.set(true);
+    //pointAt(55.5, -26, 100, reverse);
+    //driveTo(57.5, -24, 40, reverse);
 
-    driveTo(60, -52, 100, reverse);
-
-    goal_clamp.set(false);
+    //goal_clamp.set(true);
+//
+    //driveTo(60, -52, 100, reverse);
+//
+    //goal_clamp.set(false);
     
     driveFor(8, 100);
 
 
     // Last goal (FULL SEND)
 
-    driveTo(60, 60, 100, reverse);
+    driveTo(66, 60, 100, reverse);
 
     goal_clamp.set(false);
 
