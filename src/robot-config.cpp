@@ -23,14 +23,16 @@ motor_group rightDrive = motor_group(motorTR, motorMR, motorBR);
 
 // Lift
 
-motor ringIntake = motor(PORT21, ratio36_1, false);
+motor ringIntake1 = motor(PORT21, ratio36_1, true);
+motor ringIntake2 = motor(PORT17, ratio36_1, true);
 motor ringLift = motor(PORT12, ratio36_1, true);
+motor ringLiftArm = motor(PORT14, ratio36_1, true);
 
-motor_group lift = motor_group(ringIntake, ringLift);
+motor_group ringIntake = motor_group(ringIntake1, ringIntake2);
 
 // Sensors
 
-pot lift_potentiometer = pot(Brain.ThreeWirePort.C);
+pot lift_arm_potentiometer = pot(Brain.ThreeWirePort.C);
 inertial inertial_sensor = inertial(PORT9);
 
 rotation sidewaysTrackingWheel = rotation(PORT7, false);

@@ -26,7 +26,7 @@ int drawScreen(void) {
         // Renders then clears screen
 
         Controller.Screen.setCursor(1, 1);
-        Controller.Screen.print("%.2f", inertial_sensor.heading(degrees));
+        Controller.Screen.print("%.2f", lift_arm_potentiometer.angle(degrees));
 
         Brain.Screen.render();
 

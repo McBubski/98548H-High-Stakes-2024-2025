@@ -23,13 +23,16 @@ extern motor_group rightDrive;
 
 // Lift
 
-extern motor ringIntake;
+extern motor ringIntake1;
+extern motor ringIntake2;
 extern motor ringLift;
-extern motor_group lift;
+extern motor ringLiftArm;
+
+extern motor_group ringIntake;
 
 // Sensors
 
-extern pot lift_potentiometer;
+extern pot lift_arm_potentiometer;
 extern inertial inertial_sensor;
 
 extern rotation sidewaysTrackingWheel;

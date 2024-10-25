@@ -5,6 +5,8 @@ using namespace vex;
 bool slowIntake = false;
 bool liftRaising = false;
 
+int goalArmPos = 0;
+
 void initializeUserControl(void) {
     // Sets drivetrain stopping to coast
     leftDrive.setStopping(coast);
@@ -12,6 +14,7 @@ void initializeUserControl(void) {
 
     // Sets lift stopping to hold
     ringLift.setStopping(hold);
+    ringLiftArm.setStopping(hold);
 
     // Sets intake stopping to brake
     ringIntake.setStopping(brake);
@@ -19,8 +22,8 @@ void initializeUserControl(void) {
     // Connects controller inputs to functions
     Controller.ButtonDown.pressed(toggleGoalClamp);
     Controller.ButtonRight.pressed(toggleCornerArm);
-    Controller.ButtonB.pressed(raiseArmToElevationHeight);
-    Controller.ButtonY.pressed(raiseArmToWallStakeHeight);
+    Controller.ButtonL2.pressed(cycleRingArmTarget);
+    Controller.ButtonL1.pressed(lowerRingArm);
     
     // Macro
 
@@ -46,32 +49,14 @@ void toggleIntakeSpeed(void) {
   slowIntake = !slowIntake;
 }
 
-void raiseArmToElevationHeight(void) {
-  if (liftRaising == true) {
-    return;
-  } else {
-    liftRaising = true;
-  }
+void cycleRingArmTarget(void) {
+  goalArmPos++;
 
-  while (lift_potentiometer.angle(degrees) >= 196.5) {
-    ringLift.spin(forward, 100, percent);
-    wait(20, msec);
+  if (goalArmPos > 2) {
+    goalArmPos = 1;
   }
-  liftRaising = false;
-  ringLift.stop();
 }
 
-void raiseArmToWallStakeHeight(void) {
-  if (liftRaising == true) {
-    return;
-  } else {
-    liftRaising = true;
-  }
-
-  while (lift_potentiometer.angle(degrees) >= 205.0) {
-    ringLift.spin(forward, 100, percent);
-    wait(20, msec);
-  }
-  liftRaising = false;
-  ringLift.stop();
+void lowerRingArm(void) {
+  goalArmPos = 0;
 }

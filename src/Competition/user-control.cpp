@@ -1,14 +1,20 @@
 #include "Competition/user-control.h"
 #include "Competition/user-functions.h"
 
-using namespace vex;
+#include <cmath>
 
-float liftMaxAngle = 196;
-float liftMinAngle = 213;
-float intakeLiftMinAngle = 213;
+using namespace vex;
 
 bool intakeSpinning = false;
 bool skillsSetupHasRun = false;
+
+// Change these values for arm position
+
+float armPositions[3] = {
+  199,    // Rest position
+  175,    // First ring position
+  80      // Wall stake position
+};
 
 void usercontrol(void) {
   // Initializes robot before driving
@@ -25,20 +31,20 @@ void usercontrol(void) {
     leftDrive.spin(forward, leftStickPos, percent);
     rightDrive.spin(forward, rightStickPos, percent);
 
+    // PID for arm lift
 
+    float currentArmAngle = lift_arm_potentiometer.angle(degrees);
+    float goalArmAngle = armPositions[goalArmPos];
+    float error = goalArmAngle - currentArmAngle;
 
-    // Moves lift up and down
-
-    if (Controller.ButtonL1.pressing()) {
-      liftRaising = false;
-      ringLift.spin(forward, 100, percent);
-    } else if (Controller.ButtonL2.pressing()) {
-      liftRaising = false;
-      ringLift.spin(reverse, 100, percent);
-    } else {
-      if (!liftRaising) {
-        ringLift.stop();
+    if (std::abs(error) >= 1.0) {
+      if (goalArmPos == 3) { // If goal pos is wall stake, go faster
+        ringLiftArm.spin(reverse, error * 5, percent);
+      } else {
+        ringLiftArm.spin(reverse, error * 2.5, percent);
       }
+    } else {
+      ringLiftArm.stop();
     }
 
     // Sets intakeSpeed to however fast it should be
@@ -59,7 +65,7 @@ void usercontrol(void) {
     if (Controller.ButtonX.pressing()) {  
         if (!skillsSetupHasRun) {
           skillsSetupHasRun = true;
-          ringLift.spinFor(forward, 200, degrees, false);
+          //ringLift.spinFor(forward, 200, degrees, false);
           ringIntake.spin(forward, 100, percent);
           wait(400, msec);
           ringIntake.stop();
