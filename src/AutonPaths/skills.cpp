@@ -1,134 +1,230 @@
 #include "AutonPaths/skills.h"
 #include "Autonomous/auton-functions.h"
 
-void Skills_Auton(void) {
-    // SKILLS
+// Change these values for arm position
 
-    // Spin first ring onto alliance stake
+void Skills_Auton(void) {
+    // Put ring on alliance stake
+
     ringIntake.spin(forward, 100, percent);
-    wait(400, msec);
+    wait(300, msec);
     ringIntake.stop();
 
-    ringLift.spinFor(forward, 150, degrees, false);
-//
-    // Get first goal
-    driveFor(16, 100);
-    ringLift.spinFor(reverse, 150, degrees, false);
-    driveTo(-44, 23, 30, reverse);
+    // Get next goal
+
+    driveFor(13, 100);
+    driveTo(-47, -18, 30, reverse);
     goal_clamp.set(true);
 
-    // Gets rings
+    // Get first ring
+    ringIntake.spin(forward, 100, percent);
+    driveTo(-26, -18, 80, forward);
 
-    // Ring 1
-    ringIntake.spin(forward, 80, percent);
-    turnToHeading(85, 100);
-    driveFor(24, 100);
+    // Get next ring
+    driveTo(5.25, -48, 100, forward);
+    driveTo(21, -50, 80, forward);
 
-    // Ring 2
+    // Pick up wallstake ring
+    driveTo(0, -44, 100, reverse);
+    moveLiftToAngle(178, false);
+    driveTo(0, -62, 70, forward);
+    turnToHeading(180, 100);
 
-    driveTo(2, 52, 100, forward);
+    // Intakes until torque spike, indicating the ring is in fully
+    waitUntil(ringIntake.torque(Nm) >= 2);
+    wait(300, msec);
+    ringIntake.stop();
 
-    // Ring 3
+    moveLiftToAngle(80, true);
+    moveLiftToAngle(200, false);
 
-    driveTo(-24, 48, 100, forward);
+    // Get next three rings
+    driveFor(-12, 100);
+    ringIntake.spin(forward, 100, percent);
+    driveTo(-90, -48, 40, forward);
 
-    // Rings 4 & 5
+    // Get final ring
+    driveFor(-8, 100);
+    driveTo(-48, -62, 100, forward);
 
-    driveTo(-60, 46, 35, forward);
-
-    wait(1400, msec);
-
-    // Ring 6
-
-    driveFor(-30, 100);
-
-    ringLift.spinFor(reverse, 150, degrees, false);
-
-    driveTo(-54, 58, 100, forward);
-
-    wait(500, msec);
-
-    // Corner
-
-    turnToHeading(125, 100);
-    driveFor(-22, 100);
-    ringIntake.spinFor(reverse, 50, degrees, false);
+    // Set goal in corner
+    driveTo(-64, -68, 100, reverse);
+    ringIntake.stop();
+    ringIntake.spinFor(-100, degrees, false);
     goal_clamp.set(false);
-
-    driveFor(8, 100);
+    driveFor(10, 100);
 
     // Get second goal
 
-    driveTo(-42.5, 24, 100, forward);
-    pointAt(-42.5, -22, 100, reverse);
-    driveTo(-42.5, -22, 50, reverse);
+    driveTo(-46, 10, 60, reverse);
+    pointAt(-48, 24, 40, reverse);
+    driveFor(-18, 40);
     goal_clamp.set(true);
 
-    // Ring 1
+    // Get first ring
+    ringIntake.spin(forward, 100, percent);
+    driveTo(-26, 21, 80, forward);
 
-    ringIntake.spin(forward, 80, percent);
-//
-    driveTo(-19, -18, 100, forward);
-//
-////
-    //// Ring 2
-////
-    driveTo(-1, -50, 100, forward);
-////
-    ////// Ring 3
-////
-    driveTo(-19.5, -45, 100, forward);
-////
-    ////// Rings 4 & 5
-////
-    driveTo(-55.5, -43.5, 35, forward);
-////
-    wait(1000, msec);
-////
-    //// Ring 6
-////
-    driveFor(-30, 100);
-////
-    driveTo(-48, -58, 100, forward);
-    wait(500, msec);
-//
-    ////
-    //// Corner
-////
-    turnToHeading(65, 100);
-    driveFor(-24, 100);
-    ringIntake.spinFor(reverse, 50, degrees, false);
+    // Get next ring
+    driveTo(-24, 48, 60, forward);
+
+    // Get next two rings
+    driveTo(-68, 46, 40, forward);
+
+    // Get last ring
+    driveFor(-12, 100);
+    driveTo(-48, 60, 100, forward);
+
+    // Drop off in corner
+
+    driveTo(-64, 68, 100, reverse);
+    ringIntake.stop();
+    ringIntake.spinFor(-100, degrees, false);
     goal_clamp.set(false);
-    driveFor(12, 100);
-
-    // Get third goal (rip)
-
-    driveTo(0, -48, 100, forward);
-    driveTo(54, 0, 100, forward);
-    //driveTo(48.5, -27, 100, forward);
-
-    turnToHeading(330, 100);
-    driveFor(-60, 100);
-
-    //pointAt(55.5, -26, 100, reverse);
-    //driveTo(57.5, -24, 40, reverse);
-
-    //goal_clamp.set(true);
-//
-    //driveTo(60, -52, 100, reverse);
-//
-    //goal_clamp.set(false);
-    
     driveFor(8, 100);
 
+    // Wallstake
 
-    // Last goal (FULL SEND)
+    ringIntake.spin(forward, 100, percent);
+    driveTo(0, 30, 100, forward);
+    moveLiftToAngle(178, false);
+    driveTo(0, 61, 70, forward);
 
-    driveTo(66, 60, 100, reverse);
+    // Intakes until torque spike, indicating the ring is in fully
+    waitUntil(ringIntake.torque(Nm) >= 2);
+    wait(300, msec);
+    ringIntake.stop();
 
-    goal_clamp.set(false);
+    moveLiftToAngle(80, true);
+    moveLiftToAngle(200, false);
 
-    driveFor(12, 100);
+    // SKILLS
+
+    // Spin first ring onto alliance stake
+    //ringIntake.spin(forward, 100, percent);
+    //wait(400, msec);
+    //ringIntake.stop();
+//
+    //ringLift.spinFor(forward, 150, degrees, false);
+////
+    //// Get first goal
+    //driveFor(16, 100);
+    //ringLift.spinFor(reverse, 150, degrees, false);
+    //driveTo(-44, 23, 30, reverse);
+    //goal_clamp.set(true);
+//
+    //// Gets rings
+//
+    //// Ring 1
+    //ringIntake.spin(forward, 80, percent);
+    //turnToHeading(85, 100);
+    //driveFor(24, 100);
+//
+    //// Ring 2
+//
+    //driveTo(2, 52, 100, forward);
+//
+    //// Ring 3
+//
+    //driveTo(-24, 48, 100, forward);
+//
+    //// Rings 4 & 5
+//
+    //driveTo(-60, 46, 35, forward);
+//
+    //wait(1400, msec);
+//
+    //// Ring 6
+//
+    //driveFor(-30, 100);
+//
+    //ringLift.spinFor(reverse, 150, degrees, false);
+//
+    //driveTo(-54, 58, 100, forward);
+//
+    //wait(500, msec);
+//
+    //// Corner
+//
+    //turnToHeading(125, 100);
+    //driveFor(-22, 100);
+    //ringIntake.spinFor(reverse, 50, degrees, false);
+    //goal_clamp.set(false);
+//
+    //driveFor(8, 100);
+//
+    //// Get second goal
+//
+    //driveTo(-42.5, 24, 100, forward);
+    //pointAt(-42.5, -22, 100, reverse);
+    //driveTo(-42.5, -22, 50, reverse);
+    //goal_clamp.set(true);
+//
+    //// Ring 1
+//
+    //ringIntake.spin(forward, 80, percent);
+////
+    //driveTo(-19, -18, 100, forward);
+////
+//////
+    ////// Ring 2
+//////
+    //driveTo(-1, -50, 100, forward);
+//////
+    //////// Ring 3
+//////
+    //driveTo(-19.5, -45, 100, forward);
+//////
+    //////// Rings 4 & 5
+//////
+    //driveTo(-55.5, -43.5, 35, forward);
+//////
+    //wait(1000, msec);
+//////
+    ////// Ring 6
+//////
+    //driveFor(-30, 100);
+//////
+    //driveTo(-48, -58, 100, forward);
+    //wait(500, msec);
+////
+    //////
+    ////// Corner
+//////
+    //turnToHeading(65, 100);
+    //driveFor(-24, 100);
+    //ringIntake.spinFor(reverse, 50, degrees, false);
+    //goal_clamp.set(false);
+    //driveFor(12, 100);
+//
+    //// Get third goal (rip)
+//
+    //driveTo(0, -48, 100, forward);
+    //driveTo(54, 0, 100, forward);
+    ////driveTo(48.5, -27, 100, forward);
+//
+    //turnToHeading(330, 100);
+    //driveFor(-60, 100);
+//
+    ////pointAt(55.5, -26, 100, reverse);
+    ////driveTo(57.5, -24, 40, reverse);
+//
+    ////goal_clamp.set(true);
+////
+    ////driveTo(60, -52, 100, reverse);
+////
+    ////goal_clamp.set(false);
+    //
+    //driveFor(8, 100);
+//
+//
+    //// Last goal (FULL SEND)
+//
+    //driveTo(66, 60, 100, reverse);
+//
+    //goal_clamp.set(false);
+//
+    //driveFor(12, 100);
     
 ////
     //driveFor(8, 100);
