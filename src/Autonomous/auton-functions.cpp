@@ -23,10 +23,10 @@ void turnToHeading(double heading, double turnSpeed) {
     double previousError = error;
     double previousTime = Brain.Timer.system();
 
-    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.3) + 600) * (1 + ((100 - turnSpeed) / 100));
+    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.8) + 650);
 
     bool notDone = true;
-    PID turnPid = PID(0.58, 0, 1, 0.5, 5, 100, &notDone, timeout, 800);//0.58, 0, 0.8
+    PID turnPid = PID(0.58, 0, 0.98, 0.5, 5, 100, &notDone, timeout, 800);//0.58, 0, 0.8
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -63,9 +63,9 @@ void driveFor(double distance, double speed) {
     bool driving = true;
     bool turning = true;
 
-    int timeout = (std::abs(distance) / 12) * 250 + 550;
+    int timeout = (std::abs(distance) / 12) * 270 + 550;
 
-    PID drivePID = PID(4.22, 0, 0.78, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID drivePID = PID(4.48, 0.001, 0.24, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
     PID turnPID = PID(0.58, 0, 1.1, 100, 3, speed, &turning, 9999999, 100);
 
     double driveError = distance;
@@ -84,7 +84,7 @@ void driveFor(double distance, double speed) {
         double dt = (Brain.Timer.system() - previousTime);
 
         double driveOutput = drivePID.Update(driveError, dt);
-        double turnOutput = turnPID.Update(turnError, dt) * 0.6;
+        double turnOutput = turnPID.Update(turnError, dt) * 0.8;
 
         leftDrive.spin(forward, (driveOutput + turnOutput), percent);
         rightDrive.spin(forward, (driveOutput - turnOutput), percent);
@@ -124,6 +124,34 @@ void driveTo(double x, double y, double speed, vex::directionType dir) {
     }
 }
 
-void moveLiftByDegrees(float degrees) {
- 
+void moveLiftToAngle(float targetAngle, bool pushing) {
+    // PID for arm lift
+
+    ringLiftArm.setStopping(hold);
+
+    float currentArmAngle = lift_arm_potentiometer.angle(degrees);
+    float goalArmAngle = targetAngle;
+    float error = goalArmAngle - currentArmAngle;
+
+    if (pushing) {
+        leftDrive.spin(forward, 3, percent);
+        rightDrive.spin(forward, 3, percent);
+    }
+
+    while (std::abs(error) >= 1.0) {
+        if (ringLiftArm.torque(Nm) >= 0.8) {
+            break;
+        }
+
+        std::cout << "Torque: "<< ringLiftArm.torque(Nm) << std::endl;
+
+        currentArmAngle = lift_arm_potentiometer.angle(degrees);
+        error = goalArmAngle - currentArmAngle;
+
+        ringLiftArm.spin(reverse, error * 2.5, percent);
+    }
+
+    ringLiftArm.stop();
+    leftDrive.stop();
+    rightDrive.stop();
 }
