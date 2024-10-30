@@ -3,9 +3,7 @@
 
 void Blue_Left_Auton(void) {
         // Rush goal
-    ringLift.spinFor(forward, 250, degrees, false);
     driveFor(-36, 100);
-    ringLift.spinFor(reverse, 250, degrees, false);
     driveTo(9.5, -52.5, 40, reverse);
     goal_clamp.set(true);
 
@@ -14,7 +12,7 @@ void Blue_Left_Auton(void) {
 
     // Second ring
 
-    driveTo(30, -54, 100, forward);
+    driveTo(30, -50, 100, forward);
     ringIntake.stop();
     turnToHeading(0, 100);
     goal_clamp.set(false);

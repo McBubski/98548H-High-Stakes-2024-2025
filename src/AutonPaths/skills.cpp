@@ -13,21 +13,21 @@ void Skills_Auton(void) {
     // Get next goal
 
     driveFor(13, 100);
-    driveTo(-47, -18, 30, reverse);
+    driveTo(-48, -18, 40, reverse);
     goal_clamp.set(true);
 
     // Get first ring
     ringIntake.spin(forward, 100, percent);
-    driveTo(-26, -18, 80, forward);
+    driveTo(-26, -20, 80, forward);
 
     // Get next ring
     driveTo(5.25, -48, 100, forward);
     driveTo(21, -50, 80, forward);
 
     // Pick up wallstake ring
-    driveTo(0, -44, 100, reverse);
-    moveLiftToAngle(178, false);
-    driveTo(0, -62, 70, forward);
+    driveTo(1, -44, 100, reverse);
+    moveLiftToAngle(205, false);
+    driveTo(1, -62, 70, forward);
     turnToHeading(180, 100);
 
     // Intakes until torque spike, indicating the ring is in fully
@@ -35,8 +35,8 @@ void Skills_Auton(void) {
     wait(300, msec);
     ringIntake.stop();
 
-    moveLiftToAngle(80, true);
-    moveLiftToAngle(200, false);
+    moveLiftToAngle(103, true);
+    moveLiftToAngle(220, false);
 
     // Get next three rings
     driveFor(-12, 100);
@@ -44,7 +44,8 @@ void Skills_Auton(void) {
     driveTo(-90, -48, 40, forward);
 
     // Get final ring
-    driveFor(-8, 100);
+    turnToHeading(225, 100);
+    driveFor(-6, 100);
     driveTo(-48, -62, 100, forward);
 
     // Set goal in corner
@@ -52,12 +53,13 @@ void Skills_Auton(void) {
     ringIntake.stop();
     ringIntake.spinFor(-100, degrees, false);
     goal_clamp.set(false);
-    driveFor(10, 100);
+    driveTo(-46, -46, 100, forward);
 
     // Get second goal
 
-    driveTo(-46, 10, 60, reverse);
-    pointAt(-48, 24, 40, reverse);
+    driveTo(-48, 10, 100, forward);
+    turnToHeading(180, 100);
+    turnToHeading(180, 100);
     driveFor(-18, 40);
     goal_clamp.set(true);
 
@@ -69,7 +71,7 @@ void Skills_Auton(void) {
     driveTo(-24, 48, 60, forward);
 
     // Get next two rings
-    driveTo(-68, 46, 40, forward);
+    driveTo(-74, 46, 40, forward);
 
     // Get last ring
     driveFor(-12, 100);
@@ -87,7 +89,7 @@ void Skills_Auton(void) {
 
     ringIntake.spin(forward, 100, percent);
     driveTo(0, 30, 100, forward);
-    moveLiftToAngle(178, false);
+    moveLiftToAngle(205, false);
     driveTo(0, 61, 70, forward);
 
     // Intakes until torque spike, indicating the ring is in fully
@@ -95,8 +97,19 @@ void Skills_Auton(void) {
     wait(300, msec);
     ringIntake.stop();
 
-    moveLiftToAngle(80, true);
-    moveLiftToAngle(200, false);
+    moveLiftToAngle(103, true);
+    moveLiftToAngle(220, false);
+
+    // Get next ring
+
+    ringIntake.spin(forward, 80, percent);
+    driveTo(22, 24, 60, forward);
+    ringIntake.stop();
+
+    // Get next goal
+
+    driveTo(48, 0, 60, reverse);
+    goal_clamp.set(true);
 
     // SKILLS
 

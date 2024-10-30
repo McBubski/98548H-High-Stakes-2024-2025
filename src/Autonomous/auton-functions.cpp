@@ -65,7 +65,7 @@ void driveFor(double distance, double speed) {
 
     int timeout = (std::abs(distance) / 12) * 270 + 550;
 
-    PID drivePID = PID(4.48, 0.001, 0.24, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID drivePID = PID(4.48, 0.001, 0.24, 0.1, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
     PID turnPID = PID(0.58, 0, 1.1, 100, 3, speed, &turning, 9999999, 100);
 
     double driveError = distance;
@@ -84,7 +84,7 @@ void driveFor(double distance, double speed) {
         double dt = (Brain.Timer.system() - previousTime);
 
         double driveOutput = drivePID.Update(driveError, dt);
-        double turnOutput = turnPID.Update(turnError, dt) * 0.8;
+        double turnOutput = turnPID.Update(turnError, dt) * 0.5;
 
         leftDrive.spin(forward, (driveOutput + turnOutput), percent);
         rightDrive.spin(forward, (driveOutput - turnOutput), percent);
