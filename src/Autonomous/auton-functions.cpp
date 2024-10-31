@@ -23,10 +23,10 @@ void turnToHeading(double heading, double turnSpeed) {
     double previousError = error;
     double previousTime = Brain.Timer.system();
 
-    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.8) + 650);
+    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.4) + 650);
 
     bool notDone = true;
-    PID turnPid = PID(0.58, 0, 0.98, 0.5, 5, 100, &notDone, timeout, 800);//0.58, 0, 0.8
+    PID turnPid = PID(0.62, 0, 0.9, 0.5, 5, 100, &notDone, timeout, 800);//.61, 0, 1.05
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -41,9 +41,6 @@ void turnToHeading(double heading, double turnSpeed) {
         previousTime = Brain.Timer.system();
 
         wait(10, msec);
-
-        Brain.Screen.printAt(50, 50, "%f", error);
-        Brain.Screen.printAt(50, 100, "%f", inertial_sensor.heading());
 
         std::cout << "Error: " << error << std::endl;
     }

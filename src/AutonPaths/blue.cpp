@@ -19,8 +19,8 @@ void Blue_Left_Auton(void) {
 
     // Get second goal
 
-    pointAt(26, -28, 100, reverse);
-    driveTo(26, -28, 30, reverse);
+    turnToHeading(180, 100);
+    driveFor(-20, 40);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -34,7 +34,9 @@ void Blue_Left_Auton(void) {
     //corner_arm.set(true);
     //turnToHeading(200, 50);
 
-    turnToHeading(225, 100);
+    turnToHeading(315, 100);
+    driveFor(8, 100);
+    moveLiftToAngle(100, false);
 }
 
 void Blue_Right_Auton(void) {
@@ -56,7 +58,7 @@ void Blue_Right_Auton(void) {
 
     // Grab second ring
 
-    driveTo(28, 48, 100, forward);
+    driveTo(26, 48, 100, forward);
     wait(300, msec);
     driveFor(-8, 100);
 
@@ -71,10 +73,9 @@ void Blue_Right_Auton(void) {
     // Touch bar
 
     driveTo(24, 22, 40, reverse);
-    turnToHeading(270, 100);
-    corner_arm.set(true);
-    driveFor(6, 100);
-    turnToHeading(240, 100);
+    turnToHeading(225, 100);
+    driveFor(4, 100);
+    moveLiftToAngle(100, false);
 }
 
 void Failsafe(void) {
