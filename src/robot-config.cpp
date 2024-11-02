@@ -35,8 +35,8 @@ motor_group ringIntake = motor_group(ringIntake1, ringIntake2);
 pot lift_arm_potentiometer = pot(Brain.ThreeWirePort.C);
 inertial inertial_sensor = inertial(PORT9);
 
-rotation sidewaysTrackingWheel = rotation(PORT7, false);
-rotation forwardTrackingWheel = rotation(PORT2, false);
+rotation sidewaysTrackingWheel = rotation(PORT19, false);
+rotation forwardTrackingWheel = rotation(PORT18, false);
 
 aivision ai_vision = aivision(PORT4);
 
