@@ -7,15 +7,16 @@
 
 using namespace vex;
 
-int auton_path = 5;
+int auton_path = 7;
 
-double startingPositions[6][3] = {
+double startingPositions[7][3] = {
     {-56.5, -62.0, 270}, // Goal Rush Right
     {56.5, 16.5, 90}, // Goal Fill Right    //// NEW POSITION
     {56.5, -62.0, 90}, // Goal Rush Left
     {-56.5, 16.5, 270}, // Goal Fill Left
     {-61, 0, 90}, // Skills
-    {61.25, 17, 180} // Failsafe Auton
+    {56.5, 16.5, 90}, // Win Point Blue
+    {-56.5, 16.5, 270} // Win Point Red
 };
 
 void autonomous(void) {
@@ -36,10 +37,13 @@ void autonomous(void) {
             Skills_Auton();
             break;
         case 6:
-            Failsafe();
+            Blue_Win_Point();
+            break;
+        case 7:
+            Red_Win_Point();
             break;
         default:
-            Failsafe();
+            Blue_Win_Point();
     }
 }
 

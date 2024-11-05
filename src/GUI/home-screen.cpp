@@ -124,7 +124,10 @@ void UpdateAutonInformation(void) {
             auton = "Skills";
             break;
         case 6:
-            auton = "Failsafe";
+            auton = "Blue Solo Winpoint";
+            break;
+        case 7:
+            auton = "Red Solo Winpoint";
             break;
         default:
             auton = "Blue Auton";

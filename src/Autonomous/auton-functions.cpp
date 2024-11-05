@@ -129,6 +129,9 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     float goalArmAngle = targetAngle;
     float error = goalArmAngle - currentArmAngle;
 
+    float startTime = Brain.Timer.system();
+    float timeSinceStart = Brain.Timer.system() - startTime;
+
     if (pushing) {
         leftDrive.spin(forward, 3, percent);
         rightDrive.spin(forward, 3, percent);
@@ -137,6 +140,16 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     while (std::abs(error) >= 1.0) {
         if (ringLiftArm.torque(Nm) >= 0.8) {
             break;
+        }
+
+        timeSinceStart = Brain.Timer.system() - startTime;
+
+        if (timeSinceStart >= 4000) {
+            ringLiftArm.stop();
+            leftDrive.stop();
+            rightDrive.stop(); 
+
+            return;
         }
 
         std::cout << "Torque: "<< ringLiftArm.torque(Nm) << std::endl;
