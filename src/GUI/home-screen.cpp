@@ -129,6 +129,12 @@ void UpdateAutonInformation(void) {
         case 7:
             auton = "Red Solo Winpoint";
             break;
+        case 8:
+            auton = "Eliminations Blue";
+            break;
+        case 9:
+            auton = "Eliminations Red";
+            break;
         default:
             auton = "Blue Auton";
     }

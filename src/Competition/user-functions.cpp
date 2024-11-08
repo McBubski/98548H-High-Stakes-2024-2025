@@ -1,4 +1,5 @@
 #include "Competition/user-functions.h"
+#include "Autonomous/auton-functions.h"
 
 using namespace vex;
 
@@ -6,6 +7,8 @@ bool slowIntake = false;
 bool liftRaising = false;
 
 int goalArmPos = 0;
+
+int previousAutonColor = 0;
 
 void initializeUserControl(void) {
     // Sets drivetrain stopping to coast
@@ -22,8 +25,12 @@ void initializeUserControl(void) {
     // Connects controller inputs to functions
     Controller.ButtonDown.pressed(toggleGoalClamp);
     Controller.ButtonRight.pressed(toggleCornerArm);
+    Controller.ButtonB.pressed(toggleColorSorter);
     Controller.ButtonL2.pressed(cycleRingArmTarget);
     Controller.ButtonL1.pressed(lowerRingArm);
+
+    previousAutonColor = auton_color;
+    auton_color = 2;
     
     // Macro
 
@@ -59,4 +66,13 @@ void cycleRingArmTarget(void) {
 
 void lowerRingArm(void) {
   goalArmPos = 0;
+}
+
+void toggleColorSorter(void) {
+  Controller.rumble(".");
+  if (auton_color == previousAutonColor) {
+    auton_color = 2;
+  } else {
+    auton_color = previousAutonColor;
+  }
 }

@@ -14,4 +14,9 @@ void pre_auton(void) {
 
     forwardTrackingWheel.resetPosition();
     sidewaysTrackingWheel.resetPosition();
+
+    // Sensors
+    color_sensor.setLight(ledState::on);
+    color_sensor.setLightPower(50, percent);
+
 }

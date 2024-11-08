@@ -5,6 +5,8 @@
 #include <iostream>
 #include <cmath>
 
+int auton_color = 1; // 0 is red, 1 is blue, 2 is no color sorting.
+
 double wrapAngleDeg(double angle) {
     angle = fmod(angle + 180.0, 360.0);
     return (angle >= 0) ? angle - 180.0 : angle + 180.0;
@@ -26,7 +28,7 @@ void turnToHeading(double heading, double turnSpeed) {
     double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.3) + 550);
 
     bool notDone = true;
-    PID turnPid = PID(0.63, 0.001, 1.05, 0.5, 5, 100, &notDone, timeout, 700);//.61, 0, 1.05
+    PID turnPid = PID(0.59, 0.0001, 0.73, 0.5, 5, 100, &notDone, timeout, 700);//.61, 0, 1.05
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -42,7 +44,7 @@ void turnToHeading(double heading, double turnSpeed) {
 
         wait(10, msec);
 
-        std::cout << "Error: " << error << std::endl;
+        //std::cout << "Error: " << error << std::endl;
     }
 
     leftDrive.stop();
@@ -163,4 +165,29 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     ringLiftArm.stop();
     leftDrive.stop();
     rightDrive.stop();
+}
+
+int sortColorTask(void) {
+    color_sensor.setLight(ledState::on);
+    color_sensor.setLightPower(25, percent);
+
+    while (true) {
+        if (auton_color == 0) { // Red
+            if ((color_sensor.isNearObject() && color_sensor.color() == blue)) {
+                ring_sorter.set(true);
+                wait(450, msec);
+            } else {
+                ring_sorter.set(false);
+            }
+        } else if (auton_color == 1) { // Blue
+             if ((color_sensor.isNearObject() && color_sensor.color() == red)) {
+                ring_sorter.set(true);
+                wait(450, msec);
+            } else {
+                ring_sorter.set(false);
+            }
+        }
+        wait(20, msec);
+    }
+    return 1;
 }

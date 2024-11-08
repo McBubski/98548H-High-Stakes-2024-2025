@@ -38,12 +38,13 @@ inertial inertial_sensor = inertial(PORT9);
 rotation sidewaysTrackingWheel = rotation(PORT19, false);
 rotation forwardTrackingWheel = rotation(PORT18, false);
 
-aivision ai_vision = aivision(PORT4);
+optical color_sensor = optical(PORT13);
 
 // Pneumatics
 
 digital_out goal_clamp = digital_out(Brain.ThreeWirePort.A);
 digital_out corner_arm = digital_out(Brain.ThreeWirePort.B);
+digital_out ring_sorter = digital_out(Brain.ThreeWirePort.D);
 
 // Odometry
 

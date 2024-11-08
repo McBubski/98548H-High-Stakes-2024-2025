@@ -4,6 +4,8 @@
 #include "GUI/home-screen.h"
 #include "GUI/odometry-screen.h"
 
+#include "Autonomous/auton-functions.h"
+
 #include <iostream>
 #include <string.h>
 
@@ -27,6 +29,19 @@ int drawScreen(void) {
 
         Controller.Screen.setCursor(1, 1);
         Controller.Screen.print("%.2f", inertial_sensor.heading(degrees));
+        Controller.Screen.setCursor(1, 15);
+
+        if (auton_color == 0) {
+            Controller.Screen.print("CS: RED");
+        } else if (auton_color == 1) {
+            Controller.Screen.print("CS: BLU");
+        } 
+
+
+        // Testing color sensor
+
+        //Brain.Screen.printAt(50, 50, "%f %d", color_sensor.hue(), color_sensor.isNearObject());
+
 
         Brain.Screen.render();
 

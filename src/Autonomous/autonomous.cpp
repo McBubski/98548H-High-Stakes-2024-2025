@@ -9,40 +9,59 @@ using namespace vex;
 
 int auton_path = 7;
 
-double startingPositions[7][3] = {
+double startingPositions[9][3] = {
     {-56.5, -62.0, 270}, // Goal Rush Right
     {56.5, 16.5, 90}, // Goal Fill Right    //// NEW POSITION
     {56.5, -62.0, 90}, // Goal Rush Left
     {-56.5, 16.5, 270}, // Goal Fill Left
     {-61, 0, 90}, // Skills
-    {56.5, 16.5, 90}, // Win Point Blue
-    {-56.5, 16.5, 270} // Win Point Red
+    {56.5, -16.5, 90}, // Win Point Blue
+    {-56.5, -16.5, 270}, // Win Point Red
+    {56.5, -16.5, 90}, // Elims Blue
+    {-56.5, -16.5, 270} // Elims Red
 };
 
 void autonomous(void) {
+    std::cout << "Auton: " << auton_path << std::endl;
     switch (auton_path) {
         case 1:
+            auton_color = 0;
             Red_Right_Auton();
             break;
         case 2:
+            auton_color = 1;
             Blue_Right_Auton();
             break;
         case 3:
+            auton_color = 1;
             Blue_Left_Auton();
             break;
         case 4:
+            auton_color = 0;
             Red_Left_Auton();
             break;
         case 5:
+            auton_color = 0;
             Skills_Auton();
             break;
         case 6:
+            auton_color = 1;
             Blue_Win_Point();
             break;
         case 7:
+            auton_color = 0;
             Red_Win_Point();
             break;
+        case 8:
+            auton_color = 1;
+            Blue_Elims();
+            break;
+        case 9:
+            auton_color = 0;
+            Red_Elims();
+            break;
         default:
+            auton_color = 1;
             Blue_Win_Point();
     }
 }
@@ -51,8 +70,8 @@ void changeAuton(int direction) {
     auton_path += direction;
 
     if (auton_path < 1) {
-        auton_path = 6;
-    } else if (auton_path > 6) {
+        auton_path = 9;
+    } else if (auton_path > 9) {
         auton_path = 1;
     }
 

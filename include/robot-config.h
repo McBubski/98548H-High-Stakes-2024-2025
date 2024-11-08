@@ -38,12 +38,13 @@ extern inertial inertial_sensor;
 extern rotation sidewaysTrackingWheel;
 extern rotation forwardTrackingWheel;
 
-extern aivision ai_vision;
+extern optical color_sensor;
 
 // Pneumatics
 
 extern digital_out goal_clamp;
 extern digital_out corner_arm;
+extern digital_out ring_sorter;
 
 // Odometry
 

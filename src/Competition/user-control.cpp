@@ -1,5 +1,6 @@
 #include "Competition/user-control.h"
 #include "Competition/user-functions.h"
+#include "Autonomous/auton-functions.h"
 
 #include <cmath>
 

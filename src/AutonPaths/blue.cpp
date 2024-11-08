@@ -40,9 +40,6 @@ void Blue_Left_Auton(void) {
 }
 
 void Blue_Right_Auton(void) {
-    // Raise Arm
-    ringLift.spinFor(forward, 150, degrees, false);
-
     // Get first goal
 
     driveFor(-18, 100);
@@ -80,62 +77,98 @@ void Blue_Right_Auton(void) {
 }
 
 void Blue_Win_Point(void) {
-    driveTo(54, -0.1, 100, reverse);
-    turnToHeading(270, 100);
-    driveFor(-9, 100);
+    // Get first goal
 
-    ringIntake.spin(forward, 100, percent);
-    wait(500, msec);
-    ringIntake.stop();
-
-    driveFor(12, 100);
-
-    driveTo(19.5, 28.5, 40, reverse);
+    driveFor(-18, 100);
+    ringLift.spinFor(reverse, 150, degrees, false);
+    turnToHeading(60, 100);
+    driveFor(-10, 20);
     goal_clamp.set(true);
-
     ringIntake.spin(forward, 100, percent);
-    driveTo(8.5, 41, 80, forward);
-    wait(1000, msec);
-    driveFor(-16, 100);
-    driveTo(19.5, 48, 100, forward);
-    driveTo(17, 15.5, 100, forward);
 
-    turnToHeading(225, 100);
-    driveFor(-2, 100);
+    // Second goal
+
+    driveTo(51, -24, 100, forward);
+    driveTo(51, 32, 70, forward);
+    //wait(1300, msec);
+    driveFor(-6, 100);
+    goal_clamp.set(false);
+
+    pointAt(20, 22, 100, reverse);
+    driveTo(20, 22, 35, reverse);
+    goal_clamp.set(true);
+    ringIntake.spin(forward, 100, percent);
+
+    // Get next ring
+    driveTo(26, 46, 100, forward);
+    driveFor(-20, 100);
+
+    // Touch bar
+
     moveLiftToAngle(100, false);
-    //ringLift.setStopping(hold);
-    //ringIntake.spin(reverse, 100, percent);
-    //driveFor(20, 100);
-    //ringIntake.stop();
-    //turnToHeading(275, 100);
-    //driveFor(-4, 100);
-//
-    //ringLift.spin(forward, 80, percent);
-    //wait(600, msec);
-    //ringLift.stop();
-//
-    //driveFor(6, 100);
-//
-    //ringLift.spin(reverse, 80, percent);
-    //wait(400, msec);
-    //ringLift.setStopping(coast);
-    //ringLift.stop();   
-//
-    //driveFor(-16, 100); 
-//
-    //turnToHeading(320, 100);
-    //driveFor(-38, 40);
-    //goal_clamp.set(true);
-    //turnToHeading(180, 100);
+    driveTo(14, 14, 100, forward);
+
+    //driveTo(54, -0.1, 100, reverse);
+    //turnToHeading(270, 100);
+    //driveFor(-9, 100);
 //
     //ringIntake.spin(forward, 100, percent);
-    //driveFor(28, 100);
-    //wait(1500, msec);
-    //driveFor(-28, 100);
-    //turnToHeading(110, 100);
-    //driveFor(10, 100);
-//
+    //wait(500, msec);
     //ringIntake.stop();
-    //corner_arm.set(true);
-    //turnToHeading(35, 100); 
+//
+    //driveFor(12, 100);
+//
+    //driveTo(19.5, 28.5, 40, reverse);
+    //goal_clamp.set(true);
+//
+    //ringIntake.spin(forward, 100, percent);
+    //driveTo(8.5, 41, 80, forward);
+    //wait(1000, msec);
+    //driveFor(-16, 100);
+    //driveTo(19.5, 48, 100, forward);
+    //driveTo(17, 15.5, 100, forward);
+//
+    //turnToHeading(225, 100);
+    //driveFor(-2, 100);
+    //moveLiftToAngle(100, false);
+}
+
+void Blue_Elims(void) {
+    // Get first goal
+
+    driveFor(-18, 100);
+    ringLift.spinFor(reverse, 150, degrees, false);
+    turnToHeading(60, 100);
+    driveFor(-10, 20);
+    goal_clamp.set(true);
+
+    // Get next ring (with ring sort :D)
+
+    ringIntake.spin(forward, 80, percent);
+    driveTo(58, 7, 50, forward);
+    wait(200, msec);
+
+    // Get third ring
+
+    driveFor(-10, 100);
+    driveTo(25, -46, 90, forward);
+    wait(200, msec);
+    driveFor(-12, 100);
+
+    // Get last ring
+
+    driveTo(74, -79, 35, forward);
+    wait(500, msec);
+
+    // Wiggle
+
+    driveFor(-4, 100);
+    driveFor(8, 100);
+    wait(200, msec);
+    driveFor(-12, 100);
+    driveFor(16, 100);
+    driveFor(-12, 100);
+    driveFor(16, 100);
+    driveFor(-12, 100);
+
 }
