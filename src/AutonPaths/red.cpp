@@ -46,22 +46,24 @@ void Red_Left_Auton(void) {
 void Red_Right_Auton(void) {
     // Rush goal
     driveFor(-36, 100);
-    driveTo(-7, -53, 30, reverse);
+    driveTo(-9, -54, 30, reverse);
     goal_clamp.set(true);
 
     ringIntake.spin(forward, 100, percent);
-    wait(800, msec);
+    wait(400, msec);
 
     // Second ring
 
     driveTo(-26, -50, 100, forward);
     ringIntake.stop();
+    ringIntake2.spin(forward, 100, percent);
     turnToHeading(0, 100);
     goal_clamp.set(false);
 
     // Get second goal
 
-    driveTo(-22, -30, 40, reverse);
+    pointAt(-24, -30, 100, reverse);
+    driveFor(-24.5, 40);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -70,7 +72,7 @@ void Red_Right_Auton(void) {
     // Touch bar
 
     turnToHeading(45, 100);
-    driveFor(7, 100);
+    driveFor(2, 100);
     moveLiftToAngle(90, false);
 
     //driveFor(-5, 100);

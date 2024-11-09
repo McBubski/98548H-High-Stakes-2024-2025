@@ -4,7 +4,7 @@
 void Blue_Left_Auton(void) {
         // Rush goal
     driveFor(-36, 100);
-    driveTo(10.5, -53.5, 30, reverse);
+    driveTo(9.5, -52.5, 30, reverse);
     goal_clamp.set(true);
 
     ringIntake.spin(forward, 100, percent);
@@ -14,13 +14,14 @@ void Blue_Left_Auton(void) {
 
     driveTo(28, -50, 100, forward);
     ringIntake.stop();
+    ringIntake2.spin(forward, 100, percent);
     turnToHeading(0, 100);
     goal_clamp.set(false);
 
     // Get second goal
 
-    turnToHeading(180, 100);
-    driveFor(-20, 40);
+    pointAt(25.5, -24, 100, reverse);
+    driveFor(-22, 40);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -35,17 +36,20 @@ void Blue_Left_Auton(void) {
     //turnToHeading(200, 50);
 
     turnToHeading(315, 100);
-    driveFor(7, 100);
+    driveFor(4, 100);
     moveLiftToAngle(100, false);
 }
 
 void Blue_Right_Auton(void) {
+    // Raise Arm
+    ringLift.spinFor(forward, 150, degrees, false);
+
     // Get first goal
 
     driveFor(-18, 100);
     ringLift.spinFor(reverse, 150, degrees, false);
-    turnToHeading(120, 100);
-    driveFor(-10, 20);
+    turnToHeading(121, 100);
+    driveFor(-16, 20);
     goal_clamp.set(true);
 
     // Put on first ring
@@ -53,27 +57,29 @@ void Blue_Right_Auton(void) {
     ringIntake.spin(forward, 100, percent);
     wait(300, msec);
 
-    // Grab second ring
-
-    driveTo(26, 48, 100, forward);
-    wait(300, msec);
-    driveFor(-8, 100);
-
     // Grab third ring
 
-    driveTo(13.5, 45, 60, forward);
+    driveTo(10.5, 39, 60, forward);
+    wait(500, msec);
 
     // Grab to last ring 
     
-    driveTo(10, 48, 60, forward);
+    driveTo(7.5, 52, 60, forward);
+    wait(500, msec);
 
-    // Touch bar
+    // Grab second ring
 
+    driveTo(34, 42, 60, forward);
+    wait(300, msec);
+
+
+//
+    //// Touch bar
+//
     driveTo(24, 22, 40, reverse);
     turnToHeading(225, 100);
     driveFor(4, 100);
     moveLiftToAngle(100, false);
-    ringIntake.stop();
 }
 
 void Blue_Win_Point(void) {

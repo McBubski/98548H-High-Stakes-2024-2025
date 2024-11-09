@@ -17,6 +17,6 @@ void pre_auton(void) {
 
     // Sensors
     color_sensor.setLight(ledState::on);
-    color_sensor.setLightPower(50, percent);
+    color_sensor.setLightPower(75, percent);
 
 }

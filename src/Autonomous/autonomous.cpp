@@ -7,7 +7,7 @@
 
 using namespace vex;
 
-int auton_path = 7;
+int auton_path = 5;
 
 double startingPositions[9][3] = {
     {-56.5, -62.0, 270}, // Goal Rush Right
