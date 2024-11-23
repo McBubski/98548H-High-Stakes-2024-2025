@@ -39,6 +39,7 @@ rotation sidewaysTrackingWheel = rotation(PORT19, false);
 rotation forwardTrackingWheel = rotation(PORT18, false);
 
 optical color_sensor = optical(PORT13);
+aivision ai_sensor = aivision(PORT2);
 
 // Pneumatics
 

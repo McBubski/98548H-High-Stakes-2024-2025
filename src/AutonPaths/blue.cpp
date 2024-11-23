@@ -111,8 +111,8 @@ void Blue_Win_Point(void) {
 
     // Touch bar
 
+    driveTo(13.5, 13.5, 100, forward);
     moveLiftToAngle(100, false);
-    driveTo(14, 14, 100, forward);
 
     //driveTo(54, -0.1, 100, reverse);
     //turnToHeading(270, 100);

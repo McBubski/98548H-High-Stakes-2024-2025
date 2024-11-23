@@ -13,18 +13,17 @@ void Skills_Auton(void) {
     // Get next goal
 
     driveFor(13, 100);
-    driveTo(-49, -18, 35, reverse);
+    driveTo(-48.5, -20, 35, reverse);
     goal_clamp.set(true);
 
     // Get first ring
     ringIntake.spin(forward, 100, percent);
-    driveTo(-26, -18, 80, forward);
+    driveTo(-24, -18, 80, forward);
 
     // Get next ring
-    driveTo(5.25, -44, 100, forward);
-    driveTo(23, -50, 80, forward);
+    driveTo(-1, -57, 100, forward);
 
-    driveTo(0, -48, 100, forward);
+    driveTo(1, -47, 100, reverse);
     // Pick up wallstake ring
     //driveTo(1.25, -42, 80, reverse);
     //moveLiftToAngle(201, false);
@@ -43,12 +42,12 @@ void Skills_Auton(void) {
     // Get next three rings
     //driveFor(-12, 100);
     ringIntake.spin(forward, 100, percent);
-    driveTo(-94, -44, 40, forward);
+    driveTo(-94, -47, 45, forward);
 
     // Get final ring
     turnToHeading(225, 100);
     driveFor(-6, 100);
-    driveTo(-50, -62, 100, forward);
+    driveTo(-50, -60, 100, forward);
 
     // Set goal in corner
     driveTo(-64, -68, 100, reverse);
@@ -59,7 +58,7 @@ void Skills_Auton(void) {
 
     // Get second goal
 
-    driveTo(-44, 10, 80, reverse);
+    driveTo(-42, 10, 80, reverse);
     driveTo(-46, 30, 20, reverse);
     goal_clamp.set(true);
 
@@ -132,13 +131,13 @@ void Skills_Auton(void) {
     // Last shove
 
     driveTo(52, 0, 100, reverse);
-    driveTo(64, -62, 100, reverse);
+    driveTo(70, -68, 100, reverse);
 
-    driveFor(2, 100);
+    driveFor(4, 100);
 
     // Elevate
 
-    driveTo(-6, 0, 100, forward);
+    driveTo(-2, 1, 100, forward);
     corner_arm.set(true);
     turnToHeading(312, 100);
     driveFor(-23, 80);

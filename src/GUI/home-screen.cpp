@@ -5,6 +5,7 @@
 #include "Graphics/button.h"
 
 #include "Autonomous/autonomous.h"
+#include <cmath>
 
 bool screenDebounce = false;
 

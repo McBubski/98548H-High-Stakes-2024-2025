@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-int auton_color = 0; // 0 is red, 1 is blue, 2 is no color sorting.
+int auton_color = 2; // 0 is red, 1 is blue, 2 is no color sorting.
 
 double wrapAngleDeg(double angle) {
     angle = fmod(angle + 180.0, 360.0);

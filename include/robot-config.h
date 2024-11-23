@@ -39,6 +39,7 @@ extern rotation sidewaysTrackingWheel;
 extern rotation forwardTrackingWheel;
 
 extern optical color_sensor;
+extern aivision ai_sensor;
 
 // Pneumatics
 
