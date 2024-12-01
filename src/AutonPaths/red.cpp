@@ -159,18 +159,18 @@ void Red_Elims(void) {
     // Get third ring
 
     driveFor(-10, 100);
-    driveTo(-25, -49, 90, forward);
+    driveTo(-27, -49, 90, forward);
     wait(200, msec);
     driveFor(-12, 100);
   
     // Get last ring
 
-    driveTo(-80, -83, 40, forward);
+    driveTo(-77, -83, 40, forward);
     wait(500, msec);
 
     // Wiggle
 
-    driveFor(-4, 100);
+    driveFor(-6, 100);
     driveFor(16, 100);
     wait(200, msec);
     driveFor(-12, 100);

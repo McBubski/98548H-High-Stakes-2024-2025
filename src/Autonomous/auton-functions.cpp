@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-int auton_color = 2; // 0 is red, 1 is blue, 2 is no color sorting.
+int auton_color = 1; // 0 is red, 1 is blue, 2 is no color sorting.
 
 double wrapAngleDeg(double angle) {
     angle = fmod(angle + 180.0, 360.0);
@@ -175,14 +175,14 @@ int sortColorTask(void) {
         if (auton_color == 0) { // Red
             if ((color_sensor.isNearObject() && color_sensor.color() == blue)) {
                 ring_sorter.set(true);
-                wait(450, msec);
+                wait(350, msec);
             } else {
                 ring_sorter.set(false);
             }
         } else if (auton_color == 1) { // Blue
              if ((color_sensor.isNearObject() && color_sensor.color() == red)) {
                 ring_sorter.set(true);
-                wait(450, msec);
+                wait(350, msec);
             } else {
                 ring_sorter.set(false);
             }
