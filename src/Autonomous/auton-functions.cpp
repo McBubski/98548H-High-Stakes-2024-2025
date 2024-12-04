@@ -136,7 +136,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
 
     if (pushing) {
         leftDrive.spin(forward, 3, percent);
-        rightDrive.spin(forward, 3, percent);
+        rightDrive.spin(forward, 6, percent);
     }
 
     while (std::abs(error) >= 1.0) {
@@ -154,7 +154,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
             return;
         }
 
-        std::cout << "Torque: "<< ringLiftArm.torque(Nm) << std::endl;
+        //std::cout << "Torque: "<< ringLiftArm.torque(Nm) << std::endl;
 
         currentArmAngle = lift_arm_potentiometer.angle(degrees);
         error = goalArmAngle - currentArmAngle;

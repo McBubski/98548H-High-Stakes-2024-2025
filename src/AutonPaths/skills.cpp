@@ -4,14 +4,14 @@
 // Change these values for arm position
 
 void Skills_Auton(void) {
-    // Put ring on alliance stake
-
+    //// Put ring on alliance stake
+//
     ringIntake.spin(forward, 100, percent);
     wait(300, msec);
     ringIntake.stop();
-
-    // Get next goal
-
+//
+    //// Get next goal
+//
     driveFor(13, 100);
     driveTo(-48.5, -20, 35, reverse);
     goal_clamp.set(true);
@@ -21,7 +21,7 @@ void Skills_Auton(void) {
     driveTo(-24, -18, 80, forward);
 
     // Get next ring
-    driveTo(-1, -57, 100, forward);
+    driveTo(-2, -56, 100, forward);
 
     driveTo(1, -47, 100, reverse);
     // Pick up wallstake ring
@@ -58,17 +58,36 @@ void Skills_Auton(void) {
 
     // Get second goal
 
-    driveTo(-42, 10, 80, reverse);
-    driveTo(-46, 30, 20, reverse);
+    // UNCOMMENT ABOVE
+
+    
+    driveTo(-46, 12, 80, reverse);
+    driveTo(-46, 34, 20, reverse);
     goal_clamp.set(true);
 
     // Get first ring
     ringIntake.spin(forward, 100, percent);
-    driveTo(-24, 24, 80, forward);
+    driveTo(-20, 21.5, 80, forward);
 
-    // Get next ring
-    driveTo(-22, 51, 60, forward);
+    // Drive to wallstake
+
+    driveTo(0.5, 59.5, 100, forward);
+    moveLiftToAngle(201, false);
+
+    //driveTo(-3, 62.5, 80, forward);
+    pointAt(0, 70.5, 80, forward);
+    waitUntil(ringIntake.torque(Nm) >= 2);
     wait(200, msec);
+    ringIntake.stop();
+    ringIntake.spinFor(reverse, 100, degrees);
+    moveLiftToAngle(103, true);
+    moveLiftToAngle(220, false);
+
+    // Reverse
+    driveTo(0, 50, 100, reverse);
+    ringIntake.spin(forward, 100, percent);
+
+    driveTo(-30, 52, 100, forward);
 
     // Get next two rings
     driveTo(-74, 52, 40, forward);
@@ -106,13 +125,13 @@ void Skills_Auton(void) {
 
     //driveFor(-4, 100);
     ringIntake.spin(forward, 100, percent);
-    driveTo(29, 16, 80, forward);
+    driveTo(31, 16, 80, forward);
     ringIntake.stop();
     ringIntake2.spin(forward, 100, percent);
 
     // Get next goal
 
-    driveTo(49, -9.5, 40, reverse);
+    driveTo(52, -8.5, 40, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -130,14 +149,14 @@ void Skills_Auton(void) {
 
     // Last shove
 
-    driveTo(52, 0, 100, reverse);
-    driveTo(70, -68, 100, reverse);
+    driveTo(50, 0, 100, reverse);
+    driveTo(74, -68, 100, reverse);
 
-    driveFor(4, 100);
+    driveFor(6, 100);
 
     // Elevate
 
-    driveTo(-2, 1, 100, forward);
+    driveTo(-3, 1, 100, forward);
     corner_arm.set(true);
     turnToHeading(312, 100);
     driveFor(-23, 80);
