@@ -53,7 +53,7 @@ void turnToHeading(double heading, double turnSpeed) {
 }
 
 void driveFor(double distance, double speed) {
-    std::cout << "-------------------" << std::endl;
+    //std::cout << "-------------------" << std::endl;
     double targetHeading = inertial_sensor.heading();
     double encoderStart = forwardTrackingWheel.position(turns);
 
@@ -91,7 +91,7 @@ void driveFor(double distance, double speed) {
 
         wait(10, msec);
 
-        std::cout << "Error: " << driveError << std::endl;
+        //std::cout << "Error: " << driveError << std::endl;
         Brain.Screen.printAt(50, 50, "%f", driveError);
     }
 

@@ -10,67 +10,77 @@ void Red_Left_Auton(void) {
     // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
-    wait(300, msec);
+    wait(100, msec);
 
     // Grab third ring
 
-    driveTo(-11.5, 27, 60, forward);
-    wait(500, msec);
+    driveTo(-13.5, 51, 60, forward);
+    wait(100, msec);
 
     // Grab to last ring 
     
-    driveTo(-8, 36, 60, forward);
-    wait(500, msec);
+    driveTo(-6, 62, 60, forward);
+    wait(100, msec);
     driveFor(-10, 100);
 
     // Grab second ring
 
-    driveTo(-24, 33, 60, forward);
-    wait(300, msec);
+    driveTo(-24, 57, 60, forward);
+    wait(100, msec);
 
+    // Get corner ring
 
+    driveTo(-56, 56, 100, forward);
+    driveTo(-70, 70, 100, forward);
 //
     //// Touch bar
 //
-    driveTo(-14, 9, 100, reverse);
-    turnToHeading(315, 100);
-    driveFor(4, 100);
+    driveFor(-36, 100);
+    driveTo(-22, 22, 100, forward);
+    //turnToHeading(135, 100);
+    //driveFor(8, 100);
     moveLiftToAngle(100, false);
 }
 
 void Red_Right_Auton(void) {
-    auton_color = 1; // Disable color sort
+    auton_color = 0; // Disable color sort
 
     // Rush goal
 
     driveFor(-32, 100);
-    driveTo(-3, -52, 30, reverse);
+    driveTo(-5.5, -50.5, 30, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
     // First ring
 
-    driveTo(-24, -49, 100, forward);
+    //driveTo(-24, -49, 100, forward);
 
     // Put in corner
 
     driveTo(-48, -56, 100, forward);
     ringIntake.stop();
     ringIntake1.spin(forward, 100, percent);
-    pointAt(-49, -59, 100, reverse);
+    turnToHeading(300, 1000);
     goal_clamp.set(false);
 
     // Get next goal
 
     driveTo(-41, -46, 100, forward);
     ringIntake.spin(reverse, 100, percent);
-    driveTo(-32, -34, 100, reverse);
-    driveTo(-26, -28, 40, reverse);
+    //driveTo(-32, -34, 100, reverse);
+    driveTo(-20, -22, 40, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
-    auton_color = 1;
-    driveTo(-64, 4, 100, forward);
+    driveTo(-64, 4, 50, forward);
+
+    // Touch BAR WOOOO
+
+    driveTo(-24, -24, 100, reverse);
+    turnToHeading(45, 100);
+    driveFor(6, 100);
+    //moveLiftToAngle(100, false);
 }
 
 void Red_Win_Point(void) {

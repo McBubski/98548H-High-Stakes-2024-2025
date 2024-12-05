@@ -7,13 +7,13 @@
 
 using namespace vex;
 
-int auton_path = 5;
+int auton_path = 2;
 
 double startingPositions[9][3] = {
     {-54.5, -40.0, 270}, // Goal Rush Right
-    {50.5, 25.0, 57.3}, // Goal Fill Right    //// NEW POSITION
+    {50.5, 49.0, 57.3}, // Goal Fill Right    //// NEW POSITION
     {54.5, -40.0, 90}, // Goal Rush Left
-    {-50.5, 25.0, 302.7}, // Goal Fill Left
+    {-50.5, 49.0, 302.7}, // Goal Fill Left
     {-60.5, 0, 90}, // Skills
     {59, -40, 113}, // Win Point Blue
     {-59, -40, 247}, // Win Point Red
@@ -22,7 +22,8 @@ double startingPositions[9][3] = {
 };
 
 void autonomous(void) {
-    std::cout << "Auton: " << auton_path << std::endl;
+    float startTime = Brain.Timer.systemHighResolution();
+
     switch (auton_path) {
         case 1:
             auton_color = 0;
@@ -64,6 +65,11 @@ void autonomous(void) {
             auton_color = 1;
             Blue_Win_Point();
     }
+
+    float endTime = Brain.Timer.systemHighResolution();
+    float totalTime = (endTime - startTime) / 1000000.0000;
+
+    std::cout << "That took " << totalTime <<  "s, leaving u with " << 15.0 - totalTime << "s" << std::endl;
 }
 
 void changeAuton(int direction) {
