@@ -7,7 +7,7 @@
 
 using namespace vex;
 
-int auton_path = 2;
+int auton_path = 8;
 
 double startingPositions[9][3] = {
     {-54.5, -40.0, 270}, // Goal Rush Right
@@ -17,8 +17,8 @@ double startingPositions[9][3] = {
     {-60.5, 0, 90}, // Skills
     {59, -40, 113}, // Win Point Blue
     {-59, -40, 247}, // Win Point Red
-    {56.5, -16.5, 90}, // Elims Blue
-    {-56.5, -16.5, 270} // Elims Red
+    {59, -40, 113}, // Elims Blue
+    {-59, -40, 247} // Elims Red
 };
 
 void autonomous(void) {
@@ -68,8 +68,15 @@ void autonomous(void) {
 
     float endTime = Brain.Timer.systemHighResolution();
     float totalTime = (endTime - startTime) / 1000000.0000;
+    float timeLeft;
 
-    std::cout << "That took " << totalTime <<  "s, leaving u with " << 15.0 - totalTime << "s" << std::endl;
+    if (auton_color == 5) { // Skills
+        timeLeft = 60.0 - totalTime;
+    } else {
+        timeLeft = 15.0 - totalTime;
+    }
+
+    std::cout << "Auton Took: " << totalTime <<  "s | Time Remaining: " << timeLeft << "s" << std::endl;
 }
 
 void changeAuton(int direction) {

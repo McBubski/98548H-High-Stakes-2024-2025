@@ -175,10 +175,7 @@ void Red_Win_Point(void) {
 void Red_Elims(void) {
      // Get first goal
 
-    driveFor(-18, 100);
-    ringLift.spinFor(reverse, 150, degrees, false);
-    turnToHeading(300, 100);
-    driveFor(-10, 20);
+    driveFor(-40, 40);
     goal_clamp.set(true);
 
     // Get next ring (with ring sort :D)
@@ -190,21 +187,21 @@ void Red_Elims(void) {
     // Get third ring
 
     driveFor(-10, 100);
-    driveTo(-27, -49, 90, forward);
+    driveTo(-27, -49, 100, forward);
     wait(200, msec);
     driveFor(-12, 100);
   
     // Get last ring
 
-    driveTo(-77, -83, 40, forward);
-    wait(500, msec);
-
+    driveTo(-77, -83, 60, forward);
     // Wiggle
 
     driveFor(-6, 100);
     driveFor(16, 100);
-    wait(200, msec);
     driveFor(-12, 100);
+    driveFor(16, 100);
+    driveFor(-12, 100);
+
     //driveFor(16, 100);
     //driveFor(-6, 100);
     //driveFor(16, 100);

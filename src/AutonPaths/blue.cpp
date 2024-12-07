@@ -205,10 +205,7 @@ void Blue_Win_Point(void) {
 void Blue_Elims(void) {
     // Get first goal
 
-    driveFor(-18, 100);
-    ringLift.spinFor(reverse, 150, degrees, false);
-    turnToHeading(60, 100);
-    driveFor(-10, 20);
+    driveFor(-40, 40);
     goal_clamp.set(true);
 
     // Get next ring (with ring sort :D)
@@ -220,24 +217,20 @@ void Blue_Elims(void) {
     // Get third ring
 
     driveFor(-10, 100);
-    driveTo(25, -46, 90, forward);
+    driveTo(25, -46, 100, forward);
     wait(200, msec);
     driveFor(-12, 100);
 
     // Get last ring
 
-    driveTo(74, -79, 35, forward);
-    wait(500, msec);
+    driveTo(74, -79, 60, forward);
 
     // Wiggle
 
-    driveFor(-4, 100);
-    driveFor(8, 100);
-    wait(200, msec);
-    driveFor(-12, 100);
+    driveFor(-6, 100);
     driveFor(16, 100);
-    driveFor(-12, 100);
+    driveFor(-14, 100);
     driveFor(16, 100);
-    driveFor(-12, 100);
+    driveFor(-14, 100);
 
 }

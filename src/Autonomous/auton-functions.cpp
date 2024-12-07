@@ -25,7 +25,7 @@ void turnToHeading(double heading, double turnSpeed) {
     double previousError = error;
     double previousTime = Brain.Timer.system();
 
-    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.3) + 550);
+    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.45) + 400);
 
     bool notDone = true;
     PID turnPid = PID(0.59, 0.0001, 0.73, 0.5, 5, 100, &notDone, timeout, 700);//.61, 0, 1.05
@@ -135,7 +135,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     float timeSinceStart = Brain.Timer.system() - startTime;
 
     if (pushing) {
-        leftDrive.spin(forward, 3, percent);
+        leftDrive.spin(forward, 6, percent);
         rightDrive.spin(forward, 6, percent);
     }
 
@@ -144,9 +144,17 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
             break;
         }
 
+        if (pushing) {
+            float shakeVal = (Brain.Timer.system() / 200.00) * 3.14;
+            float shake = sin(shakeVal) * 8.5;
+
+            leftDrive.spin(forward, 6 + shake, percent);
+            rightDrive.spin(forward, 6 - shake, percent);
+        }
+
         timeSinceStart = Brain.Timer.system() - startTime;
 
-        if (timeSinceStart >= 4000) {
+        if (timeSinceStart >= 2000) {
             ringLiftArm.stop();
             leftDrive.stop();
             rightDrive.stop(); 
