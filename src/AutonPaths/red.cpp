@@ -180,9 +180,10 @@ void Red_Elims(void) {
 
     // Get next ring (with ring sort :D)
 
+    pointAt(-58, 7, 100, forward);
     ringIntake.spin(forward, 80, percent);
-    driveTo(-58, 7, 45, forward);
-    wait(200, msec);
+    driveTo(-58, 7, 40, forward);
+    wait(100, msec);
 
     // Get third ring
 

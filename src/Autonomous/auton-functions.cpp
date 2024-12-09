@@ -146,7 +146,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
 
         if (pushing) {
             float shakeVal = (Brain.Timer.system() / 200.00) * 3.14;
-            float shake = sin(shakeVal) * 8.5;
+            float shake = sin(shakeVal) * 11;
 
             leftDrive.spin(forward, 6 + shake, percent);
             rightDrive.spin(forward, 6 - shake, percent);

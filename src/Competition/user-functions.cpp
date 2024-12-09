@@ -50,6 +50,11 @@ void toggleGoalClamp(void) {
 
 void toggleCornerArm(void) {
   corner_arm.set(!corner_arm.value());
+
+  if (corner_arm.value() == false) {
+    goalArmPos = 0;
+    ringLiftArm.setStopping(coast);
+  }
 }
 
 void toggleIntakeSpeed(void) {
@@ -57,6 +62,7 @@ void toggleIntakeSpeed(void) {
 }
 
 void cycleRingArmTarget(void) {
+  ringLiftArm.setStopping(hold);
   goalArmPos++;
 
   if (goalArmPos > 2) {
