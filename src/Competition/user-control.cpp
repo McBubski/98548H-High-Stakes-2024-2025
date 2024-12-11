@@ -13,7 +13,7 @@ bool skillsSetupHasRun = false;
 
 float armPositions[3] = {
   220,    // Rest position
-  201,    // First ring position
+  203.5,    // First ring position
   103      // Wall stake position
 };
 
