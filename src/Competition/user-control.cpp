@@ -12,7 +12,7 @@ bool skillsSetupHasRun = false;
 // Change these values for arm position
 
 float armPositions[3] = {
-  47,    // Rest position
+  27,    // Rest position
   62,    // First ring position
   200      // Wall stake position
 };
@@ -36,10 +36,10 @@ void usercontrol(void) {
 
     if (Controller.ButtonB.pressing()) {
       armOverride = true;
-      ringLiftArm.spin(reverse, 75, percent);
+      ringLiftArm.spin(reverse, 100, percent);
     } else if (Controller.ButtonY.pressing()) {
       armOverride = true;
-      ringLiftArm.spin(forward, 75, percent);
+      ringLiftArm.spin(forward, 100, percent);
     } else {
       if (armOverride) {
         ringLiftArm.stop();
