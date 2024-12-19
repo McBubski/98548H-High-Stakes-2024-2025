@@ -6,40 +6,40 @@ brain Brain;
 controller Controller;
 
 // Left Drive
-
-motor motorTL = motor(PORT6, ratio6_1, false);
-motor motorML = motor(PORT5, ratio6_1, true);
-motor motorBL = motor(PORT10, ratio6_1, true);
+//Rename PPPPLLLLEEEAAASSEEE
+motor motorTL = motor(PORT2, ratio6_1, false);
+motor motorML = motor(PORT1, ratio6_1, true);
+motor motorBL = motor(PORT3, ratio6_1, true);
 
 motor_group leftDrive = motor_group(motorTL, motorML, motorBL);
 
 // Right Drive
 
-motor motorTR = motor(PORT3, ratio6_1, true);
-motor motorMR = motor(PORT1, ratio6_1, false);
-motor motorBR = motor(PORT8, ratio6_1, false);
+motor motorTR = motor(PORT6, ratio6_1, true);
+motor motorMR = motor(PORT4, ratio6_1, false);
+motor motorBR = motor(PORT5, ratio6_1, false);
 
 motor_group rightDrive = motor_group(motorTR, motorMR, motorBR);
 
 // Lift
 
-motor ringIntake1 = motor(PORT21, ratio36_1, true);
-motor ringIntake2 = motor(PORT17, ratio36_1, true);
-motor ringLift = motor(PORT12, ratio36_1, true);
-motor ringLiftArm = motor(PORT14, ratio36_1, true);
+motor ringIntake1 = motor(PORT12, ratio36_1, false);
+motor ringIntake2 = motor(PORT11, ratio36_1, true);
+motor ringLift = motor(PORT17, ratio36_1, true);
+motor ringLiftArm = motor(PORT16, ratio36_1, true);
 
 motor_group ringIntake = motor_group(ringIntake1, ringIntake2);
 
 // Sensors
 
-pot lift_arm_potentiometer = pot(Brain.ThreeWirePort.C);
-inertial inertial_sensor = inertial(PORT9);
+rotation lift_arm_potentiometer = rotation(PORT15, false);
+inertial inertial_sensor = inertial(PORT7);
 
-rotation sidewaysTrackingWheel = rotation(PORT19, false);
-rotation forwardTrackingWheel = rotation(PORT18, false);
+rotation sidewaysTrackingWheel = rotation(PORT13, true);
+rotation forwardTrackingWheel = rotation(PORT14, false);
 
-optical color_sensor = optical(PORT13);
-aivision ai_sensor = aivision(PORT2);
+optical color_sensor = optical(PORT16);
+aivision ai_sensor = aivision(PORT17);
 
 // Pneumatics
 
@@ -50,7 +50,7 @@ digital_out ring_sorter = digital_out(Brain.ThreeWirePort.D);
 // Odometry
 
 // Tracking Wheel Radius, Forward Tracking Wheel Distance, Sideways Tracking Wheel Distance, Starting Heading, Starting X, Starting Y
-Odometry Position_Tracking = Odometry(2.75 / 2, 1.25, 1.25, 0.0, 0.0, 0.0);
+Odometry Position_Tracking = Odometry(2.75 / 2, 0, 1, 0.0, 0.0, 0.0);
 
 void vexcodeInit(void) {
   

@@ -12,9 +12,9 @@ bool skillsSetupHasRun = false;
 // Change these values for arm position
 
 float armPositions[3] = {
-  220,    // Rest position
-  203.5,    // First ring position
-  103      // Wall stake position
+  47,    // Rest position
+  62,    // First ring position
+  200      // Wall stake position
 };
 
 void usercontrol(void) {
@@ -34,18 +34,28 @@ void usercontrol(void) {
 
     // PID for arm lift
 
-    float currentArmAngle = lift_arm_potentiometer.angle(degrees);
-    float goalArmAngle = armPositions[goalArmPos];
-    float error = goalArmAngle - currentArmAngle;
-
-    if (std::abs(error) >= 1.0) {
-      if (goalArmPos == 3) { // If goal pos is wall stake, go faster
-        ringLiftArm.spin(reverse, error * 5, percent);
-      } else {
-        ringLiftArm.spin(reverse, error * 2.5, percent);
-      }
+    if (Controller.ButtonB.pressing()) {
+      armOverride = true;
+      ringLiftArm.spin(reverse, 75, percent);
+    } else if (Controller.ButtonY.pressing()) {
+      armOverride = true;
+      ringLiftArm.spin(forward, 75, percent);
     } else {
-      ringLiftArm.stop();
+      if (armOverride) {
+        ringLiftArm.stop();
+      }
+    }
+
+    if (!armOverride) {
+      float currentArmAngle = lift_arm_potentiometer.angle(degrees);
+      float goalArmAngle = armPositions[goalArmPos];
+      float error = goalArmAngle - currentArmAngle;
+
+      if (std::abs(error) >= 1.0) {
+        ringLiftArm.spin(reverse, error * 2, percent);
+      } else {
+        ringLiftArm.stop();
+      }
     }
 
     // Sets intakeSpeed to however fast it should be

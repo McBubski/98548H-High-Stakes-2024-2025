@@ -32,7 +32,7 @@ extern motor_group ringIntake;
 
 // Sensors
 
-extern pot lift_arm_potentiometer;
+extern rotation lift_arm_potentiometer;
 extern inertial inertial_sensor;
 
 extern rotation sidewaysTrackingWheel;

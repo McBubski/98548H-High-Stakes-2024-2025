@@ -136,6 +136,12 @@ void UpdateAutonInformation(void) {
         case 9:
             auton = "Eliminations Red";
             break;
+        case 10:
+            auton = "Failsafe Blue ;)";
+            break;
+        case 11:
+            auton = "Failsafe Red ;)";
+            break;
         default:
             auton = "Blue Auton";
     }

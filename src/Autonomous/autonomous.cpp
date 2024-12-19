@@ -9,7 +9,7 @@ using namespace vex;
 
 int auton_path = 8;
 
-double startingPositions[9][3] = {
+double startingPositions[11][3] = {
     {-54.5, -40.0, 270}, // Goal Rush Right
     {50.5, 49.0, 57.3}, // Goal Fill Right    //// NEW POSITION
     {54.5, -40.0, 90}, // Goal Rush Left
@@ -18,7 +18,9 @@ double startingPositions[9][3] = {
     {59, -40, 113}, // Win Point Blue
     {-59, -40, 247}, // Win Point Red
     {59, -40, 113}, // Elims Blue
-    {-59, -40, 247} // Elims Red
+    {-59, -40, 247}, // Elims Red
+    {59, -40, 113}, // TOP SECRET!!!!! Blue
+    {-59, -40, 247} // TOP SECRET!!!!! Red
 };
 
 void autonomous(void) {
@@ -61,6 +63,14 @@ void autonomous(void) {
             auton_color = 0;
             Red_Elims();
             break;
+        case 10:
+            auton_color = 1;
+            Blue_Secret();
+            break;
+        case 11:
+            auton_color = 0;
+            Red_Secret();
+            break;
         default:
             auton_color = 1;
             Blue_Win_Point();
@@ -83,8 +93,8 @@ void changeAuton(int direction) {
     auton_path += direction;
 
     if (auton_path < 1) {
-        auton_path = 9;
-    } else if (auton_path > 9) {
+        auton_path = 11;
+    } else if (auton_path > 11) {
         auton_path = 1;
     }
 
