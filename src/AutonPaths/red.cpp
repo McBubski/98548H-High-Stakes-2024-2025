@@ -59,6 +59,7 @@ void Red_Right_Auton(void) {
     // Put in corner
 
     driveTo(-48, -56, 100, forward);
+    wait(500, msec);
     ringIntake.stop();
     ringIntake1.spin(forward, 100, percent);
     turnToHeading(300, 1000);
