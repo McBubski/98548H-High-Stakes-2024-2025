@@ -38,7 +38,7 @@ inertial inertial_sensor = inertial(PORT7);
 rotation sidewaysTrackingWheel = rotation(PORT13, true);
 rotation forwardTrackingWheel = rotation(PORT14, false);
 
-optical color_sensor = optical(PORT16);
+optical color_sensor = optical(PORT20);
 aivision ai_sensor = aivision(PORT17);
 
 // Pneumatics

@@ -25,7 +25,7 @@ void initializeUserControl(void) {
 
     // Connects controller inputs to functions
     Controller.ButtonDown.pressed(toggleGoalClamp);
-    Controller.ButtonRight.pressed(toggleCornerArm);
+    Controller.ButtonRight.pressed(toggleElevation);
     Controller.ButtonL2.pressed(cycleRingArmTarget);
     Controller.ButtonL1.pressed(lowerRingArm);
 
@@ -48,13 +48,8 @@ void toggleGoalClamp(void) {
     goal_clamp.set(!goal_clamp.value());
 }
 
-void toggleCornerArm(void) {
-  corner_arm.set(!corner_arm.value());
-
-  if (corner_arm.value() == false) {
-    goalArmPos = 0;
-    ringLiftArm.setStopping(coast);
-  }
+void toggleElevation(void) {
+  goalArmPos = 2;
 }
 
 void toggleIntakeSpeed(void) {

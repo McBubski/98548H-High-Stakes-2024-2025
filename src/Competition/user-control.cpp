@@ -62,15 +62,17 @@ void usercontrol(void) {
 
     // Spins intake depending on direction and speed
 
-    if (Controller.ButtonR1.pressing()) {
-      ringIntake.spin(forward, 100, percent);
-      intakeSpinning = true;
-    } else if (Controller.ButtonR2.pressing()) {
+    if (!intake_interrupt) {
+      if (Controller.ButtonR1.pressing()) {
+        ringIntake.spin(forward, 100, percent);
+        intakeSpinning = true;
+      } else if (Controller.ButtonR2.pressing()) {
         ringIntake.spin(reverse, 100, percent);
         intakeSpinning = true;
-    } else {
-      ringIntake.stop();
-      intakeSpinning = false;
+      } else {
+        ringIntake.stop();
+        intakeSpinning = false;
+      }
     }
 
     if (Controller.ButtonX.pressing()) {  
