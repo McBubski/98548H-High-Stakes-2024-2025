@@ -48,7 +48,7 @@ void Red_Right_Auton(void) {
     // Rush goal
 
     driveFor(-32, 100);
-    driveTo(-5.5, -50.5, 30, reverse);
+    driveTo(-11.0, -51.0, 30, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -69,35 +69,37 @@ void Red_Right_Auton(void) {
     driveTo(-41, -46, 100, forward);
     ringIntake.spin(reverse, 100, percent);
     //driveTo(-32, -34, 100, reverse);
-    driveTo(-20, -22, 40, reverse);
+    driveTo(-14, -18, 40, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
-    driveTo(-64, 4, 50, forward);
+    driveTo(-68.5, 4, 50, forward);
 
     // Touch BAR WOOOO
 
-    driveTo(-24, -24, 100, reverse);
+    driveTo(-24, -26, 100, reverse);
     turnToHeading(45, 100);
-    driveFor(6, 100);
-    //moveLiftToAngle(100, false);
+    moveLiftToAngle(90, false);
 }
 
 void Red_Win_Point(void) {
+    auton_color = 2;
     // Get first goal
 
     driveFor(-40, 40);
     goal_clamp.set(true);
-    ringIntake.spin(forward, 100, percent);
 
     // Second ring
 
+    pointAt(-30, -46, 100, forward);
+    ringIntake.spin(forward, 100, percent);
     driveTo(-30, -46, 100, forward);
     driveFor(-12, 100);
 
     // Get third ring
 
-    driveTo(-62, 14, 40, forward);
+    auton_color = 0;
+    driveTo(-64, 16, 40, forward);
     goal_clamp.set(false);
     ringIntake.stop();
     ringIntake2.spin(forward, 100, percent);
@@ -199,9 +201,48 @@ void Red_Elims(void) {
 
     driveFor(-6, 100);
     driveFor(16, 100);
-    driveFor(-12, 100);
+    driveFor(-36, 100);
+
+    //driveFor(16, 100);
+    //driveFor(-6, 100);
+    //driveFor(16, 100);
+    //driveFor(-12, 100);   
+}
+
+void Red_Secret(void) {
+     // Get first goal
+
+    driveFor(-40, 40);
+    goal_clamp.set(true);
+
+    // Get next ring (with ring sort :D)
+
+    pointAt(-58, 7, 100, forward);
+    ringIntake.spin(forward, 80, percent);
+    driveTo(-58, 7, 40, forward);
+    wait(100, msec);
+
+    // Get third ring
+
+    driveFor(-10, 100);
+    driveTo(-27, -49, 100, forward);
+    wait(200, msec);
+    driveFor(-14, 100);
+  
+    // Get last ring
+
+    driveTo(-77, -83, 60, forward);
+    // Wiggle
+
+    driveFor(-6, 100);
     driveFor(16, 100);
     driveFor(-12, 100);
+
+    turnToHeading(10, 100);
+    goal_clamp.set(false);
+    
+    driveTo(-20, -60, 100, reverse);
+    pointAt(0, -48, 100, reverse);
 
     //driveFor(16, 100);
     //driveFor(-6, 100);

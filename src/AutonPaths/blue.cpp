@@ -7,7 +7,7 @@ void Blue_Left_Auton(void) {
     // Rush goal
 
     driveFor(-32, 100);
-    driveTo(5.5, -50.5, 30, reverse);
+    driveTo(6, -50, 30, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -29,7 +29,7 @@ void Blue_Left_Auton(void) {
     driveTo(41, -46, 100, forward);
     ringIntake.spin(reverse, 100, percent);
     //driveTo(-32, -34, 100, reverse);
-    driveTo(18, -20, 40, reverse);
+    driveTo(14, -18, 40, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
@@ -37,7 +37,8 @@ void Blue_Left_Auton(void) {
 
     // Touch BAR WOOOO
 
-    driveTo(24, -7, 100, forward);
+    driveTo(24, -26, 100, reverse);
+    driveTo(18, -20, 100, forward);
     moveLiftToAngle(90, false);
     //moveLiftToAngle(100, false);
 
@@ -235,4 +236,41 @@ void Blue_Elims(void) {
     driveFor(16, 100);
     driveFor(-14, 100);
 
+}
+
+void Blue_Secret(void) {
+    // Get first goal
+
+    driveFor(-40, 40);
+    goal_clamp.set(true);
+
+    // Get next ring (with ring sort :D)
+
+    pointAt(60, 7, 100, forward);
+    ringIntake.spin(forward, 80, percent);
+    driveTo(60, 7, 50, forward);
+    wait(100, msec);
+
+    // Get third ring
+
+    driveFor(-10, 100);
+    driveTo(25, -54, 100, forward);
+    wait(200, msec);
+    driveFor(-14, 100);
+
+    // Get last ring
+
+    driveTo(73, -81, 60, forward);
+
+    // Wiggle
+
+    driveFor(-6, 100);
+    driveFor(16, 100);
+    driveFor(-12, 100);
+
+    turnToHeading(350, 100);
+    goal_clamp.set(false);
+
+    driveTo(20, -60, 100, reverse);
+    pointAt(0, -48, 100, reverse);   
 }

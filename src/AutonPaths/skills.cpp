@@ -4,6 +4,7 @@
 // Change these values for arm position
 
 void Skills_Auton(void) {
+    auton_color = 2;
     //// Put ring on alliance stake
 //
     ringIntake.spin(forward, 100, percent);
@@ -42,7 +43,7 @@ void Skills_Auton(void) {
     // Get next three rings
     //driveFor(-12, 100);
     ringIntake.spin(forward, 100, percent);
-    driveTo(-88, -47, 45, forward);
+    driveTo(-84, -47, 45, forward);
 
     // Get final ring
     turnToHeading(225, 100);
@@ -69,10 +70,10 @@ void Skills_Auton(void) {
     // Drive to wallstake
 
     pointAt(0, 58, 100, forward);
-    moveLiftToAngle(202.5, false);
     driveTo(0, 58, 100, forward);
 
     //driveTo(-3, 62.5, 80, forward);
+    moveLiftToAngle(203, false);
     waitUntil(ringIntake.torque(Nm) >= 2);
     wait(200, msec);
     pointAt(0, 70, 100, forward);
@@ -84,8 +85,8 @@ void Skills_Auton(void) {
 
     // Reverse
     moveLiftToAngle(220, false);
-    driveTo(0, 50, 100, reverse);
     ringIntake1.spin(reverse, 50, percent);
+    driveTo(0, 50, 100, reverse);
     ringIntake.spin(forward, 100, percent);
 
     // Get next two rings
