@@ -5,6 +5,7 @@ using namespace vex;
 
 bool slowIntake = false;
 bool liftRaising = false;
+bool armOverride = false;
 
 int goalArmPos = 0;
 
@@ -24,8 +25,7 @@ void initializeUserControl(void) {
 
     // Connects controller inputs to functions
     Controller.ButtonDown.pressed(toggleGoalClamp);
-    Controller.ButtonRight.pressed(toggleCornerArm);
-    Controller.ButtonB.pressed(toggleColorSorter);
+    Controller.ButtonRight.pressed(toggleElevation);
     Controller.ButtonL2.pressed(cycleRingArmTarget);
     Controller.ButtonL1.pressed(lowerRingArm);
 
@@ -48,13 +48,8 @@ void toggleGoalClamp(void) {
     goal_clamp.set(!goal_clamp.value());
 }
 
-void toggleCornerArm(void) {
-  corner_arm.set(!corner_arm.value());
-
-  if (corner_arm.value() == false) {
-    goalArmPos = 0;
-    ringLiftArm.setStopping(coast);
-  }
+void toggleElevation(void) {
+  goalArmPos = 2;
 }
 
 void toggleIntakeSpeed(void) {
@@ -62,6 +57,14 @@ void toggleIntakeSpeed(void) {
 }
 
 void cycleRingArmTarget(void) {
+  if (armOverride == true) {
+    armOverride = false;
+    goalArmPos = 1;
+    return;
+  }
+
+  armOverride = false;
+
   ringLiftArm.setStopping(hold);
   goalArmPos++;
 
@@ -71,14 +74,6 @@ void cycleRingArmTarget(void) {
 }
 
 void lowerRingArm(void) {
+  armOverride = false;
   goalArmPos = 0;
-}
-
-void toggleColorSorter(void) {
-  Controller.rumble(".");
-  if (auton_color == previousAutonColor) {
-    auton_color = 2;
-  } else {
-    auton_color = previousAutonColor;
-  }
 }

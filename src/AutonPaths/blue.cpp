@@ -254,9 +254,9 @@ void Blue_Secret(void) {
     // Get third ring
 
     driveFor(-10, 100);
-    driveTo(25, -54, 100, forward);
+    driveTo(25, -46, 100, forward);
     wait(200, msec);
-    driveFor(-14, 100);
+    driveFor(-12, 100);
 
     // Get last ring
 
@@ -266,11 +266,12 @@ void Blue_Secret(void) {
 
     driveFor(-6, 100);
     driveFor(16, 100);
-    driveFor(-12, 100);
+    
+    // SECRET
 
-    turnToHeading(350, 100);
+    turnToHeading(110, 100);
     goal_clamp.set(false);
 
-    driveTo(20, -60, 100, reverse);
-    pointAt(0, -48, 100, reverse);   
+    driveTo(12, -60, 100, forward);
+    pointAt(0, -48, 100, reverse);
 }

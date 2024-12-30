@@ -1,6 +1,7 @@
 #include "vex.h"
 
 extern int auton_color;
+extern bool intake_interrupt;
 
 void turnToHeading(double heading, double turnSpeed);
 void pointAt(double x, double y, double turnSpeed, vex::directionType dir);

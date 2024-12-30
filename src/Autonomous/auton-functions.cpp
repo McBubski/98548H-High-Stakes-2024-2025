@@ -6,6 +6,7 @@
 #include <cmath>
 
 int auton_color = 0; // 0 is red, 1 is blue, 2 is no color sorting.
+bool intake_interrupt = false;
 
 double wrapAngleDeg(double angle) {
     angle = fmod(angle + 180.0, 360.0);
@@ -183,21 +184,32 @@ int sortColorTask(void) {
     color_sensor.setLightPower(25, percent);
 
     while (true) {
-        if (auton_color == 0) { // Red
-            if ((color_sensor.isNearObject() && color_sensor.color() == blue)) {
-                ring_sorter.set(true);
-                wait(350, msec);
-            } else {
-                ring_sorter.set(false);
+        int detectedColor = 2;
+
+        if (color_sensor.isNearObject()) {
+            if (color_sensor.color() == red) {
+                detectedColor = 0;
+            } else if (color_sensor.color() == blue) {
+                detectedColor = 1;
             }
-        } else if (auton_color == 1) { // Blue
-             if ((color_sensor.isNearObject() && color_sensor.color() == red)) {
-                ring_sorter.set(true);
-                wait(350, msec);
-            } else {
-                ring_sorter.set(false);
+        } else {
+            detectedColor = 2;
+        }
+
+        std::cout << detectedColor << ", " << auton_color << std::endl;
+
+        if (Controller.ButtonR1.pressing() && auton_color != 2) {
+            if (detectedColor != auton_color) {
+                wait(750, msec);
+                intake_interrupt = true;
+                ringIntake.spin(reverse, 100, percent);
+                Controller.rumble(".");
+                wait(100, msec);
+                ringIntake.stop();
+                intake_interrupt = false;
             }
         }
+
         wait(20, msec);
     }
     return 1;

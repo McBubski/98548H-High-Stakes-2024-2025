@@ -7,7 +7,7 @@
 
 using namespace vex;
 
-int auton_path = 1;
+int auton_path = 4;
 
 double startingPositions[11][3] = {
     {-54.5, -40.0, 270}, // Goal Rush Right
@@ -19,8 +19,8 @@ double startingPositions[11][3] = {
     {-59, -40, 247}, // Win Point Red
     {59, -40, 113}, // Elims Blue
     {-59, -40, 247}, // Elims Red
-    {59, -40, 113}, // Secret Blue
-    {-59, -40, 247} // Secret Red
+    {59, -40, 113}, // TOP SECRET!!!!! Blue
+    {-59, -40, 247} // TOP SECRET!!!!! Red
 };
 
 void autonomous(void) {

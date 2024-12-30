@@ -34,33 +34,45 @@ void usercontrol(void) {
 
     // PID for arm lift
 
-    float currentArmAngle = lift_arm_potentiometer.angle(degrees);
-    float goalArmAngle = armPositions[goalArmPos];
-    float error = goalArmAngle - currentArmAngle;
-
-    if (std::abs(error) >= 1.0) {
-      if (goalArmPos == 3) { // If goal pos is wall stake, go faster
-        ringLiftArm.spin(reverse, error * 5, percent);
-      } else {
-        ringLiftArm.spin(reverse, error * 2.5, percent);
-      }
+    if (Controller.ButtonB.pressing()) {
+      armOverride = true;
+      ringLiftArm.spin(reverse, 100, percent);
+    } else if (Controller.ButtonY.pressing()) {
+      armOverride = true;
+      ringLiftArm.spin(forward, 100, percent);
     } else {
-      ringLiftArm.stop();
+      if (armOverride) {
+        ringLiftArm.stop();
+      }
+    }
+
+    if (!armOverride) {
+      float currentArmAngle = lift_arm_potentiometer.angle(degrees);
+      float goalArmAngle = armPositions[goalArmPos];
+      float error = goalArmAngle - currentArmAngle;
+
+      if (std::abs(error) >= 1.0) {
+        ringLiftArm.spin(reverse, error * 2, percent);
+      } else {
+        ringLiftArm.stop();
+      }
     }
 
     // Sets intakeSpeed to however fast it should be
 
     // Spins intake depending on direction and speed
 
-    if (Controller.ButtonR1.pressing()) {
-      ringIntake.spin(forward, 100, percent);
-      intakeSpinning = true;
-    } else if (Controller.ButtonR2.pressing()) {
+    if (!intake_interrupt) {
+      if (Controller.ButtonR1.pressing()) {
+        ringIntake.spin(forward, 100, percent);
+        intakeSpinning = true;
+      } else if (Controller.ButtonR2.pressing()) {
         ringIntake.spin(reverse, 100, percent);
         intakeSpinning = true;
-    } else {
-      ringIntake.stop();
-      intakeSpinning = false;
+      } else {
+        ringIntake.stop();
+        intakeSpinning = false;
+      }
     }
 
     if (Controller.ButtonX.pressing()) {  
