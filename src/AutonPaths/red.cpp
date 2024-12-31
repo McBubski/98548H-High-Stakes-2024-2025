@@ -1,7 +1,7 @@
 #include "AutonPaths/red.h"
 #include "Autonomous/auton-functions.h"
 
-void Red_Left_Auton(void) {
+void Goal_Fill_Left_Auton(void) {
     // Get first goal
 
     driveFor(-32, 40);
@@ -42,7 +42,7 @@ void Red_Left_Auton(void) {
     moveLiftToAngle(100, false);
 }
 
-void Red_Right_Auton(void) {
+void Goal_Rush_Right_Auton(void) {
     auton_color = 0; // Disable color sort
 
     // Rush goal

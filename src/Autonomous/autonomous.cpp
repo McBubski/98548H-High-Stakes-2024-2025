@@ -27,52 +27,41 @@ void autonomous(void) {
     float startTime = Brain.Timer.systemHighResolution();
 
     switch (auton_path) {
+        setColorSort();
         case 1:
-            auton_color = 0;
-            Red_Right_Auton();
+            Goal_Rush_Right_Auton();
             break;
         case 2:
-            auton_color = 1;
-            Blue_Right_Auton();
+            Goal_Fill_Right_Auton();
             break;
         case 3:
-            auton_color = 1;
-            Blue_Left_Auton();
+            Goal_Rush_Left_Auton();
             break;
         case 4:
-            auton_color = 0;
-            Red_Left_Auton();
+            Goal_Fill_Left_Auton();
             break;
         case 5:
-            auton_color = 0;
             Skills_Auton();
             break;
         case 6:
-            auton_color = 1;
             Blue_Win_Point();
             break;
         case 7:
-            auton_color = 0;
             Red_Win_Point();
             break;
         case 8:
-            auton_color = 1;
             Blue_Elims();
             break;
         case 9:
-            auton_color = 0;
             Red_Elims();
             break;
         case 10:
-            auton_color = 1;
             Blue_Secret();
             break;
         case 11:
-            auton_color = 0;
             Red_Secret();
             break;
         default:
-            auton_color = 1;
             Blue_Win_Point();
     }
 
@@ -89,6 +78,46 @@ void autonomous(void) {
     std::cout << "Auton Took: " << totalTime <<  "s | Time Remaining: " << timeLeft << "s" << std::endl;
 }
 
+void setColorSort() {
+    switch (auton_path) {
+        case 1:
+            auton_color = 0;
+            break;
+        case 2:
+            auton_color = 1;
+            break;
+        case 3:
+            auton_color = 1;
+            break;
+        case 4:
+            auton_color = 0;
+            break;
+        case 5:
+            auton_color = 0;
+            break;
+        case 6:
+            auton_color = 1;
+            break;
+        case 7:
+            auton_color = 0;
+            break;
+        case 8:
+            auton_color = 1;
+            break;
+        case 9:
+            auton_color = 0;
+            break;
+        case 10:
+            auton_color = 1;
+            break;
+        case 11:
+            auton_color = 0;
+            break;
+        default:
+            auton_color = 1;
+    }
+}
+
 void changeAuton(int direction) {
     auton_path += direction;
 
@@ -98,5 +127,6 @@ void changeAuton(int direction) {
         auton_path = 1;
     }
 
+    setColorSort();
     Position_Tracking.SetAuton(auton_path);
 }

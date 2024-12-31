@@ -1,7 +1,7 @@
 #include "AutonPaths/blue.h"
 #include "Autonomous/auton-functions.h"
 
-void Blue_Left_Auton(void) {
+void Goal_Rush_Left_Auton(void) {
     auton_color = 1; // Disable color sort
 
     // Get first ring
@@ -62,7 +62,7 @@ void Blue_Left_Auton(void) {
     rightDrive.stop();
 }
 
-void Blue_Right_Auton(void) {
+void Goal_Fill_Right_Auton(void) {
     // Score first ring
 
     ringLiftArm.spin(reverse, 100, percent);
@@ -87,7 +87,7 @@ void Blue_Right_Auton(void) {
 
     // Grab to last ring 
     
-    driveTo(9.5, 61s, 60, forward);
+    driveTo(9.5, 61, 60, forward);
     wait(100, msec);
     driveFor(-10, 100);
 
