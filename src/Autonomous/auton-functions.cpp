@@ -196,8 +196,6 @@ int sortColorTask(void) {
             detectedColor = 2;
         }
 
-        std::cout << detectedColor << ", " << auton_color << std::endl;
-
         if (Controller.ButtonR1.pressing() && auton_color != 2) {
             if (detectedColor != auton_color) {
                 wait(750, msec);

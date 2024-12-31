@@ -50,7 +50,7 @@ digital_out ring_sorter = digital_out(Brain.ThreeWirePort.D);
 // Odometry
 
 // Tracking Wheel Radius, Forward Tracking Wheel Distance, Sideways Tracking Wheel Distance, Starting Heading, Starting X, Starting Y
-Odometry Position_Tracking = Odometry(2.75 / 2, 0, 1, 0.0, 0.0, 0.0);
+Odometry Position_Tracking = Odometry(2.75 / 2, 0, 0.75, 0.0, 0.0, 0.0);
 
 void vexcodeInit(void) {
   

@@ -2,93 +2,79 @@
 #include "Autonomous/auton-functions.h"
 
 void Blue_Left_Auton(void) {
-        auton_color = 1; // Disable color sort
+    auton_color = 1; // Disable color sort
 
-    // Rush goal
+    // Get first ring
 
-    driveFor(-32, 100);
-    driveTo(6, -50, 30, reverse);
-    goal_clamp.set(true);
-    ringIntake.spin(forward, 100, percent);
+    moveLiftToAngle(205, false);
+    ringIntake1.spin(forward, 60, percent);
+    driveTo(29, -52, 100, forward);
 
-    // First ring
+    // Put ring on goal
 
-    //driveTo(-24, -49, 100, forward);
-
-    // Put in corner
-
-    driveTo(48, -56, 100, forward);
+    driveTo(14.5, -48, 100, forward);
+    moveLiftToAngle(275, false);
     ringIntake.stop();
-    ringIntake1.spin(forward, 100, percent);
-    //turnToHeading(60, 100);
-    wait(500, msec);
-    goal_clamp.set(false);
+    driveFor(2, 100);
+    pointAt(29, -24, 100, reverse);
+    ringIntake.spin(forward, 3, percent);
 
-    // Get next goal
+    // Get second goal
 
-    driveTo(41, -46, 100, forward);
-    ringIntake.spin(reverse, 100, percent);
-    //driveTo(-32, -34, 100, reverse);
-    driveTo(14, -18, 40, reverse);
+    driveFor(-30, 35);
+    moveLiftToAngle(320, false);
     goal_clamp.set(true);
+
+    // Next ring
+
+    ringIntake.spin(forward, 90, percent);
+    pointAt(59, 8.5, 100, forward);
+    wait(250, msec);
+    goal_clamp.set(false);
+    moveLiftToAngle(200, false);
+    driveTo(59, 8.5, 40, forward); // Ring Stack
+    wait(400, msec);
+    moveLiftToAngle(75, false);
     ringIntake.spin(forward, 100, percent);
+    waitUntil(ringIntake2.torque(Nm) >= 2.3);
+    ringIntake.spinFor(reverse, 50, degrees);
+    ringIntake.stop();
 
-    driveTo(68.5, 5, 50, forward);
+    // Last wallstake
+    driveFor(-16, 100);
+    pointAt(70, -5.2, 100, forward);
+    driveFor(10, 100);
+    moveLiftToAngle(250, false);   
 
-    // Touch BAR WOOOO
+    driveFor(-4, 100);
 
-    driveTo(24, -26, 100, reverse);
-    driveTo(18, -20, 100, forward);
-    moveLiftToAngle(90, false);
-    //moveLiftToAngle(100, false);
+    moveLiftToAngle(45, false);
+    turnToHeading(270, 100);
+    ringIntake.spin(forward, 100, percent);
+    driveFor(28, 45);
 
-    //
+    leftDrive.spin(forward, 5, percent);
+    rightDrive.spin(forward, 5, percent);
 
-    
+    wait(2000, msec);
 
-   //driveFor(-36, 100);
-   //driveTo(9.5, -52.5, 30, reverse);
-   //goal_clamp.set(true);
-
-   //ringIntake.spin(forward, 100, percent);
-   //wait(400, msec);
-
-   //// Second ring
-
-   //driveTo(28, -50, 100, forward);
-   //ringIntake.stop();
-   //ringIntake2.spin(forward, 100, percent);
-   //turnToHeading(0, 100);
-   //goal_clamp.set(false);
-
-   //// Get second goal
-
-   //pointAt(25.5, -24, 100, reverse);
-   //driveFor(-22, 40);
-   //goal_clamp.set(true);
-   //ringIntake.spin(forward, 100, percent);
-
-   //wait(500, msec);
-
-   //// Touch bar
-
-   ////driveFor(-5, 100);
-   ////turnToHeading(280, 100);
-   ////driveFor(8, 100);
-   ////corner_arm.set(true);
-   ////turnToHeading(200, 50);
-
-   //turnToHeading(315, 100);
-   //driveFor(4, 100);
-   //moveLiftToAngle(100, false);
+    leftDrive.stop();
+    rightDrive.stop();
 }
 
 void Blue_Right_Auton(void) {
-    // Get first goal
+    // Score first ring
 
-    driveFor(-32, 40);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(1000, msec);
+    ringLiftArm.stop();
+    driveFor(-6, 100);
+
+    moveLiftToAngle(45, false);
+
+    driveTo(22, 32.5, 40, reverse);
     goal_clamp.set(true);
-
+//
     // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
@@ -96,12 +82,12 @@ void Blue_Right_Auton(void) {
 
     // Grab third ring
 
-    driveTo(14, 51, 60, forward);
+    driveTo(11, 51, 60, forward);
     wait(100, msec);
 
     // Grab to last ring 
     
-    driveTo(6.5, 62, 60, forward);
+    driveTo(9.5, 61s, 60, forward);
     wait(100, msec);
     driveFor(-10, 100);
 
@@ -122,7 +108,7 @@ void Blue_Right_Auton(void) {
     driveTo(22, 22, 100, forward);
     //turnToHeading(135, 100);
     //driveFor(8, 100);
-    moveLiftToAngle(100, false);
+    moveLiftToAngle(240, false);
 }
 
 void Blue_Win_Point(void) {

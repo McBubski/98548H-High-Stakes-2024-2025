@@ -210,46 +210,6 @@ void Red_Elims(void) {
     //driveFor(-12, 100);   
 }
 
-void Red_Secret(void) {
-     // Get first goal
-
-    driveFor(-40, 40);
-    goal_clamp.set(true);
-
-    // Get next ring (with ring sort :D)
-
-    pointAt(-58, 7, 100, forward);
-    ringIntake.spin(forward, 80, percent);
-    driveTo(-58, 7, 40, forward);
-    wait(100, msec);
-
-    // Get third ring
-
-    driveFor(-10, 100);
-    driveTo(-27, -49, 100, forward);
-    wait(200, msec);
-    driveFor(-14, 100);
-  
-    // Get last ring
-
-    driveTo(-77, -83, 60, forward);
-    // Wiggle
-
-    driveFor(-6, 100);
-    driveFor(16, 100);
-    driveFor(-12, 100);
-
-    turnToHeading(10, 100);
-    goal_clamp.set(false);
-    
-    driveTo(-20, -60, 100, reverse);
-    pointAt(0, -48, 100, reverse);
-
-    //driveFor(16, 100);
-    //driveFor(-6, 100);
-    //driveFor(16, 100);
-    //driveFor(-12, 100);   
-}
 
 void Red_Secret(void) {
      // Get first goal
