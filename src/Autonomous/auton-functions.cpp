@@ -23,18 +23,15 @@ double getDistance(double x1, double y1, double x2, double y2) {
 
 void turnToHeading(double heading, double turnSpeed) {
     double error = wrapAngleDeg(heading - inertial_sensor.heading());
-    double previousError = error;
     double previousTime = Brain.Timer.system();
 
     double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.45) + 400);
 
     bool notDone = true;
-    PID turnPid = PID(0.59, 0.0001, 0.73, 0.5, 5, 100, &notDone, timeout, 700);//.61, 0, 1.05
+    PID turnPid = PID(0.5875, 0.0001, 0.705, 0.5, 5, 100, &notDone, timeout, 500);//.61, 0, 1.05
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
-
-        double previousError = error;
 
         double speed = turnPid.Update(error, (Brain.Timer.system() - previousTime));
 
@@ -45,7 +42,6 @@ void turnToHeading(double heading, double turnSpeed) {
 
         wait(10, msec);
 
-        //std::cout << "Error: " << error << std::endl;
     }
 
     leftDrive.stop();
@@ -62,10 +58,10 @@ void driveFor(double distance, double speed) {
     bool driving = true;
     bool turning = true;
 
-    int timeout = (std::abs(distance) / 12) * 260 + 550;
+    int timeout = (std::abs(distance) / 12) * 265 + 550;
 
-    PID drivePID = PID(4.48, 0.001, 0.24, 0.1, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
-    PID turnPID = PID(0.62, 0, 1.1, 100, 3, speed, &turning, 9999999, 100);
+    PID drivePID = PID(5.3, 0.001, 0.70, 0.1, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID turnPID = PID(0.5875, 0.0001, 0.705, 100, 3, speed, &turning, 9999999, 100);
 
     double driveError = distance;
     double turnError = wrapAngleDeg(targetHeading - inertial_sensor.heading());
@@ -74,7 +70,7 @@ void driveFor(double distance, double speed) {
 
     while (driving) {
         double encoderChange = forwardTrackingWheel.position(turns) - encoderStart;
-        double inchesMoved = encoderChange * 2.75 * M_PI; // Circumference of Wheels
+        double inchesMoved = encoderChange * 2 * M_PI; // Circumference of Wheels
 
         driveError = distance - inchesMoved;
 
@@ -93,7 +89,6 @@ void driveFor(double distance, double speed) {
         wait(10, msec);
 
         //std::cout << "Error: " << driveError << std::endl;
-        Brain.Screen.printAt(50, 50, "%f", driveError);
     }
 
     leftDrive.stop();
@@ -102,6 +97,11 @@ void driveFor(double distance, double speed) {
 
 void pointAt(double x, double y, double turnSpeed, vex::directionType dir) {
     float targetOrientation = atan2(x - Position_Tracking.GlobalXPos, y - Position_Tracking.GlobalYPos);
+
+    if (std::abs(wrapAngleDeg(targetOrientation * (180/M_PI) - inertial_sensor.heading())) <= 1) {
+        return;
+    }
+
     if (dir == forward) {
         turnToHeading(targetOrientation * (180/M_PI), turnSpeed);
     } else if (dir == reverse) {
@@ -160,8 +160,11 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
 
         if (timeSinceStart >= 2000) {
             ringLiftArm.stop();
-            leftDrive.stop();
-            rightDrive.stop(); 
+            
+            if (pushing) {
+                leftDrive.stop();
+                rightDrive.stop(); 
+            }
 
             return;
         }
@@ -175,8 +178,20 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     }
 
     ringLiftArm.stop();
-    leftDrive.stop();
-    rightDrive.stop();
+    
+    if (pushing) {
+        leftDrive.stop();
+        rightDrive.stop();
+    }
+}
+
+vex::task createRaiseArmTask(int targetAngle) {
+    return vex::task([](void* param) -> int {
+        int arg = *static_cast<int*>(param);
+        moveLiftToAngle(arg, false); // Replace with your actual function
+        delete static_cast<int*>(param); // Clean up allocated memory
+        return 0;
+    }, new int(targetAngle));
 }
 
 int sortColorTask(void) {

@@ -53,6 +53,10 @@ void drawHomeScreen(void) {
     Brain.Screen.setFont(mono20);
     Brain.Screen.setPenWidth(2);
 
+    // Show Progression
+
+    Brain.Screen.printAt(210, 150, "(%d/11)", auton_path);
+
     // Display Buttons
 
     ShowCalibrateButton();
