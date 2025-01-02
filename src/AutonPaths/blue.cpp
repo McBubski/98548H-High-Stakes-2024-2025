@@ -8,7 +8,7 @@ void Goal_Rush_Left_Auton(void) {
     // Get first ring on goql
 
     raiseArm = createRaiseArmTask(210);
-    driveTo(17.5, -46.5, 70, forward);
+    driveTo(18.5, -46.5, 70, forward);
     moveLiftToAngle(270, false);
 
     // Get second goal
@@ -20,7 +20,7 @@ void Goal_Rush_Left_Auton(void) {
 
     ringIntake.spin(forward, 100, percent);
     raiseArm = createRaiseArmTask(310);
-    driveTo(22, -57.5, 100, forward);
+    driveTo(22, -60, 100, forward);
 
     // Move to next ring
 
@@ -38,13 +38,13 @@ void Goal_Rush_Left_Auton(void) {
     // Alliance Stake
 
     pointAt(70, -2.8, 100, forward);
-    driveFor(3, 100);
+    driveFor(2.75, 100);
     ringIntake.stop();
     ringIntake2.spinFor(reverse, 100, degrees);
-    moveLiftToAngle(270, false);
-    driveFor(-12, 100);
-    turnToHeading(90, 100);
-    driveFor(12, 100);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(850, msec);
+    ringLiftArm.stop();
+    driveFor(-23, 25);
 
     // Put ring on goal
 
@@ -106,9 +106,9 @@ void Goal_Fill_Right_Auton(void) {
     ringLiftArm.stop();
     driveFor(-6, 100);
 
-    moveLiftToAngle(45, false);
+    task raiseArm = createRaiseArmTask(45);
 
-    driveTo(22, 32.5, 40, reverse);
+    driveTo(21, 34.5, 40, reverse);
     goal_clamp.set(true);
 //
     // Put on first ring
@@ -118,33 +118,35 @@ void Goal_Fill_Right_Auton(void) {
 
     // Grab third ring
 
-    driveTo(11, 51, 60, forward);
+    driveTo(15.5, 50.25, 60, forward);
     wait(100, msec);
 
     // Grab to last ring 
     
-    driveTo(9.5, 61, 60, forward);
+    //driveTo(16.25, 62, 60, forward);
+    turnToHeading(355, 100);
+    driveFor(16, 100);
     wait(100, msec);
     driveFor(-10, 100);
 
     // Grab second ring
 
-    driveTo(24, 57, 60, forward);
+    driveTo(24, 55, 60, forward);
     wait(100, msec);
 
     // Get corner ring
 
-    driveTo(56, 56, 100, forward);
+    driveTo(60, 60, 100, forward);
     driveTo(70, 70, 100, forward);
     wait(200, msec);
 //
     //// Touch bar
 //
-    driveFor(-36, 100);
-    driveTo(22, 22, 100, forward);
+    driveFor(-36, 90);
+    raiseArm = createRaiseArmTask(220);
+    driveTo(30, 30, 100, forward);
     //turnToHeading(135, 100);
     //driveFor(8, 100);
-    moveLiftToAngle(240, false);
 }
 
 void Blue_Win_Point(void) {
@@ -175,7 +177,7 @@ void Blue_Win_Point(void) {
     // Touch bar
 
     driveTo(31, 28, 100, reverse);
-    driveTo(20, 16, 100, forward);
+    driveTo(18, 18, 100, forward);
 
     moveLiftToAngle(100, false);
 

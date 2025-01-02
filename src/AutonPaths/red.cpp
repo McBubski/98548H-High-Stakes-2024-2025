@@ -2,11 +2,18 @@
 #include "Autonomous/auton-functions.h"
 
 void Goal_Fill_Left_Auton(void) {
-    // Get first goal
+// Score first ring
 
-    driveFor(-32, 40);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(1000, msec);
+    ringLiftArm.stop();
+    driveFor(-6, 100);
+
+    task raiseArm = createRaiseArmTask(45);
+
+    driveTo(-21, 34.5, 40, reverse);
     goal_clamp.set(true);
-
+//
     // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
@@ -14,73 +21,81 @@ void Goal_Fill_Left_Auton(void) {
 
     // Grab third ring
 
-    driveTo(-13.5, 51, 60, forward);
+    driveTo(-16.75, 50.25, 60, forward);
     wait(100, msec);
 
     // Grab to last ring 
     
-    driveTo(-6, 62, 60, forward);
+    //driveTo(16.25, 62, 60, forward);
+    turnToHeading(6, 100);
+    driveFor(16, 100);
     wait(100, msec);
     driveFor(-10, 100);
 
     // Grab second ring
 
-    driveTo(-24, 57, 60, forward);
+    driveTo(-24, 55, 60, forward);
     wait(100, msec);
 
     // Get corner ring
 
-    driveTo(-56, 56, 100, forward);
+    driveTo(-60, 60, 100, forward);
     driveTo(-70, 70, 100, forward);
+    wait(200, msec);
 //
     //// Touch bar
 //
-    driveFor(-36, 100);
-    driveTo(-22, 22, 100, forward);
+    driveFor(-36, 90);
+    raiseArm = createRaiseArmTask(220);
+    driveTo(-27, 27, 100, forward);
     //turnToHeading(135, 100);
     //driveFor(8, 100);
-    moveLiftToAngle(100, false);
 }
 
 void Goal_Rush_Right_Auton(void) {
     auton_color = 0; // Disable color sort
+    vex::task raiseArm;
+    
+    // Get first ring on goql
 
-    // Rush goal
+    raiseArm = createRaiseArmTask(210);
+    driveTo(-16, -41, 70, forward);
+    moveLiftToAngle(270, false);
 
-    driveFor(-32, 100);
-    driveTo(-11.0, -51.0, 30, reverse);
+    // Get second goal
+
+    driveTo(-29.0, -17, 25, reverse);
     goal_clamp.set(true);
+
+    // Get next ring
+
     ringIntake.spin(forward, 100, percent);
+    raiseArm = createRaiseArmTask(310);
+    driveTo(-18, -56.6, 100, forward);
 
-    // First ring
+    // Move to next ring
 
-    //driveTo(-24, -49, 100, forward);
-
-    // Put in corner
-
-    driveTo(-48, -56, 100, forward);
-    wait(500, msec);
-    ringIntake.stop();
-    ringIntake1.spin(forward, 100, percent);
-    turnToHeading(300, 1000);
+    driveFor(-24, 100);
+    pointAt(-59, 8, 100, forward);
+    raiseArm = createRaiseArmTask(45);
     goal_clamp.set(false);
+    driveTo(-59, 8, 60, forward);
+    wait(500, msec);
+    ringIntake2.stop();
+    raiseArm = createRaiseArmTask(74);
+    driveTo(-48, -5.75, 100, reverse);
+    ringIntake2.spin(forward, 100, percent);
 
-    // Get next goal
+    // Alliance Stake
 
-    driveTo(-41, -46, 100, forward);
-    ringIntake.spin(reverse, 100, percent);
-    //driveTo(-32, -34, 100, reverse);
-    driveTo(-14, -18, 40, reverse);
-    goal_clamp.set(true);
-    ringIntake.spin(forward, 100, percent);
-
-    driveTo(-68.5, 4, 50, forward);
-
-    // Touch BAR WOOOO
-
-    driveTo(-24, -26, 100, reverse);
-    turnToHeading(45, 100);
-    moveLiftToAngle(90, false);
+    pointAt(-70, -6.8, 100, forward);
+    driveFor(6.25, 100);
+    ringIntake.stop();
+    ringIntake2.spinFor(reverse, 100, degrees);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(850, msec);
+    ringLiftArm.stop();
+    driveFor(-24, 30);
 }
 
 void Red_Win_Point(void) {

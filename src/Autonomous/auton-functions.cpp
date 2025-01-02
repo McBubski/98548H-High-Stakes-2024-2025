@@ -98,7 +98,9 @@ void driveFor(double distance, double speed) {
 void pointAt(double x, double y, double turnSpeed, vex::directionType dir) {
     float targetOrientation = atan2(x - Position_Tracking.GlobalXPos, y - Position_Tracking.GlobalYPos);
 
-    if (std::abs(wrapAngleDeg(targetOrientation * (180/M_PI) - inertial_sensor.heading())) <= 1) {
+    std::cout << std::abs(wrapAngleDeg(targetOrientation * (180/M_PI) - inertial_sensor.heading()))  << std::endl;
+
+    if (std::abs(wrapAngleDeg(targetOrientation * (180/M_PI) - inertial_sensor.heading())) <= 3) {
         return;
     }
 
