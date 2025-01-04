@@ -14,7 +14,7 @@ bool skillsSetupHasRun = false;
 float armPositions[3] = {
   45,    // Rest position
   75,    // First ring position
-  205      // Wall stake position
+  205    // Wall stake position
 };
 
 void usercontrol(void) {

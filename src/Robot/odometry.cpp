@@ -69,7 +69,7 @@ void Odometry::Update(void) {
     sidewaysPos = sidewaysTrackingWheel.position(rotationUnits::deg);
 
     // Converts degrees to RADIANS, then calculates distance travelled (INCHES)
-    deltaForward = ((forwardPos - previousForwardPos) * M_PI / 180) * 1;
+    deltaForward = ((forwardPos - previousForwardPos) * M_PI / 180) * 0.875;
     deltaSideways = ((sidewaysPos - previousSidewaysPos) * M_PI / 180) * TrackingWheelRadius;
 
     // Updates previous sensor values (DEGREES)

@@ -70,7 +70,7 @@ void driveFor(double distance, double speed) {
 
     while (driving) {
         double encoderChange = forwardTrackingWheel.position(turns) - encoderStart;
-        double inchesMoved = encoderChange * 2 * M_PI; // Circumference of Wheels
+        double inchesMoved = encoderChange * 1.75 * M_PI; // Circumference of Wheels
 
         driveError = distance - inchesMoved;
 
