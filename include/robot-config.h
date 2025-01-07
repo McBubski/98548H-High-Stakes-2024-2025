@@ -41,11 +41,12 @@ extern rotation forwardTrackingWheel;
 extern optical color_sensor;
 extern aivision ai_sensor;
 
+extern digital_in ring_switch;
+
 // Pneumatics
 
 extern digital_out goal_clamp;
-extern digital_out corner_arm;
-extern digital_out ring_sorter;
+extern digital_out lifted_intake;
 
 // Odometry
 

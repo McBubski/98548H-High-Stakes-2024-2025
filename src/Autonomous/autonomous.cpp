@@ -69,7 +69,7 @@ void autonomous(void) {
     float totalTime = (endTime - startTime) / 1000000.0000;
     float timeLeft;
 
-    if (auton_color == 5) { // Skills
+    if (auton_path == 5) { // Skills
         timeLeft = 60.0 - totalTime;
     } else {
         timeLeft = 15.0 - totalTime;

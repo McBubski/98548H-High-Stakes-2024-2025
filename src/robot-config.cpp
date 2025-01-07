@@ -41,11 +41,12 @@ rotation forwardTrackingWheel = rotation(PORT14, false);
 optical color_sensor = optical(PORT20);
 aivision ai_sensor = aivision(PORT17);
 
+digital_in ring_switch = digital_in(Brain.ThreeWirePort.C);
+
 // Pneumatics
 
 digital_out goal_clamp = digital_out(Brain.ThreeWirePort.A);
-digital_out corner_arm = digital_out(Brain.ThreeWirePort.B);
-digital_out ring_sorter = digital_out(Brain.ThreeWirePort.D);
+digital_out lifted_intake = digital_out(Brain.ThreeWirePort.B);
 
 // Odometry
 

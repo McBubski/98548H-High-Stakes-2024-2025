@@ -7,6 +7,7 @@
 
 int auton_color = 0; // 0 is red, 1 is blue, 2 is no color sorting.
 bool intake_interrupt = false;
+bool color_sort_override = false;
 
 double wrapAngleDeg(double angle) {
     angle = fmod(angle + 180.0, 360.0);
@@ -97,8 +98,6 @@ void driveFor(double distance, double speed) {
 
 void pointAt(double x, double y, double turnSpeed, vex::directionType dir) {
     float targetOrientation = atan2(x - Position_Tracking.GlobalXPos, y - Position_Tracking.GlobalYPos);
-
-    std::cout << std::abs(wrapAngleDeg(targetOrientation * (180/M_PI) - inertial_sensor.heading()))  << std::endl;
 
     if (std::abs(wrapAngleDeg(targetOrientation * (180/M_PI) - inertial_sensor.heading())) <= 3) {
         return;
@@ -196,12 +195,18 @@ vex::task createRaiseArmTask(int targetAngle) {
     }, new int(targetAngle));
 }
 
+int previousSwitchState = 0;
+int previousColor = 0;
+
 int sortColorTask(void) {
     color_sensor.setLight(ledState::on);
-    color_sensor.setLightPower(25, percent);
+    color_sensor.setLightPower(75, percent);
+
+    int detectedColor = 2;
+    int colorSortColor = 2;
 
     while (true) {
-        int detectedColor = 2;
+        std::cout << color_sort_override << std::endl;
 
         if (color_sensor.isNearObject()) {
             if (color_sensor.color() == red) {
@@ -213,18 +218,25 @@ int sortColorTask(void) {
             detectedColor = 2;
         }
 
-        if (Controller.ButtonR1.pressing() && auton_color != 2) {
-            if (detectedColor != auton_color) {
-                wait(750, msec);
-                intake_interrupt = true;
-                ringIntake.spin(reverse, 100, percent);
-                Controller.rumble(".");
-                wait(100, msec);
-                ringIntake.stop();
-                intake_interrupt = false;
-            }
+        if (previousColor != detectedColor && detectedColor == 2) {
+            colorSortColor = previousColor;
         }
 
+        if (previousSwitchState == 0 && ring_switch.value() == 1) {
+            if (colorSortColor != auton_color) {
+                if (color_sort_override == false) {
+                    intake_interrupt = true;
+                    ringIntake2.stop();
+
+                    wait(70, msec);
+
+                    intake_interrupt = false;
+                }
+            }
+        }
+        
+        previousSwitchState = ring_switch.value();
+        previousColor = detectedColor;
         wait(20, msec);
     }
     return 1;

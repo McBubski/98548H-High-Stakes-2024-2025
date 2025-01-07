@@ -8,54 +8,57 @@ void Skills_Auton(void) {
     task raiseArm;
 
     // Places ring on alliance stake, and then clamps the goal.
-    moveLiftToAngle(250, false);
-    driveFor(-20, 50);
+    moveLiftToAngle(245, false);
+    driveFor(-22, 45);
     goal_clamp.set(true);
 
     // Get first ring
     raiseArm = createRaiseArmTask(45);
     ringIntake.spin(forward, 100, percent);
-    driveTo(-26, -22, 100, forward);
+    driveTo(-26, -20, 100, forward);
 
     // Get next ring, and put it in lady brown
 
-    driveTo(-23, -46, 100, forward);
+    driveTo(-21, -47, 100, forward);
 
     // Drive to align with wallstake
 
-    driveTo(-2, -56, 100, forward);
-    raiseArm = createRaiseArmTask(72);
+    pointAt(-1, -58, 100, forward);
+    raiseArm = createRaiseArmTask(73);
+    driveTo(-1, -58, 100, forward);
+    ringIntake.spin(forward, 80, percent);
     wait(400, msec);
+    ringIntake.spin(forward, 100, percent);
     waitUntil(ringIntake2.torque(Nm) >= 2.2);
-    wait(150, msec);
-    ringIntake.spinFor(reverse, 50, degrees);
-    raiseArm = createRaiseArmTask(125);
-    
+
     // Put ring on wallstake
 
-    pointAt(3, -71, 100, forward);
+    driveFor(-2, 100);
+    pointAt(1, -71, 100, forward);
 
     leftDrive.spin(forward, 40, percent);
     rightDrive.spin(forward, 40, percent);
     wait(600, msec);
     leftDrive.stop();
     rightDrive.stop();
+    ringIntake.spinFor(reverse, 20, degrees);
 
-    moveLiftToAngle(205, true);
+    moveLiftToAngle(195, true);
 
     driveFor(-12, 100);
     ringIntake.spin(forward, 100, percent);
 
     // Get next ring
 
-    raiseArm = createRaiseArmTask(45);
+    raiseArm = createRaiseArmTask(41);
     driveTo(25.5, -22.5, 100, forward);
 
     // Get next three
 
-    driveTo(0, -40, 90, reverse);
-    driveTo(48, -36, 75, forward);
-    driveTo(48, -60, 100, forward);
+    driveTo(0, -42, 90, reverse);
+    driveTo(48, -38, 75, forward);
+    wait(200, msec);
+    driveTo(48, -54, 100, forward);
     wait(200, msec);
 
     // Drop goal
@@ -67,15 +70,48 @@ void Skills_Auton(void) {
 
     // Goal push
 
-    driveTo(48, -4, 60, reverse);
-    driveTo(36, 6, 100, reverse);
+    //ringIntake.spin(forward, 100, percent);
+    driveTo(44, 6, 60, reverse);
+    goal_clamp.set(true);
+    turnToHeading(145, 100);
+    goal_clamp.set(false);
 
-    driveTo(70, 62, 100, forward);
-    driveTo(26, 16, 60, reverse);
+    // Grab dropped goal
+
+    driveFor(8, 100);
+    driveTo(66, 62, 100, forward);
+    driveFor(-8, 100);
+    driveTo(38, 8, 60, reverse);
     goal_clamp.set(true);
 
+    //Get next ring
 
-    //// Put ring on alliance stake
+    ringIntake.spin(forward, 100, percent);
+    driveTo(24, 22, 100, forward);
+    driveTo(-48, -46, 100, forward);
+
+    // Get next two rings
+
+    driveFor(-4, 100);
+    driveTo(-44, -60, 100, forward);
+    driveFor(-14, 100);
+    driveTo(-58, -50, 100, forward);
+
+    // Drop goal in corner
+
+    turnToHeading(30, 100);
+    goal_clamp.set(false);
+    driveFor(-18, 100);
+    driveFor(22, 100);
+
+    // Grab goal
+
+    driveTo(-46, 12, 80, reverse);
+    driveTo(-46, 34, 20, reverse);
+    goal_clamp.set(true);
+    driveTo(-24, 24, 100, forward);
+    driveTo(24, 48, 100, forward);
+
 //
     //ringIntake.spin(forward, 100, percent);
     //wait(300, msec);

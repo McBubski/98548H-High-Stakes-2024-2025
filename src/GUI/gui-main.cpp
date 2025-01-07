@@ -31,11 +31,13 @@ int drawScreen(void) {
         Controller.Screen.print("%.2f", inertial_sensor.heading(degrees));
         Controller.Screen.setCursor(1, 15);
 
-        if (auton_color == 0) {
-            Controller.Screen.print("CS: RED");
-        } else if (auton_color == 1) {
-            Controller.Screen.print("CS: BLU");
-        } 
+        if (color_sort_override == false) {
+            if (auton_color == 0) {
+                Controller.Screen.print("CS: RED");
+            } else if (auton_color == 1) {
+                Controller.Screen.print("CS: BLU");
+            } 
+        }
 
 
         // Testing color sensor

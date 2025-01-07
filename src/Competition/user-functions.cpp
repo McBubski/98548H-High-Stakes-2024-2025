@@ -9,8 +9,6 @@ bool armOverride = false;
 
 int goalArmPos = 0;
 
-int previousAutonColor = 0;
-
 void initializeUserControl(void) {
     // Sets drivetrain stopping to coast
     leftDrive.setStopping(coast);
@@ -28,15 +26,14 @@ void initializeUserControl(void) {
     Controller.ButtonRight.pressed(toggleElevation);
     Controller.ButtonL2.pressed(cycleRingArmTarget);
     Controller.ButtonL1.pressed(lowerRingArm);
+    Controller.ButtonA.pressed(toggleColorSorter);
+    Controller.ButtonUp.pressed(toggleLiftedIntake);
 
-    previousAutonColor = auton_color;
-    auton_color = 2;
+    color_sort_override = true;
     
     // Macro
 
-    Controller.ButtonX.pressed(autoSkillsStart);
-
-    corner_arm.set(false);
+    //Controller.ButtonX.pressed(autoSkillsStart);
 }
 
 void autoSkillsStart(void) {
@@ -46,6 +43,10 @@ void autoSkillsStart(void) {
 
 void toggleGoalClamp(void) {
     goal_clamp.set(!goal_clamp.value());
+}
+
+void toggleLiftedIntake(void) {
+  lifted_intake.set(!lifted_intake.value());
 }
 
 void toggleElevation(void) {
@@ -71,6 +72,10 @@ void cycleRingArmTarget(void) {
   if (goalArmPos > 2) {
     goalArmPos = 1;
   }
+}
+
+void toggleColorSorter(void) {
+  color_sort_override = !color_sort_override;
 }
 
 void lowerRingArm(void) {
