@@ -159,7 +159,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
 
         timeSinceStart = Brain.Timer.system() - startTime;
 
-        if (timeSinceStart >= 2000) {
+        if (timeSinceStart >= 1000) {
             ringLiftArm.stop();
             
             if (pushing) {
@@ -206,8 +206,6 @@ int sortColorTask(void) {
     int colorSortColor = 2;
 
     while (true) {
-        std::cout << color_sort_override << std::endl;
-
         if (color_sensor.isNearObject()) {
             if (color_sensor.color() == red) {
                 detectedColor = 0;
@@ -225,6 +223,7 @@ int sortColorTask(void) {
         if (previousSwitchState == 0 && ring_switch.value() == 1) {
             if (colorSortColor != auton_color) {
                 if (color_sort_override == false) {
+                    Controller.rumble("-");
                     intake_interrupt = true;
                     ringIntake2.stop();
 

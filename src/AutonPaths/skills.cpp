@@ -4,11 +4,11 @@
 // Change these values for arm position
 
 void Skills_Auton(void) {
-    auton_color = 2;
     task raiseArm;
 
     // Places ring on alliance stake, and then clamps the goal.
     moveLiftToAngle(245, false);
+    raiseArm = createRaiseArmTask(45);
     driveFor(-22, 45);
     goal_clamp.set(true);
 
@@ -101,16 +101,70 @@ void Skills_Auton(void) {
 
     turnToHeading(30, 100);
     goal_clamp.set(false);
-    driveFor(-18, 100);
-    driveFor(22, 100);
+    driveFor(-14, 100);
+    driveFor(20, 100);
 
     // Grab goal
 
-    driveTo(-46, 12, 80, reverse);
-    driveTo(-46, 34, 20, reverse);
+    driveTo(-47.5, 8, 80, reverse);
+    driveTo(-47.5, 20, 20, reverse);
     goal_clamp.set(true);
-    driveTo(-24, 24, 100, forward);
-    driveTo(24, 48, 100, forward);
+    ringIntake.spin(forward, 100, percent);
+    driveTo(-28, 14.5, 100, forward);
+    driveTo(0, 36, 100, forward);
+    driveTo(28, 42, 100, forward);
+
+    // Get second wallstake
+
+    driveTo(0, 56, 100, forward);
+    ringIntake.spin(forward, 80, percent);
+    raiseArm = createRaiseArmTask(68);
+    waitUntil(ringIntake2.torque(Nm) >= 2);
+
+    // Put ring on wallstake
+
+    driveFor(-2, 100);
+    pointAt(1, 71, 100, forward);
+
+    leftDrive.spin(forward, 40, percent);
+    rightDrive.spin(forward, 40, percent);
+    wait(600, msec);
+    leftDrive.stop();
+    rightDrive.stop();
+    ringIntake.spinFor(reverse, 20, degrees);
+
+    moveLiftToAngle(195, true);
+
+    driveFor(-12, 100);
+    ringIntake.spin(forward, 100, percent);
+
+    // Get next ring
+
+    raiseArm = createRaiseArmTask(41);
+
+    // Get next three rings
+
+    driveTo(-64, 50, 55, forward);    
+    
+    // Get final ring
+
+    driveFor(-12, 100);
+    driveTo(-48, 60, 100, forward);
+
+    wait(200, msec);
+
+    // Drop goal in corner
+
+    turnToHeading(120, 100);
+    driveFor(-20, 100);
+    goal_clamp.set(false);
+    driveFor(30, 100);
+
+    // Hang
+
+    raiseArm = createRaiseArmTask(200);
+    driveTo(-2, 2, 100, reverse);
+
 
 //
     //ringIntake.spin(forward, 100, percent);
