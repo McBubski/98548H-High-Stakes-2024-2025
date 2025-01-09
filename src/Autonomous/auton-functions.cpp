@@ -26,10 +26,10 @@ void turnToHeading(double heading, double turnSpeed) {
     double error = wrapAngleDeg(heading - inertial_sensor.heading());
     double previousTime = Brain.Timer.system();
 
-    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.45) + 400);
+    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.43) + 400);
 
     bool notDone = true;
-    PID turnPid = PID(0.5875, 0.0001, 0.705, 0.5, 5, 100, &notDone, timeout, 500);//.61, 0, 1.05
+    PID turnPid = PID(0.5875, 0.0001, 0.705, 0.5, 5, 100, &notDone, timeout, 400);//.61, 0, 1.05
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -223,12 +223,13 @@ int sortColorTask(void) {
         if (previousSwitchState == 0 && ring_switch.value() == 1) {
             if (colorSortColor != auton_color) {
                 if (color_sort_override == false) {
-                    Controller.rumble("-");
+                    //Controller.rumble("-");
                     intake_interrupt = true;
                     ringIntake2.stop();
 
                     wait(70, msec);
 
+                    ringIntake2.spin(forward, 100, percent);
                     intake_interrupt = false;
                 }
             }
@@ -236,7 +237,7 @@ int sortColorTask(void) {
         
         previousSwitchState = ring_switch.value();
         previousColor = detectedColor;
-        wait(20, msec);
+        wait(10, msec);
     }
     return 1;
 }

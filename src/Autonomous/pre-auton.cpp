@@ -5,6 +5,7 @@ using namespace vex;
 
 void pre_auton(void) {
     Position_Tracking.SetAuton(auton_path);
+    setColorSort();
     leftDrive.setStopping(coast);
     rightDrive.setStopping(coast);
 

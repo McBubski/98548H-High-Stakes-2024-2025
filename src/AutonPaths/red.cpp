@@ -190,39 +190,64 @@ void Red_Win_Point(void) {
     //moveLiftToAngle(100, false);
 }
 
+int delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao() {
+    wait(800, msec);
+    lifted_intake.set(true);
+    return 1;
+}
+
 void Red_Elims(void) {
-     // Get first goal
+    // Score first ring
 
-    driveFor(-40, 40);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(800, msec);
+    ringLiftArm.stop();
+    driveFor(-6, 100);
+
+    task raiseArm = createRaiseArmTask(45);
+
+    driveTo(-21, 34.5, 50, reverse);
     goal_clamp.set(true);
+//
+    // Put on first ring
 
-    // Get next ring (with ring sort :D)
+    ringIntake.spin(forward, 100, percent);
+    wait(25, msec);
 
-    pointAt(-58, 7, 100, forward);
-    ringIntake.spin(forward, 80, percent);
-    driveTo(-58, 7, 40, forward);
-    wait(100, msec);
+    // Grab third ring
 
-    // Get third ring
+    driveTo(-15.5, 48, 80, forward);
+    wait(25, msec);
 
-    driveFor(-10, 100);
-    driveTo(-27, -49, 100, forward);
+    // Grab to last ring 
+    
+    driveTo(-9, 58.5, 100, forward);
+    //turnToHeading(355, 100);
+    //driveFor(16, 100);
+    //wait(100, msec);
+    driveFor(-12, 100);
+
+    // Grab second ring
+
+    //driveTo(24, 54, 60, forward);
+    //wait(100, msec);
+
+    // Get corner ring
+
+    //driveTo(60, 64, 100, forward);
+    driveTo(-80, 84, 45, forward);
     wait(200, msec);
     driveFor(-12, 100);
-  
-    // Get last ring
 
-    driveTo(-77, -83, 60, forward);
-    // Wiggle
+    // Get middle ring
 
-    driveFor(-6, 100);
-    driveFor(16, 100);
-    driveFor(-36, 100);
+    task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao);
+    driveTo(-54, 8, 100, forward);
+    lifted_intake.set(false);
 
-    //driveFor(16, 100);
+    turnToHeading(95, 100);
+    driveFor(12, 100);
     //driveFor(-6, 100);
-    //driveFor(16, 100);
-    //driveFor(-12, 100);   
 }
 
 

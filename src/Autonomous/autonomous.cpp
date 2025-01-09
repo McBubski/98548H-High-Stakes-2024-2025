@@ -7,7 +7,7 @@
 
 using namespace vex;
 
-int auton_path = 5;
+int auton_path = 9;
 
 double startingPositions[11][3] = {
     {-53, -29.3, 105}, // Goal Rush Right
@@ -17,8 +17,8 @@ double startingPositions[11][3] = {
     {-59.2, -14.4, 317.5}, // Skills
     {59, -40, 113}, // Win Point Blue
     {-59, -40, 247}, // Win Point Red
-    {59, -40, 113}, // Elims Blue
-    {-59, -40, 247}, // Elims Red
+    {60, 21, 144.7}, // Elims Blue
+    {-60, 21, 215.3}, // Elims Red
     {59, -40, 113}, // TOP SECRET!!!!! Blue
     {-59, -40, 247} // TOP SECRET!!!!! Red
 };
@@ -27,41 +27,52 @@ void autonomous(void) {
     float startTime = Brain.Timer.systemHighResolution();
 
     switch (auton_path) {
-        setColorSort();
         case 1:
+            setColorSort();
             Goal_Rush_Right_Auton();
             break;
         case 2:
+            setColorSort();
             Goal_Fill_Right_Auton();
             break;
         case 3:
+            setColorSort();
             Goal_Rush_Left_Auton();
             break;
         case 4:
+            setColorSort();
             Goal_Fill_Left_Auton();
             break;
         case 5:
+            setColorSort();
             Skills_Auton();
             break;
         case 6:
+            setColorSort();
             Blue_Win_Point();
             break;
         case 7:
+            setColorSort();
             Red_Win_Point();
             break;
         case 8:
+            setColorSort();
             Blue_Elims();
             break;
         case 9:
+            setColorSort();
             Red_Elims();
             break;
         case 10:
+            setColorSort();
             Blue_Secret();
             break;
         case 11:
+            setColorSort();
             Red_Secret();
             break;
         default:
+            setColorSort();
             Blue_Win_Point();
     }
 
