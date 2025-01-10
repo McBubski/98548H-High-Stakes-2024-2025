@@ -1,6 +1,7 @@
 #include "Competition/user-control.h"
 #include "Competition/user-functions.h"
 #include "Autonomous/auton-functions.h"
+#include "Autonomous/autonomous.h"
 
 #include <cmath>
 
@@ -11,10 +12,12 @@ bool skillsSetupHasRun = false;
 
 // Change these values for arm position
 
-float armPositions[3] = {
+float armPositions[5] = {
   40,    // Rest position
   70,    // First ring position
-  200    // Wall stake position
+  200,   // Wall stake position
+  250,   // Alliance stake position
+  99     // Hang position
 };
 
 void usercontrol(void) {
@@ -34,7 +37,8 @@ void usercontrol(void) {
 
     // PID for arm lift
 
-    if (Controller.ButtonB.pressing()) {
+    if (auton_path != 5) {
+      if (Controller.ButtonB.pressing()) {
       armOverride = true;
       ringLiftArm.spin(reverse, 100, percent);
     } else if (Controller.ButtonY.pressing()) {
@@ -44,6 +48,7 @@ void usercontrol(void) {
       if (armOverride) {
         ringLiftArm.stop();
       }
+    } 
     }
 
     if (!armOverride) {

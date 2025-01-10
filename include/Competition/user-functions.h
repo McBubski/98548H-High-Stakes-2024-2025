@@ -10,6 +10,7 @@ void cycleRingArmTarget(void);
 void lowerRingArm(void);
 void autoSkillsStart(void);
 void toggleColorSorter(void);
+void setRingArmTargetToAllianceStake(void);
 
 extern bool slowIntake;
 extern bool liftRaising;

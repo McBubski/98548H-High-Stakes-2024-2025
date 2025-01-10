@@ -1,5 +1,6 @@
 #include "Competition/user-functions.h"
 #include "Autonomous/auton-functions.h"
+#include "Autonomous/autonomous.h"
 
 using namespace vex;
 
@@ -33,7 +34,7 @@ void initializeUserControl(void) {
     
     // Macro
 
-    //Controller.ButtonX.pressed(autoSkillsStart);
+    Controller.ButtonB.pressed(setRingArmTargetToAllianceStake);
 }
 
 void autoSkillsStart(void) {
@@ -50,11 +51,19 @@ void toggleLiftedIntake(void) {
 }
 
 void toggleElevation(void) {
-  goalArmPos = 2;
+  armOverride = false;
+  goalArmPos = 4;
 }
 
 void toggleIntakeSpeed(void) {
   slowIntake = !slowIntake;
+}
+
+void setRingArmTargetToAllianceStake(void) {
+  armOverride = false;
+  if (auton_path == 5) {
+    goalArmPos = 3;
+  }
 }
 
 void cycleRingArmTarget(void) {

@@ -7,7 +7,9 @@ void Skills_Auton(void) {
     task raiseArm;
 
     // Places ring on alliance stake, and then clamps the goal.
-    moveLiftToAngle(245, false);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(800, msec);
+    ringLiftArm.stop();
     raiseArm = createRaiseArmTask(45);
     driveFor(-22, 45);
     goal_clamp.set(true);
@@ -19,26 +21,27 @@ void Skills_Auton(void) {
 
     // Get next ring, and put it in lady brown
 
-    driveTo(-21, -47, 100, forward);
+    driveTo(-20, -47, 100, forward);
 
     // Drive to align with wallstake
 
-    pointAt(-1, -58, 100, forward);
+    pointAt(0, -58, 100, forward);
     raiseArm = createRaiseArmTask(73);
-    driveTo(-1, -58, 100, forward);
+    driveTo(0, -58, 100, forward);
     ringIntake.spin(forward, 80, percent);
     wait(400, msec);
     ringIntake.spin(forward, 100, percent);
-    waitUntil(ringIntake2.torque(Nm) >= 2.2);
 
     // Put ring on wallstake
 
-    driveFor(-2, 100);
+    //driveFor(-2, 100);
     pointAt(1, -71, 100, forward);
+    //waitUntil(ringIntake2.torque(Nm) >= 2.2);
+    ringIntake.stop();
 
     leftDrive.spin(forward, 40, percent);
     rightDrive.spin(forward, 40, percent);
-    wait(600, msec);
+    wait(400, msec);
     leftDrive.stop();
     rightDrive.stop();
     ringIntake.spinFor(reverse, 20, degrees);
@@ -51,7 +54,7 @@ void Skills_Auton(void) {
     // Get next ring
 
     raiseArm = createRaiseArmTask(41);
-    driveTo(25.5, -22.5, 100, forward);
+    driveTo(27.5, -22.5, 100, forward);
 
     // Get next three
 
@@ -71,52 +74,51 @@ void Skills_Auton(void) {
     // Goal push
 
     //ringIntake.spin(forward, 100, percent);
-    driveTo(44, 6, 60, reverse);
+    driveTo(48, 6, 60, reverse);
     goal_clamp.set(true);
     turnToHeading(145, 100);
     goal_clamp.set(false);
 
     // Grab dropped goal
 
-    driveFor(8, 100);
+    driveFor(4, 100);
     driveTo(66, 62, 100, forward);
     driveFor(-8, 100);
-    driveTo(38, 8, 60, reverse);
+    driveTo(35, 3.5, 50, reverse);
     goal_clamp.set(true);
 
     //Get next ring
 
     ringIntake.spin(forward, 100, percent);
-    driveTo(24, 22, 100, forward);
-    driveTo(-48, -46, 100, forward);
+    driveTo(18, 24, 100, forward);
+    driveTo(-52, -64.5, 100, forward);
 
     // Get next two rings
 
-    driveFor(-4, 100);
-    driveTo(-44, -60, 100, forward);
-    driveFor(-14, 100);
-    driveTo(-58, -50, 100, forward);
+    driveFor(-24, 100);
+    driveTo(-58, -56.5, 100, forward);
 
     // Drop goal in corner
 
     turnToHeading(30, 100);
     goal_clamp.set(false);
+    ringIntake.spinFor(reverse, 20, degrees, false);
     driveFor(-14, 100);
-    driveFor(20, 100);
+    driveFor(22, 100);
 
     // Grab goal
 
-    driveTo(-47.5, 8, 80, reverse);
-    driveTo(-47.5, 20, 20, reverse);
+    driveTo(-50.5, 8, 80, reverse);
+    driveTo(-50.5, 20, 20, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
     driveTo(-28, 14.5, 100, forward);
-    driveTo(0, 36, 100, forward);
-    driveTo(28, 42, 100, forward);
+    driveTo(0, 38, 100, forward);
+    driveTo(36, 44, 100, forward);
 
     // Get second wallstake
 
-    driveTo(0, 56, 100, forward);
+    driveTo(-6, 57.5, 100, forward);
     ringIntake.spin(forward, 80, percent);
     raiseArm = createRaiseArmTask(68);
     waitUntil(ringIntake2.torque(Nm) >= 2);
@@ -124,11 +126,11 @@ void Skills_Auton(void) {
     // Put ring on wallstake
 
     driveFor(-2, 100);
-    pointAt(1, 71, 100, forward);
+    pointAt(-5, 71, 100, forward);
 
     leftDrive.spin(forward, 40, percent);
     rightDrive.spin(forward, 40, percent);
-    wait(600, msec);
+    wait(400, msec);
     leftDrive.stop();
     rightDrive.stop();
     ringIntake.spinFor(reverse, 20, degrees);
@@ -145,20 +147,13 @@ void Skills_Auton(void) {
     // Get next three rings
 
     driveTo(-64, 50, 55, forward);    
-    
-    // Get final ring
-
-    driveFor(-12, 100);
-    driveTo(-48, 60, 100, forward);
-
-    wait(200, msec);
 
     // Drop goal in corner
 
-    turnToHeading(120, 100);
+    turnToHeading(170, 100);
     driveFor(-20, 100);
     goal_clamp.set(false);
-    driveFor(30, 100);
+    driveFor(12, 100);
 
     // Hang
 
