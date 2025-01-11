@@ -13,11 +13,11 @@ bool skillsSetupHasRun = false;
 // Change these values for arm position
 
 float armPositions[5] = {
-  40,    // Rest position
-  70,    // First ring position
-  200,   // Wall stake position
-  250,   // Alliance stake position
-  99     // Hang position
+  64,    // Rest position
+  101,    // First ring position
+  222,   // Wall stake position
+  275,   // Alliance stake position
+  125     // Hang position
 };
 
 void usercontrol(void) {
@@ -57,7 +57,7 @@ void usercontrol(void) {
       float error = goalArmAngle - currentArmAngle;
 
       if (std::abs(error) >= 1.0) {
-        ringLiftArm.spin(reverse, error * 1.9, percent);
+        ringLiftArm.spin(reverse, error * 1.6, percent);
       } else {
         ringLiftArm.stop();
       }

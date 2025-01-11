@@ -15,8 +15,8 @@ double startingPositions[11][3] = {
     {53, -29.3, 245}, // Goal Rush Left
     {-60, 21, 215.3}, // Goal Fill Left
     {-59.2, -14.4, 317.5}, // Skills
-    {59, -40, 113}, // Win Point Blue
-    {-59, -40, 247}, // Win Point Red
+    {59, -13, 34.7}, // Win Point Blue
+    {-59, -13, 325.3}, // Win Point Red
     {60, 21, 144.7}, // Elims Blue
     {-60, 21, 215.3}, // Elims Red
     {59, -40, 113}, // TOP SECRET!!!!! Blue
@@ -24,7 +24,7 @@ double startingPositions[11][3] = {
 };
 
 void autonomous(void) {
-    float startTime = Brain.Timer.systemHighResolution();
+    float startTime = Brain.Timer.systemHighResolution();   
 
     switch (auton_path) {
         case 1:

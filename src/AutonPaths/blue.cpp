@@ -150,82 +150,45 @@ void Goal_Fill_Right_Auton(void) {
 }
 
 void Blue_Win_Point(void) {
-    // Get first goal
+    // Get alliance stake
 
-    driveFor(-34, 50);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(900, msec);
+    ringLiftArm.stop();
+    driveFor(-6, 100);
+
+    task raiseArm = createRaiseArmTask(45);
+
+    // Grab goal
+
+    driveTo(21, -27, 40, reverse);
     goal_clamp.set(true);
+    
+    // Get lifted ring
+    
+    lifted_intake.set(true);
     ringIntake.spin(forward, 100, percent);
-
-    // Second ring
-
-    driveTo(30, -46, 100, forward);
+    driveTo(43, -6, 100, forward);
+    lifted_intake.set(false);
     driveFor(-12, 100);
 
-    // Get third ring
+    // Get second ring
 
-    driveTo(48, 0, 100, forward);
-    goal_clamp.set(false);
-    ringIntake.stop();
+    driveTo(28, -50, 100, forward);
 
-    pointAt(30, 23, 100, reverse);
-    driveTo(30, 23, 40, reverse);
-    goal_clamp.set(true);
-    ringIntake.spin(forward, 100, percent);
+    // Get corner ring
 
-    driveTo(27, 44, 100, forward);
+    driveTo(64, -68, 45, forward);
+    wait(100, msec);
 
     // Touch bar
 
-    driveTo(31, 28, 100, reverse);
-    driveTo(18, 18, 100, forward);
+    driveTo(28, -50, 100, reverse);
 
-    moveLiftToAngle(100, false);
+    raiseArm = createRaiseArmTask(200);
 
-
-    //driveTo(53, -24, 100, forward);
-    //driveTo(53, 36, 35, forward);
-    ////wait(1300, msec);
-    //driveFor(-6, 100);
-    //wait(300, msec);
-    //goal_clamp.set(false);
-//
-    //pointAt(19, 26, 100, reverse);
-    //driveTo(19, 26, 35, reverse);
-    //goal_clamp.set(true);
-    //ringIntake.spin(forward, 100, percent);
-//
-    //// Get next ring
-    //driveTo(26, 46, 100, forward);
-    //driveFor(-20, 100);
-//
-    //// Touch bar
-//
-    //driveTo(13.5, 13.5, 100, forward);
-    //moveLiftToAngle(100, false);
-
-    //driveTo(54, -0.1, 100, reverse);
-    //turnToHeading(270, 100);
-    //driveFor(-9, 100);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //wait(500, msec);
-    //ringIntake.stop();
-//
-    //driveFor(12, 100);
-//
-    //driveTo(19.5, 28.5, 40, reverse);
-    //goal_clamp.set(true);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //driveTo(8.5, 41, 80, forward);
-    //wait(1000, msec);
-    //driveFor(-16, 100);
-    //driveTo(19.5, 48, 100, forward);
-    //driveTo(17, 15.5, 100, forward);
-//
-    //turnToHeading(225, 100);
-    //driveFor(-2, 100);
-    //moveLiftToAngle(100, false);
+    driveTo(20, -20, 60, forward);
+    turnToHeading(315, 100);
 }
 
 int delayRaiseIntakeButOnlyForThisSpecificAutonLmao() {

@@ -3,6 +3,7 @@
 
 #include "GUI/home-screen.h"
 #include "GUI/odometry-screen.h"
+#include "GUI/robot-screen.h"
 
 #include "Autonomous/auton-functions.h"
 
@@ -21,8 +22,8 @@ int drawScreen(void) {
             drawHomeScreen();
         } else if (strncmp(window, "Odometry", 2) == 0) {
             drawOdometryScreen();
-        } else if (strncmp(window, "System", 2)) {
-           
+        } else if (strncmp(window, "System", 2) == 0) {
+           drawRobotScreen();
         }
 
         // Renders then clears screen

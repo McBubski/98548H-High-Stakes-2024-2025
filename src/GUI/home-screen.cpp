@@ -13,13 +13,14 @@ bool screenDebounce = false;
 Button CalibrateButton = Button(125, 190, 230, 40, "Calibrate", "#2ec943", CalibrateInertial); // Shamrock-ish Green\\
 
 // Window Buttons
+
 Button OdometryWindowButton = Button(10, 190, 100, 40, "Odometry", "#498afc", SwitchToOdometryWindow);
 Button SystemWindowButton = Button(370, 190, 100, 40, "System", "#f09521", SwitchToSystemWindow);
 
 // Auton Buttons
 
-Button SwitchAutonLeftButton = Button(10, 60, 50, 110, "<", "#f04221", SwitchAutonLeft);
-Button SwitchAutonRightButton = Button(420, 60, 50, 110, ">", "#f04221", SwitchAutonRight);
+Button SwitchAutonLeftButton = Button(10, 60, 100, 50, "<", "#f04221", SwitchAutonLeft);
+Button SwitchAutonRightButton = Button(10, 125, 100, 50, ">", "#f04221", SwitchAutonRight);
 
 // Main Loop
 
@@ -48,14 +49,14 @@ void drawHomeScreen(void) {
     // Auton Info
 
     Brain.Screen.setFont(mono40);
-    Brain.Screen.printAt(240 - Brain.Screen.getStringWidth(auton) / 2, 120, auton);
+    Brain.Screen.printAt(240 - Brain.Screen.getStringWidth(auton) / 2 + 50, 120, auton);
 
     Brain.Screen.setFont(mono20);
     Brain.Screen.setPenWidth(2);
 
     // Show Progression
 
-    Brain.Screen.printAt(210, 150, "(%d/11)", auton_path);
+    Brain.Screen.printAt(260, 150, "(%d/11)", auton_path);
 
     // Display Buttons
 
@@ -100,11 +101,11 @@ void ShowCalibrateButton(void) {
 void ShowBatteryLevel(void) {
     int batteryLevel = Brain.Battery.capacity(percent);
 
-    if (batteryLevel > 60) {
+    if (batteryLevel >= 60) {
         Brain.Screen.setPenColor(green);
-    } else if (batteryLevel <= 60 && batteryLevel > 30) {
+    } else if (batteryLevel < 60 && batteryLevel >= 25) {
         Brain.Screen.setPenColor(yellow);
-    } else if (batteryLevel <= 30) {
+    } else if (batteryLevel < 25) {
         Brain.Screen.setPenColor(red);
     }
 
@@ -129,22 +130,22 @@ void UpdateAutonInformation(void) {
             auton = "Skills";
             break;
         case 6:
-            auton = "Blue Solo Winpoint";
+            auton = "Blue Solo WP";
             break;
         case 7:
-            auton = "Red Solo Winpoint";
+            auton = "Red Solo WP";
             break;
         case 8:
-            auton = "Eliminations Blue";
+            auton = "Elims Blue";
             break;
         case 9:
-            auton = "Eliminations Red";
+            auton = "Elims Red";
             break;
         case 10:
-            auton = "Failsafe Blue ;)";
+            auton = "Secret Blue";
             break;
         case 11:
-            auton = "Failsafe Red ;)";
+            auton = "Secret Red";
             break;
         default:
             auton = "Blue Auton";
