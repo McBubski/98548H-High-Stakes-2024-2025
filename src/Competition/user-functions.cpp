@@ -30,6 +30,9 @@ void initializeUserControl(void) {
     Controller.ButtonA.pressed(toggleColorSorter);
     Controller.ButtonUp.pressed(toggleLiftedIntake);
 
+    Controller.ButtonLeft.pressed(toggleGoalRushArm);
+    Controller.ButtonX.pressed(toggleGoalRushArmClamp);
+
     color_sort_override = true;
     
     // Macro
@@ -44,6 +47,14 @@ void autoSkillsStart(void) {
 
 void toggleGoalClamp(void) {
     goal_clamp.set(!goal_clamp.value());
+}
+
+void toggleGoalRushArm(void) {
+  goal_rush_arm.set(!goal_rush_arm.value());
+}
+
+void toggleGoalRushArmClamp(void) {
+  goal_rush_arm_clamp.set(!goal_rush_arm_clamp.value());
 }
 
 void toggleLiftedIntake(void) {

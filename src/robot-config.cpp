@@ -48,6 +48,9 @@ digital_in ring_switch = digital_in(Brain.ThreeWirePort.C);
 digital_out goal_clamp = digital_out(Brain.ThreeWirePort.A);
 digital_out lifted_intake = digital_out(Brain.ThreeWirePort.B);
 
+digital_out goal_rush_arm = digital_out(Brain.ThreeWirePort.E);
+digital_out goal_rush_arm_clamp = digital_out(Brain.ThreeWirePort.F);
+
 // Odometry
 
 // Tracking Wheel Radius, Forward Tracking Wheel Distance, Sideways Tracking Wheel Distance, Starting Heading, Starting X, Starting Y

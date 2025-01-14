@@ -45,7 +45,7 @@ void Skills_Auton(void) {
     ringIntake.stop();
     ringIntake.spinFor(reverse, 20, degrees);
 
-    moveLiftToAngle(222, true);
+    moveLiftToAngle(214, true);
 
     driveFor(-12, 100);
     ringIntake.spin(forward, 100, percent);
@@ -83,7 +83,7 @@ void Skills_Auton(void) {
     ringIntake.spin(reverse, 100, percent);
     driveTo(63, 59, 100, forward);
     driveFor(-24, 100);
-    driveTo(34, 1.5, 50, reverse);
+    driveTo(32.5, 1.5, 50, reverse);
     goal_clamp.set(true);
 
     //Get next ring
@@ -113,8 +113,8 @@ void Skills_Auton(void) {
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
     driveTo(-28, 11, 100, forward);
-    driveTo(2, 36, 100, forward);
-    driveTo(40, 40, 100, forward);
+    driveTo(2, 37, 100, forward);
+    driveTo(40, 41.5, 100, forward);
 
     // Get second wallstake
 
@@ -135,7 +135,7 @@ void Skills_Auton(void) {
     rightDrive.stop();
     ringIntake.spinFor(reverse, 20, degrees);
 
-    moveLiftToAngle(222, true);
+    moveLiftToAngle(214, true);
 
     driveFor(-16, 100);
     ringIntake.spin(forward, 100, percent);

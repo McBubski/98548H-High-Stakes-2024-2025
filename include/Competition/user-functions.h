@@ -12,6 +12,9 @@ void autoSkillsStart(void);
 void toggleColorSorter(void);
 void setRingArmTargetToAllianceStake(void);
 
+void toggleGoalRushArm(void);
+void toggleGoalRushArmClamp(void);
+
 extern bool slowIntake;
 extern bool liftRaising;
 extern bool armOverride;

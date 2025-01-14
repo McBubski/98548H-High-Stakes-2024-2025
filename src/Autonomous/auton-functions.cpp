@@ -29,7 +29,7 @@ void turnToHeading(double heading, double turnSpeed) {
     double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.43) + 450);
 
     bool notDone = true;
-    PID turnPid = PID(0.59, 0.0001, 0.71, 0.5, 5, 100, &notDone, timeout, 200);//.61, 0, 1.05
+    PID turnPid = PID(0.59, 0.0001, 0.71, 0.5, 5, 100, &notDone, timeout, 230);//.61, 0, 1.05
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -202,7 +202,7 @@ int previousColor = 0;
 
 int sortColorTask(void) {
     color_sensor.setLight(ledState::on);
-    color_sensor.setLightPower(75, percent);
+    color_sensor.setLightPower(100, percent);
 
     int detectedColor = 2;
     int colorSortColor = 2;

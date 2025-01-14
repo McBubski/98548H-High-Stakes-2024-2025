@@ -48,6 +48,9 @@ extern digital_in ring_switch;
 extern digital_out goal_clamp;
 extern digital_out lifted_intake;
 
+extern digital_out goal_rush_arm;
+extern digital_out goal_rush_arm_clamp;
+
 // Odometry
 
 extern Odometry Position_Tracking;
