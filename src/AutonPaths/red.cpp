@@ -52,14 +52,21 @@ void Goal_Fill_Left_Auton(void) {
     //driveFor(8, 100);
 }
 
-void Goal_Rush_Right_Auton(void) {
-        // Do everything really fast 
-    goal_rush_arm.set(true);
+int dumbArmTask(void) {
     ringIntake.spin(forward, 100, percent);
+    wait(100, msec);
+    goal_rush_arm.set(true);
+
+    return 1;
+}
+
+void Goal_Rush_Right_Auton(void) {
+    // Do everything really fast 
     task raiseArm = createRaiseArmTask(99);
+    task rushArm = task(dumbArmTask);
 
     // Rush and grab goal
-    driveFor(33.5, 100);
+    driveFor(30.5, 100);
     goal_rush_arm_clamp.set(true);
     driveFor(-20, 100);
 

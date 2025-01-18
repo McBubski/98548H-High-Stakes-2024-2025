@@ -1,14 +1,21 @@
 #include "AutonPaths/blue.h"
 #include "Autonomous/auton-functions.h"
 
+int dumbArmTask(void) {
+    ringIntake.spin(forward, 100, percent);
+    wait(100, msec);
+    goal_rush_arm.set(true);
+
+    return 1;
+}
+
 void Goal_Rush_Left_Auton(void) {
     // Do everything really fast 
-    goal_rush_arm.set(true);
-    ringIntake.spin(forward, 100, percent);
     task raiseArm = createRaiseArmTask(99);
+    task rushArm = task(dumbArmTask);
 
     // Rush and grab goal
-    driveFor(33.5, 100);
+    driveFor(30.5, 100);
     goal_rush_arm_clamp.set(true);
     driveFor(-20, 100);
 
