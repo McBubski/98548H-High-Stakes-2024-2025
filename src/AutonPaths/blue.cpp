@@ -2,100 +2,50 @@
 #include "Autonomous/auton-functions.h"
 
 void Goal_Rush_Left_Auton(void) {
-    auton_color = 1; // Disable color sort
-    vex::task raiseArm;
-    
-    // Get first ring on goql
+    // Do everything really fast 
+    goal_rush_arm.set(true);
+    ringIntake.spin(forward, 100, percent);
+    task raiseArm = createRaiseArmTask(99);
 
-    raiseArm = createRaiseArmTask(230);
-    driveTo(18.5, -46.5, 70, forward);
-    moveLiftToAngle(275, false);
+    // Rush and grab goal
+    driveFor(33.5, 100);
+    goal_rush_arm_clamp.set(true);
+    driveFor(-20, 100);
 
-    // Get second goal
+    // Put on goal
 
-    driveTo(28.0, -20.5, 25, reverse);
+    goal_rush_arm_clamp.set(false);
+    goal_rush_arm.set(false);
+    turnToHeading(275, 100);
+    driveFor(3, 100);
+    ringIntake.spinFor(reverse, 50, degrees);
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(950, msec);
+    ringLiftArm.stop();
+    raiseArm = createRaiseArmTask(64);
+    driveFor(-12, 100);
+
+    // Get next goal
+
+    ringIntake2.spin(reverse, 50, percent);
+    driveTo(24.5, -19.5, 55, reverse);
     goal_clamp.set(true);
 
-    // Get next ring
-
     ringIntake.spin(forward, 100, percent);
-    raiseArm = createRaiseArmTask(290);
-    driveTo(22, -60, 100, forward);
+    driveTo(64, -58, 60, forward);
+    turnToHeading(160, 100);
+    driveFor(24, 30);
 
-    // Move to next ring
-
-    driveFor(-24, 100);
-    pointAt(54, 5, 100, forward);
-    raiseArm = createRaiseArmTask(64);
+    // Clear corner
+    driveFor(-8, 100);
+    goal_rush_arm.set(true);
+    driveFor(3, 100);
+    turnToHeading(227, 100);
+    goal_rush_arm.set(false);
     goal_clamp.set(false);
-    driveTo(54, 8, 60, forward);
-    wait(400, msec);
-    ringIntake2.stop();
-    raiseArm = createRaiseArmTask(101);
-    driveTo(48, -7, 100, reverse);
-    ringIntake2.spin(forward, 100, percent);
 
-    // Alliance Stake
-
-    pointAt(70, -2.8, 100, forward);
-    driveFor(2.75, 100);
-    ringIntake.stop();
-    ringIntake2.spinFor(reverse, 100, degrees);
-    ringLiftArm.spin(reverse, 100, percent);
-    wait(850, msec);
-    ringLiftArm.stop();
-    driveFor(-23, 25);
-
-    // Put ring on goal
-
-    //driveTo(14.5, -48, 100, forward);
-    //raiseArm = createRaiseArmTask(275);
-    //ringIntake.stop();
-    //driveFor(2, 100);
-    //pointAt(29, -24, 100, reverse);
-    //ringIntake.spin(forward, 3, percent);
-//
-    //// Get second goal
-//
-    //driveFor(-30, 35);
-    //raiseArm = createRaiseArmTask(320);
-    //goal_clamp.set(true);
-//
-    //// Next ring
-//
-    //ringIntake.spin(forward, 90, percent);
-    //pointAt(59, 8.5, 100, forward);
-    //wait(250, msec);
-    //goal_clamp.set(false);
-    //raiseArm = createRaiseArmTask(200);
-    //driveTo(59, 8.5, 40, forward); // Ring Stack
-    //wait(400, msec);
-    //raiseArm = createRaiseArmTask(75);
-    //ringIntake.spin(forward, 100, percent);
-    //waitUntil(ringIntake2.torque(Nm) >= 2.3);
-    //ringIntake.spinFor(reverse, 50, degrees);
-    //ringIntake.stop();
-//
-    //// Last wallstake
-    //driveFor(-16, 100);
-    //pointAt(70, -5.2, 100, forward);
-    //driveFor(10, 100);
-    //moveLiftToAngle(250, false);   
-//
-    //driveFor(-4, 100);
-//
-    //moveLiftToAngle(45, false);
-    //turnToHeading(270, 100);
-    //ringIntake.spin(forward, 100, percent);
-    //driveFor(28, 45);
-//
-    //leftDrive.spin(forward, 5, percent);
-    //rightDrive.spin(forward, 5, percent);
-//
-    //wait(2000, msec);
-//
-    //leftDrive.stop();
-    //rightDrive.stop();
+    driveTo(24, -46, 60, reverse);
+    goal_clamp.set(true);
 }
 
 void Goal_Fill_Right_Auton(void) {

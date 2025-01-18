@@ -7,12 +7,12 @@
 
 using namespace vex;
 
-int auton_path = 9;
+int auton_path = 1;
 
 double startingPositions[11][3] = {
-    {-53, -29.3, 105}, // Goal Rush Right
+    {-48.6, -36.0, 112}, // Goal Rush Right
     {60, 21, 144.7}, // Goal Fill Right    //// NEW POSITION
-    {53, -29.3, 245}, // Goal Rush Left
+    {48.5, -58, 294}, // Goal Rush Left
     {-60, 21, 215.3}, // Goal Fill Left
     {-59.2, -14.4, 317.5}, // Skills
     {59, -13, 34.7}, // Win Point Blue
