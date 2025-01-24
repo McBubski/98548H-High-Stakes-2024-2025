@@ -71,10 +71,7 @@ void toggleIntakeSpeed(void) {
 }
 
 void setRingArmTargetToAllianceStake(void) {
-  armOverride = false;
-  if (auton_path == 5) {
-    goalArmPos = 3;
-  }
+  
 }
 
 void cycleRingArmTarget(void) {

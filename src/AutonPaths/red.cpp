@@ -1,55 +1,66 @@
 #include "AutonPaths/red.h"
 #include "Autonomous/auton-functions.h"
 
+int delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao() {
+    wait(800, msec);
+    lifted_intake.set(true);
+    return 1;
+}
+
 void Goal_Fill_Left_Auton(void) {
-// Score first ring
+    //auton_color = 0;
+    // Score first ring
 
     ringLiftArm.spin(reverse, 100, percent);
-    wait(1000, msec);
+    wait(800, msec);
     ringLiftArm.stop();
     driveFor(-6, 100);
 
     task raiseArm = createRaiseArmTask(64);
 
-    driveTo(-21, 34.5, 40, reverse);
+    driveTo(-17.5 , 36.5, 50, reverse);
     goal_clamp.set(true);
 //
     // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
-    wait(100, msec);
+    wait(25, msec);
 
     // Grab third ring
 
-    driveTo(-16.75, 50.25, 60, forward);
-    wait(100, msec);
+    driveTo(-17, 48, 80, forward);
+    wait(25, msec);
 
     // Grab to last ring 
     
-    //driveTo(16.25, 62, 60, forward);
-    turnToHeading(6, 100);
-    driveFor(16, 100);
-    wait(100, msec);
+    driveTo(-11.5, 58.5, 100, forward);
+    //turnToHeading(355, 100);
+    //driveFor(16, 100);
+    //wait(100, msec);
     driveFor(-10, 100);
 
     // Grab second ring
 
-    driveTo(-24, 55, 60, forward);
-    wait(100, msec);
+    //driveTo(24, 54, 60, forward);
+    //wait(100, msec);
 
     // Get corner ring
 
-    driveTo(-60, 60, 100, forward);
-    driveTo(-70, 70, 100, forward);
+    //driveTo(60, 64, 100, forward);
+    driveTo(-80, 84, 45, forward);
     wait(200, msec);
-//
-    //// Touch bar
-//
-    driveFor(-36, 90);
+    driveFor(-14, 100);
+
+    // Get middle ring
+
+    task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao);
+    driveTo(-54, 8, 100, forward);
+    lifted_intake.set(false);
+
+    driveFor(-6, 100);
     raiseArm = createRaiseArmTask(220);
-    driveTo(-27, 27, 100, forward);
-    //turnToHeading(135, 100);
-    //driveFor(8, 100);
+    turnToHeading(105, 100);
+    driveFor(16, 100);
 }
 
 int dumbArmTask(void) {
@@ -75,10 +86,10 @@ void Goal_Rush_Right_Auton(void) {
     goal_rush_arm_clamp.set(false);
     goal_rush_arm.set(false);
     turnToHeading(95, 100);
-    driveFor(3, 100);
-    ringIntake.spinFor(reverse, 50, degrees);
+    driveFor(4, 100);
+    ringIntake.spinFor(reverse, 17, degrees);
     ringLiftArm.spin(reverse, 100, percent);
-    wait(950, msec);
+    wait(1000, msec);
     ringLiftArm.stop();
     raiseArm = createRaiseArmTask(64);
     driveFor(-8, 100);
@@ -88,11 +99,11 @@ void Goal_Rush_Right_Auton(void) {
     ringIntake2.spin(reverse, 100, percent);
     //pointAt(-22.5, -19.5, 55, reverse);
     //driveFor(12, 100);
-    driveTo(-22.5, -19.5, 55, reverse);
+    driveTo(-18.5, -20.5, 55, reverse);
     goal_clamp.set(true);
 
     ringIntake.spin(forward, 100, percent);
-    driveTo(-62, -48, 60, forward);
+    driveTo(-64, -48, 60, forward);
     turnToHeading(200, 100);
     driveFor(40, 30);
 
@@ -128,7 +139,7 @@ void Red_Win_Point(void) {
     
     lifted_intake.set(true);
     ringIntake.spin(forward, 100, percent);
-    driveTo(-43, -6, 100, forward);
+    driveTo(-44.5, -6, 100, forward);
     lifted_intake.set(false);
     driveFor(-12, 100);
 
@@ -204,13 +215,7 @@ void Red_Win_Point(void) {
 //
     //turnToHeading(135, 100);
     //driveFor(2, 100);
-    //moveLiftToAngle(100, false);
-}
-
-int delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao() {
-    wait(800, msec);
-    lifted_intake.set(true);
-    return 1;
+    moveLiftToAngle(100, false);
 }
 
 void Red_Elims(void) {

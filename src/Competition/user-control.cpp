@@ -17,7 +17,7 @@ float armPositions[5] = {
   101,    // First ring position
   222,   // Wall stake position
   275,   // Alliance stake position
-  125     // Hang position
+  200     // Hang position
 };
 
 void usercontrol(void) {
@@ -37,19 +37,28 @@ void usercontrol(void) {
 
     // PID for arm lift
 
-    if (auton_path != 5) {
-      if (Controller.ButtonB.pressing()) {
+    if (Controller.ButtonB.pressing()) {
       armOverride = true;
       ringLiftArm.spin(reverse, 100, percent);
     } else if (Controller.ButtonY.pressing()) {
-      armOverride = true;
-      ringLiftArm.spin(forward, 100, percent);
+      if (auton_path == 5) {
+        ringIntake2.spinFor(reverse, 25, degrees, false);
+        driveFor(-7.5, 100);
+        ringLiftArm.spin(reverse, 100, percent);
+        wait(400, msec);
+        ringLiftArm.stop();
+      } else {
+        armOverride = true;
+        ringLiftArm.spin(forward, 100, percent);
+      }
     } else {
       if (armOverride) {
+        ringLiftArm.setStopping(hold);
         ringLiftArm.stop();
       }
     } 
-    }
+
+    std::cout << armOverride << std::endl;
 
     if (!armOverride) {
       float currentArmAngle = lift_arm_potentiometer.angle(degrees);
@@ -57,7 +66,13 @@ void usercontrol(void) {
       float error = goalArmAngle - currentArmAngle;
 
       if (std::abs(error) >= 1.0) {
-        ringLiftArm.spin(reverse, error * 1.6, percent);
+        if (goalArmPos == 2) {
+          ringLiftArm.spin(reverse, error * 0.7, percent);
+        } else if (goalArmPos == 0 || goalArmPos == 1) {
+          ringLiftArm.spin(reverse, error * 0.55, percent);
+        } else {
+          ringLiftArm.spin(reverse, error * 0.5, percent);
+        }
       } else {
         ringLiftArm.stop();
       }

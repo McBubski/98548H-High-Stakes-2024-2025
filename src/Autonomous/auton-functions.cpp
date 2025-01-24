@@ -171,13 +171,13 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
 
             return;
         }
-
-        //std::cout << "Torque: "<< ringLiftArm.torque(Nm) << std::endl;
+        
+        std::cout << "Torque: "<< ringLiftArm.torque(Nm) << std::endl;
 
         currentArmAngle = lift_arm_potentiometer.angle(degrees);
         error = goalArmAngle - currentArmAngle;
 
-        ringLiftArm.spin(reverse, error * 2.5, percent);
+        ringLiftArm.spin(reverse, error * 0.6, percent);
     }
 
     ringLiftArm.stop();
