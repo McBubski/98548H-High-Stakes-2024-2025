@@ -278,40 +278,64 @@ void Red_Elims(void) {
 }
 
 
-void Red_Secret(void) {
-     // Get first goal
+void Red_Sig_Point(void) {
+   // Score first ring
 
-    driveFor(-40, 40);
-    goal_clamp.set(true);
-
-    // Get next ring (with ring sort :D)
-
-    pointAt(-58, 7, 100, forward);
-    ringIntake.spin(forward, 80, percent);
-    driveTo(-58, 7, 40, forward);
-    wait(100, msec);
-
-    // Get third ring
-
-    driveFor(-10, 100);
-    driveTo(-27, -49, 100, forward);
-    wait(200, msec);
-    driveFor(-12, 100);
-  
-    // Get last ring
-
-    driveTo(-77, -83, 60, forward);
-
-    // Wiggle
-
+    ringLiftArm.spin(reverse, 100, percent);
+    wait(400, msec);
+    ringLiftArm.stop();
     driveFor(-6, 100);
-    driveFor(16, 100);
 
-    // SECRET
+    task raiseArm = createRaiseArmTask(64);
 
-    turnToHeading(110, 100);
+    driveTo(-18.5 , 33, 50, reverse);
+    goal_clamp.set(true);
+//
+    // Put on first ring
+
+    ringIntake.spin(forward, 100, percent);
+    wait(25, msec);
+
+    // Grab third ring
+
+    driveTo(-18.5, 48, 80, forward);
+    wait(25, msec);
+
+    // Grab to last ring 
+
+    driveFor(-6, 100);    
+    driveTo(-26, 52, 100, forward);
+
+    // Get ring stack
+
+    ringIntake1.spin(forward, 100, percent);
+    pointAt(-59, 10, 100, forward);
+    ringIntake2.stop();
+    lifted_intake.set(true);
+    driveFor(getDistance(Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos, -59, 10), 100);
+    
+    lifted_intake.set(false);
+
+    // Drop goal
+
+    //driveFor(-8, 100);
     goal_clamp.set(false);
+    //driveFor(6, 100);
 
-    driveTo(-12, -60, 100, forward);
-    pointAt(0, -48, 100, reverse);      
+    // Get next goal
+
+    driveTo(-26.5, -12.5, 55, reverse);
+    goal_clamp.set(true);
+    ringIntake.spin(forward, 100, percent);
+
+    // Get final ring
+
+    driveTo(-30, -37.5, 100, forward);
+
+    // Touch
+
+    task armTask = createRaiseArmTask(230);
+    driveFor(-24, 100);
+    turnToHeading(45, 100);
+    driveFor(8, 100);
 }

@@ -9,6 +9,7 @@ bool liftRaising = false;
 bool armOverride = false;
 
 int goalArmPos = 0;
+int previousGoalArmPos = 0;
 
 void initializeUserControl(void) {
     // Sets drivetrain stopping to coast
@@ -42,7 +43,6 @@ void initializeUserControl(void) {
 
 void autoSkillsStart(void) {
 
-    std::cout << "boop!" << std::endl;
 }
 
 void toggleGoalClamp(void) {
@@ -63,6 +63,7 @@ void toggleLiftedIntake(void) {
 
 void toggleElevation(void) {
   armOverride = false;
+  previousGoalArmPos = goalArmPos;
   goalArmPos = 4;
 }
 
@@ -75,6 +76,8 @@ void setRingArmTargetToAllianceStake(void) {
 }
 
 void cycleRingArmTarget(void) {
+  previousGoalArmPos = goalArmPos;
+
   if (armOverride == true) {
     armOverride = false;
     goalArmPos = 1;
@@ -97,5 +100,6 @@ void toggleColorSorter(void) {
 
 void lowerRingArm(void) {
   armOverride = false;
+  previousGoalArmPos = goalArmPos;
   goalArmPos = 0;
 }

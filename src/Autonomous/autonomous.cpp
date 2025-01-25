@@ -19,8 +19,8 @@ double startingPositions[11][3] = {
     {-59, -13, 325.3}, // Win Point Red
     {60, 21, 144.7}, // Elims Blue
     {-60, 21, 215.3}, // Elims Red
-    {59, -40, 113}, // TOP SECRET!!!!! Blue
-    {-59, -40, 247} // TOP SECRET!!!!! Red
+    {60, 21, 144.7}, // Sig Point Blue
+    {-60, 21, 215.3} // Sig Point Red
 };
 
 void autonomous(void) {
@@ -65,11 +65,11 @@ void autonomous(void) {
             break;
         case 10:
             setColorSort();
-            Blue_Secret();
+            Blue_Sig_Point();
             break;
         case 11:
             setColorSort();
-            Red_Secret();
+            Red_Sig_Point();
             break;
         default:
             setColorSort();

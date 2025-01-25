@@ -13,11 +13,11 @@ bool skillsSetupHasRun = false;
 // Change these values for arm position
 
 float armPositions[5] = {
-  64,    // Rest position
+  84,    // Rest position
   101,    // First ring position
   222,   // Wall stake position
   275,   // Alliance stake position
-  200     // Hang position
+  150     // Hang position
 };
 
 void usercontrol(void) {
@@ -58,7 +58,7 @@ void usercontrol(void) {
       }
     } 
 
-    std::cout << armOverride << std::endl;
+    std::cout << goalArmPos << ", " << previousGoalArmPos << std::endl;
 
     if (!armOverride) {
       float currentArmAngle = lift_arm_potentiometer.angle(degrees);
@@ -68,10 +68,14 @@ void usercontrol(void) {
       if (std::abs(error) >= 1.0) {
         if (goalArmPos == 2) {
           ringLiftArm.spin(reverse, error * 0.7, percent);
-        } else if (goalArmPos == 0 || goalArmPos == 1) {
-          ringLiftArm.spin(reverse, error * 0.55, percent);
+        } if (goalArmPos == 1) {
+          if (previousGoalArmPos == 2) {
+            ringLiftArm.spin(reverse, error * 0.53, percent);
+          } else if (previousGoalArmPos == 0) {
+            ringLiftArm.spin(reverse, error * 0.45, percent);
+          }
         } else {
-          ringLiftArm.spin(reverse, error * 0.5, percent);
+          ringLiftArm.spin(reverse, error * 0.55, percent);
         }
       } else {
         ringLiftArm.stop();

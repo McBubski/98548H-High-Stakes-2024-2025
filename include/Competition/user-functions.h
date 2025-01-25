@@ -20,4 +20,5 @@ extern bool liftRaising;
 extern bool armOverride;
 
 extern int goalArmPos;
+extern int previousGoalArmPos;
 extern int previousAutonColor;

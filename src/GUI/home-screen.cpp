@@ -142,10 +142,10 @@ void UpdateAutonInformation(void) {
             auton = "Elims Red";
             break;
         case 10:
-            auton = "Secret Blue";
+            auton = "Sigpoint Blue";
             break;
         case 11:
-            auton = "Secret Red";
+            auton = "Sigpoint Red";
             break;
         default:
             auton = "Blue Auton";
