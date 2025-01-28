@@ -58,25 +58,13 @@ void usercontrol(void) {
       }
     } 
 
-    std::cout << goalArmPos << ", " << previousGoalArmPos << std::endl;
-
     if (!armOverride) {
       float currentArmAngle = lift_arm_potentiometer.angle(degrees);
       float goalArmAngle = armPositions[goalArmPos];
       float error = goalArmAngle - currentArmAngle;
 
       if (std::abs(error) >= 1.0) {
-        if (goalArmPos == 2) {
-          ringLiftArm.spin(reverse, error * 0.7, percent);
-        } if (goalArmPos == 1) {
-          if (previousGoalArmPos == 2) {
-            ringLiftArm.spin(reverse, error * 0.53, percent);
-          } else if (previousGoalArmPos == 0) {
-            ringLiftArm.spin(reverse, error * 0.45, percent);
-          }
-        } else {
-          ringLiftArm.spin(reverse, error * 0.55, percent);
-        }
+        ringLiftArm.spin(reverse, error * 1.6, percent);
       } else {
         ringLiftArm.stop();
       }
