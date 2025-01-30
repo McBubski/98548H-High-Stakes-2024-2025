@@ -42,10 +42,10 @@ void usercontrol(void) {
       ringLiftArm.spin(reverse, 100, percent);
     } else if (Controller.ButtonY.pressing()) {
       if (auton_path == 5) {
+        ringLiftArm.spin(reverse, 100, percent);
         ringIntake2.spinFor(reverse, 25, degrees, false);
         driveFor(-7.5, 100);
-        ringLiftArm.spin(reverse, 100, percent);
-        wait(400, msec);
+        wait(150, msec);
         ringLiftArm.stop();
       } else {
         armOverride = true;

@@ -7,20 +7,20 @@
 
 using namespace vex;
 
-int auton_path = 4;
+int auton_path = 5;
 
 double startingPositions[11][3] = {
-    {-48.6, -36.0, 112}, // Goal Rush Right
-    {60, 21, 144.7}, // Goal Fill Right    //// NEW POSITION
-    {48.5, -58, 294}, // Goal Rush Left
-    {-60, 21, 215.3}, // Goal Fill Left
-    {-59.2, -14.4, 317.5}, // Skills
-    {59, -13, 34.7}, // Win Point Blue
-    {-59, -13, 325.3}, // Win Point Red
-    {60, 21, 144.7}, // Elims Blue
-    {-60, 21, 215.3}, // Elims Red
-    {60, 21, 144.7}, // Sig Point Blue
-    {-60, 21, 215.3} // Sig Point Red
+    {-48.6, -36.0, 112}, // Goal Rush Right (1)
+    {60, 21, 144.7}, // Goal Fill Right (2)
+    {48.5, -58, 294}, // Goal Rush Left (3)
+    {-60, 21, 215.3}, // Goal Fill Left (4)
+    {-59.2, -14.4, 317.5}, // Skills (5)
+    {59, -13, 34.7}, // Win Point Blue (6)
+    {-59, -13, 325.3}, // Win Point Red (7)
+    {60, 21, 144.7}, // Elims Blue (8)
+    {-60, 21, 215.3}, // Elims Red (9)
+    {60, 21, 144.7}, // Sig Point Blue (10)
+    {-60, 21, 215.3} // Sig Point Red (11)
 };
 
 void autonomous(void) {

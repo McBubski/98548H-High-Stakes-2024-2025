@@ -63,7 +63,7 @@ void driveFor(double distance, double speed) {
 
     int timeout = (std::abs(distance) / 12) * 260 + 450;
 
-    PID drivePID = PID(5.3, 0.001, 0.70, 0.2, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID drivePID = PID(5.3, 0.001, 0.70, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
     PID turnPID = PID(0.5875, 0.0001, 0.705, 100, 3, speed, &turning, 9999999, 100);
 
     double driveError = distance;
@@ -93,6 +93,8 @@ void driveFor(double distance, double speed) {
 
         //std::cout << "Error: " << driveError << std::endl;
     }
+
+    std::cout << "Drive Error: " << driveError << std::endl;
 
     leftDrive.stop();
     rightDrive.stop();
@@ -175,7 +177,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
         currentArmAngle = lift_arm_potentiometer.angle(degrees);
         error = goalArmAngle - currentArmAngle;
 
-        ringLiftArm.spin(reverse, error * 0.6, percent);
+        ringLiftArm.spin(reverse, error * 1.6, percent);
     }
 
     ringLiftArm.stop();
