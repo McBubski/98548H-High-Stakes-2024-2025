@@ -28,12 +28,12 @@ void Goal_Fill_Left_Auton(void) {
 
     // Grab third ring
 
-    driveTo(-17, 48, 80, forward);
+    driveTo(-17.25, 46, 90, forward);
     wait(25, msec);
 
     // Grab to last ring 
     
-    driveTo(-11.5, 58.5, 100, forward);
+    driveTo(-12, 58.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
@@ -64,7 +64,7 @@ void Goal_Fill_Left_Auton(void) {
 }
 
 int dumbArmTask(void) {
-    ringIntake.spin(forward, 100, percent);
+    //ringIntake.spin(forward, 100, percent);
     wait(100, msec);
     goal_rush_arm.set(true);
 
@@ -73,11 +73,13 @@ int dumbArmTask(void) {
 
 void Goal_Rush_Right_Auton(void) {
     // Do everything really fast 
-    task raiseArm = createRaiseArmTask(99);
+    task raiseArm = createRaiseArmTask(140);
     task rushArm = task(dumbArmTask);
+    ringIntake1.spin(forward, 100, percent);
+    ringIntake2.stop();
 
     // Rush and grab goal
-    driveFor(30.5, 100);
+    driveFor(31.5, 100);
     goal_rush_arm_clamp.set(true);
     driveFor(-20, 100);
 
@@ -85,40 +87,81 @@ void Goal_Rush_Right_Auton(void) {
 
     goal_rush_arm_clamp.set(false);
     goal_rush_arm.set(false);
-    turnToHeading(100, 100);
-    driveFor(4, 100);
-    ringIntake.spinFor(reverse, 17, degrees);
-    ringLiftArm.spin(reverse, 100, percent);
-    wait(1000, msec);
-    ringLiftArm.stop();
-    raiseArm = createRaiseArmTask(48);
-    driveFor(-8, 100);
-
-    // Get next goal
-
-    ringIntake2.spin(reverse, 100, percent);
-    //pointAt(-22.5, -19.5, 55, reverse);
-    //driveFor(12, 100);
-    driveTo(-18.5, -23.5, 55, reverse);
+    turnToHeading(270, 100);
+    driveFor(-18, 40);
     goal_clamp.set(true);
-
+    //ringIntake.spinFor(reverse, 50, degrees);
+    //ringLiftArm.spin(reverse, 100, percent);
     ringIntake.spin(forward, 100, percent);
-    driveTo(-64, -48, 60, forward);
-    turnToHeading(200, 100);
-    driveFor(44, 30);
+    //wait(950, msec);
+    //raiseArm = createRaiseArmTask(64);
+    //goal_clamp.set(false);
+    driveTo(-60, -48, 70, forward);
 
-    // Clear corner
+    driveTo(-66, -67, 30, forward);
+    ringIntake.stop();
+    ringIntake1.spin(forward, 100, percent);
+    //wait(200, msec);
+
     driveFor(-10, 100);
     goal_rush_arm.set(true);
-    driveFor(3, 100);
-    turnToHeading(315, 100);
-    turnToHeading(315, 100);
+    goal_rush_arm_clamp.set(true);
+    driveFor(2, 100);
+    turnToHeading(310, 100);
     goal_rush_arm.set(false);
-    goal_clamp.set(false);
-    driveFor(4, 100);
+    goal_rush_arm_clamp.set(false);
 
-    driveTo(-24, -46, 60, reverse);
+    turnToHeading(30, 100);
+    goal_clamp.set(false);
+
+    driveTo(-17, -24, 60, reverse);
+    goal_clamp.set(true);
+    ringIntake.spin(forward, 100, percent);
+    //ringIntake.spin(forward, 100, percent);
+
+    driveTo(-20, -60, 100, forward);
+    raiseArm = createRaiseArmTask(180);
+
+    turnToHeading(130, 100);//pointAt(0.75, -72, 90, forward);
+    driveFor(5, 60);
+    raiseArm = createRaiseArmTask(209);
+
+    //goal_rush_arm_clamp.set(false);
+    //goal_rush_arm.set(false);
+    //turnToHeading(90, 100);
+    //driveFor(4, 100);
+    //ringIntake.spinFor(reverse, 17, degrees);
+    //ringLiftArm.spin(reverse, 100, percent);
+    //wait(1000, msec);
+    //ringLiftArm.stop();
+    //raiseArm = createRaiseArmTask(48);
+    //driveFor(-8, 100);
+//
+    //// Get next goal
+//
+    //ringIntake2.spin(reverse, 100, percent);
+    ////pointAt(-22.5, -19.5, 55, reverse);
+    ////driveFor(12, 100);
+    //driveTo(-18.5, -23.5, 55, reverse);
     //goal_clamp.set(true);
+//
+    //ringIntake.spin(forward, 100, percent);
+    //driveTo(-64, -48, 60, forward);
+    //turnToHeading(200, 100);
+    //driveFor(46, 40);
+//
+    //// Clear corner
+    //driveFor(-10, 100);
+    //goal_rush_arm.set(true);
+    //driveFor(3, 100);
+    //turnToHeading(315, 100);
+    //turnToHeading(315, 100);
+    //goal_rush_arm.set(false);
+    //goal_clamp.set(false);
+    //driveFor(4, 100);
+//
+    //driveTo(-24, -46, 60, reverse);
+    ////goal_clamp.set(true);
 }
 
 void Red_Win_Point(void) {
@@ -240,12 +283,12 @@ void Red_Elims(void) {
 
     // Grab third ring
 
-    driveTo(-17.25, 46, 80, forward);
+    driveTo(-17.25, 46, 90, forward);
     wait(25, msec);
 
     // Grab to last ring 
     
-    driveTo(-10.5, 58.5, 100, forward);
+    driveTo(-11.5, 58.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
@@ -293,7 +336,7 @@ void Red_Sig_Point(void) {
 
     task raiseArm = createRaiseArmTask(64);
 
-    driveTo(-18.5 , 33, 50, reverse);
+    driveTo(-19 , 34, 50, reverse);
     goal_clamp.set(true);
 //
     // Put on first ring
@@ -303,7 +346,7 @@ void Red_Sig_Point(void) {
 
     // Grab third ring
 
-    driveTo(-18, 47.5, 80, forward);
+    driveTo(-17, 47.5, 90, forward);
     wait(25, msec);
 
     // Grab to last ring 
@@ -315,7 +358,6 @@ void Red_Sig_Point(void) {
 
     ringIntake1.spin(forward, 100, percent);
     pointAt(-56.5, 10, 100, forward);
-    ringIntake2.stop();
     lifted_intake.set(true);
     driveFor(getDistance(Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos, -59, 10), 100);
     
@@ -329,6 +371,8 @@ void Red_Sig_Point(void) {
 
     // Get next goal
 
+    pointAt(-26.5, -15, 55, reverse);
+    ringIntake2.stop();
     driveTo(-26.5, -15, 55, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
@@ -339,8 +383,8 @@ void Red_Sig_Point(void) {
 
     // Touch
 
-    task armTask = createRaiseArmTask(230);
     driveFor(-24, 100);
+    task armTask = createRaiseArmTask(230);
     turnToHeading(45, 100);
     driveFor(8, 100);
 }

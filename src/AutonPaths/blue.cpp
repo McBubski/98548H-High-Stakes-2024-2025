@@ -2,7 +2,7 @@
 #include "Autonomous/auton-functions.h"
 
 int dumbArmTask2(void) {
-    ringIntake.spin(forward, 100, percent);
+    //ringIntake.spin(forward, 100, percent);
     wait(100, msec);
     goal_rush_arm.set(true);
 
@@ -11,8 +11,10 @@ int dumbArmTask2(void) {
 
 void Goal_Rush_Left_Auton(void) {
     // Do everything really fast 
-    task raiseArm = createRaiseArmTask(98);
+    task raiseArm = createRaiseArmTask(140);
     task rushArm = task(dumbArmTask2);
+    ringIntake1.spin(forward, 100, percent);
+    ringIntake2.stop();
 
     // Rush and grab goal
     driveFor(30.5, 100);
@@ -23,35 +25,69 @@ void Goal_Rush_Left_Auton(void) {
 
     goal_rush_arm_clamp.set(false);
     goal_rush_arm.set(false);
-    turnToHeading(281, 100);
-    driveFor(3.5, 100);
-    ringIntake.spinFor(reverse, 50, degrees);
-    ringLiftArm.spin(reverse, 100, percent);
-    wait(950, msec);
-    ringLiftArm.stop();
-    raiseArm = createRaiseArmTask(64);
-    driveFor(-4, 100);
+    turnToHeading(95, 100);
+    driveFor(-18, 30);
+    goal_clamp.set(true);
+    //ringIntake.spinFor(reverse, 50, degrees);
+    //ringLiftArm.spin(reverse, 100, percent);
+    ringIntake.spin(forward, 100, percent);
+    //wait(950, msec);
+    //raiseArm = createRaiseArmTask(64);
+    //goal_clamp.set(false);
+    driveTo(60, -48, 70, forward);
+
+    driveTo(66, -64, 30, forward);
+    ringIntake.stop();
+    ringIntake1.spin(forward, 100, percent);
+    //wait(200, msec);
+
+    driveFor(-10, 100);
+    goal_rush_arm.set(true);
+    goal_rush_arm_clamp.set(true);
+    driveFor(2, 100);
+    turnToHeading(247, 100);
+    goal_rush_arm.set(false);
+    goal_rush_arm_clamp.set(false);
+
+    turnToHeading(30, 100);
+    goal_clamp.set(false);
+
+    driveTo(15, -21, 60, reverse);
+    goal_clamp.set(true);
+    ringIntake.spin(forward, 100, percent);
+    //ringIntake.spin(forward, 100, percent);
+
+    driveTo(24, -52, 100, forward);
+    raiseArm = createRaiseArmTask(180);
+
+    turnToHeading(220, 100);//pointAt(0.75, -72, 90, forward);
+    driveFor(8, 60);
+    raiseArm = createRaiseArmTask(209);
+
+    //pointAt(71, -0.5, 100, forward);
+    //ringLiftArm.spin(reverse, 100, percent);
+    //driveFor(2, 100);
 
     // Get next goal
 
-    ringIntake2.spin(reverse, 50, percent);
-    driveTo(21.5, -19.5, 55, reverse);
-    goal_clamp.set(true);
-
-    ringIntake.spin(forward, 100, percent);
-    driveTo(64, -58, 60, forward);
-    turnToHeading(160, 100);
-    driveFor(24, 30);
-
-    // Clear corner
-    driveFor(-8, 100);
-    goal_rush_arm.set(true);
-    driveFor(3, 100);
-    turnToHeading(227, 100);
-    goal_rush_arm.set(false);
-    goal_clamp.set(false);
-
-    driveTo(24, -50, 60, reverse);
+    //ringIntake2.spin(reverse, 50, percent);
+    //driveTo(21.5, -13.5, 55, reverse);
+    //goal_clamp.set(true);
+//
+    //ringIntake.spin(forward, 100, percent);
+    //driveTo(64, -58, 60, forward);
+    //turnToHeading(160, 100);
+    //driveFor(24, 30);
+//
+    //// Clear corner
+    //driveFor(-8, 100);
+    //goal_rush_arm.set(true);
+    //driveFor(3, 100);
+    //turnToHeading(227, 100);
+    //goal_rush_arm.set(false);
+    //goal_clamp.set(false);
+//
+    //driveTo(24, -50, 60, reverse);
 }
 
 
@@ -82,12 +118,12 @@ void Goal_Fill_Right_Auton(void) {
 
     // Grab third ring
 
-    driveTo(19, 48, 80, forward);
+    driveTo(17, 48, 80, forward);
     wait(25, msec);
 
     // Grab to last ring 
     
-    driveTo(13, 58.5, 100, forward);
+    driveTo(12.5, 60.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
@@ -101,7 +137,7 @@ void Goal_Fill_Right_Auton(void) {
     // Get corner ring
 
     //driveTo(60, 64, 100, forward);
-    driveTo(80, 84, 45, forward);
+    driveTo(80, 84, 50, forward);
     wait(200, msec);
     driveFor(-14, 100);
 
@@ -130,7 +166,7 @@ void Blue_Win_Point(void) {
 
     // Grab goal
 
-    driveTo(18, -26.5, 40, reverse);
+    driveTo(17, -25.5, 40, reverse);
     goal_clamp.set(true);
     
     // Get lifted ring
@@ -147,7 +183,7 @@ void Blue_Win_Point(void) {
 
     // Get corner ring
 
-    driveTo(66, -70, 50, forward);
+    driveTo(66, -70, 60, forward);
     driveFor(-4, 100);
     driveFor(8, 100);
 
@@ -175,19 +211,19 @@ void Blue_Elims(void) {
     driveTo(19, 34, 50, reverse);
     goal_clamp.set(true);
 
-    // Put on first ring
+     // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
     wait(25, msec);
 
     // Grab third ring
 
-    driveTo(19.5, 48, 80, forward);
+    driveTo(16.5, 48, 80, forward);
     wait(25, msec);
 
     // Grab to last ring 
     
-    driveTo(13.5, 58.5, 100, forward);
+    driveTo(13, 60.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
@@ -201,9 +237,9 @@ void Blue_Elims(void) {
     // Get corner ring
 
     //driveTo(60, 64, 100, forward);
-    driveTo(80, 84, 45, forward);
+    driveTo(80, 84, 50, forward);
     wait(200, msec);
-    driveFor(-12, 100);
+    driveFor(-14, 100);
 
     // Get middle ring
 
@@ -226,7 +262,7 @@ void Blue_Sig_Point(void) {
 
     task raiseArm = createRaiseArmTask(64);
 
-    driveTo(18.5 , 33, 50, reverse);
+    driveTo(18.5 , 36, 50, reverse);
     goal_clamp.set(true);
 //
     // Put on first ring
@@ -247,9 +283,9 @@ void Blue_Sig_Point(void) {
     // Get ring stack
 
     ringIntake1.spin(forward, 100, percent);
-    pointAt(56.5, 10, 100, forward);
+    pointAt(58.5, 10, 100, forward);
     lifted_intake.set(true);
-    driveFor(getDistance(Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos, 56.5, 10), 100);
+    driveFor(getDistance(Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos, 58.5, 10), 100);
 
     lifted_intake.set(false);
     //ringIntake1.spin(forward, 100, percent);
@@ -270,12 +306,12 @@ void Blue_Sig_Point(void) {
 
     // Get final ring
 
-    driveTo(36, -37.5, 100, forward);
+    driveTo(34, -37.5, 100, forward);
 
     // Touch
 
     driveFor(-24, 100);
-    task armTask = createRaiseArmTask(230);
+    task armTask = createRaiseArmTask(240);
     turnToHeading(315, 100);
-    driveFor(11, 100);
+    driveFor(7, 100);
 }

@@ -15,7 +15,7 @@ motor_group leftDrive = motor_group(motorTL, motorML, motorBL);
 
 // Right Drive
 
-motor motorTR = motor(PORT6, ratio6_1, true);
+motor motorTR = motor(PORT8, ratio6_1, true);
 motor motorMR = motor(PORT4, ratio6_1, false);
 motor motorBR = motor(PORT5, ratio6_1, false);
 
