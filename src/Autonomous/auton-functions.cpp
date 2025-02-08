@@ -94,7 +94,7 @@ void driveFor(double distance, double speed) {
         //std::cout << "Error: " << driveError << std::endl;
     }
 
-    std::cout << "Drive Error: " << driveError << std::endl;
+    //std::cout << "Drive Error: " << driveError << std::endl;
 
     leftDrive.stop();
     rightDrive.stop();

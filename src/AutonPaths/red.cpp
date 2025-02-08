@@ -1,5 +1,6 @@
 #include "AutonPaths/red.h"
 #include "Autonomous/auton-functions.h"
+#include "Competition/user-functions.h"
 
 int delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao() {
     wait(800, msec);
@@ -73,7 +74,7 @@ int dumbArmTask(void) {
 
 void Goal_Rush_Right_Auton(void) {
     // Do everything really fast 
-    task raiseArm = createRaiseArmTask(140);
+    task raiseArm = createRaiseArmTask(84);
     task rushArm = task(dumbArmTask);
     ringIntake1.spin(forward, 100, percent);
     ringIntake2.stop();
@@ -90,41 +91,41 @@ void Goal_Rush_Right_Auton(void) {
     turnToHeading(270, 100);
     driveFor(-18, 40);
     goal_clamp.set(true);
+    goal_rush_arm.set(true);
+    ringIntake.spin(forward, 100, percent);
+    wait(400, msec);
+    ringIntake.stop();
     //ringIntake.spinFor(reverse, 50, degrees);
     //ringLiftArm.spin(reverse, 100, percent);
-    ringIntake.spin(forward, 100, percent);
-    //wait(950, msec);
     //raiseArm = createRaiseArmTask(64);
     //goal_clamp.set(false);
-    driveTo(-60, -48, 70, forward);
+    //driveTo(-60, -48, 70, forward);
+    //ringIntake.spin(forward, 100, percent);
 
-    driveTo(-66, -67, 30, forward);
-    ringIntake.stop();
-    ringIntake1.spin(forward, 100, percent);
-    //wait(200, msec);
+    driveTo(-52, -63, 80, forward);
+    turnToHeading(310, 30);
 
-    driveFor(-10, 100);
-    goal_rush_arm.set(true);
-    goal_rush_arm_clamp.set(true);
-    driveFor(2, 100);
-    turnToHeading(310, 100);
+    turnToHeading(0, 100);
     goal_rush_arm.set(false);
-    goal_rush_arm_clamp.set(false);
-
-    turnToHeading(30, 100);
     goal_clamp.set(false);
+    driveFor(4, 100);
+    turnToHeading(285, 100);
+    driveFor(-14, 100);
 
-    driveTo(-17, -24, 60, reverse);
+    driveTo(-18, -27, 45, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
     //ringIntake.spin(forward, 100, percent);
 
-    driveTo(-20, -60, 100, forward);
-    raiseArm = createRaiseArmTask(180);
-
-    turnToHeading(130, 100);//pointAt(0.75, -72, 90, forward);
-    driveFor(5, 60);
-    raiseArm = createRaiseArmTask(209);
+    driveTo(-22, -54, 100, forward);
+    //raiseArm = createRaiseArmTask(180);
+//
+    //turnToHeading(131, 100);//pointAt(0.75, -72, 90, forward);
+    //driveFor(6, 60);
+    //goalArmPos = 2;
+    //ringLiftArm.spin(reverse, 20, percent);
+    //wait(650, msec);
+    //ringLiftArm.stop();
 
     //goal_rush_arm_clamp.set(false);
     //goal_rush_arm.set(false);
