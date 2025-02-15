@@ -144,7 +144,7 @@ void Goal_Fill_Right_Auton(void) {
     // Get middle ring
 
     task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonLmao);
-    driveTo(56.5, 8, 80, forward);
+    driveTo(58, 8, 80, forward);
     lifted_intake.set(false);
 
     driveFor(-6, 100);
@@ -208,26 +208,27 @@ void Blue_Elims(void) {
 
     task raiseArm = createRaiseArmTask(64);
 
-    driveTo(19, 34, 50, reverse);
+    driveTo(20.5, 36.5, 50, reverse);
     goal_clamp.set(true);
-
-     // Put on first ring
+//
+    // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
     wait(25, msec);
 
     // Grab third ring
 
-    driveTo(16.5, 48, 80, forward);
+    driveTo(19.5, 48, 80, forward);
     wait(25, msec);
 
     // Grab to last ring 
     
-    driveTo(13, 60.5, 100, forward);
+    driveTo(13.75, 60.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
     driveFor(-10, 100);
+    raiseArm = createRaiseArmTask(245);
 
     // Grab second ring
 
@@ -245,9 +246,14 @@ void Blue_Elims(void) {
 
     task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonLmao);
     driveTo(59, 8, 100, forward);
+    raiseArm = createRaiseArmTask(64);
     lifted_intake.set(false);
 
     driveFor(-6, 100);
+    ringIntake1.stop();
+    pointAt(75, -50, 100, reverse);
+    goal_clamp.set(false);
+    driveTo(75, -50, 100, reverse);
     //driveTo(24, -48, 100, forward); 
     //driveFor(-6, 100);
 }

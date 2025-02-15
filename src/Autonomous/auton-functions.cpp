@@ -140,12 +140,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     float startTime = Brain.Timer.system();
     float timeSinceStart = Brain.Timer.system() - startTime;
 
-    if (pushing) {
-        leftDrive.spin(forward, 6, percent);
-        rightDrive.spin(forward, 6, percent);
-    }
-
-    while (std::abs(error) >= 1.0) {
+    while (std::abs(error) >= 1.5) {
         if (ringLiftArm.torque(Nm) >= 0.8) {
             break;
         }
@@ -222,14 +217,16 @@ int sortColorTask(void) {
             colorSortColor = previousColor;
         }
 
-        if (previousSwitchState == 0 && ring_switch.value() == 1) {
+        if (previousSwitchState == 1 && ring_switch.value() == 0) {
             if (colorSortColor != auton_color) {
                 if (color_sort_override == false) {
-                    //Controller.rumble("-");
+                    wait(80, msec);
+                    
+                    Controller.rumble("-");
                     intake_interrupt = true;
                     ringIntake2.stop();
 
-                    wait(70, msec);
+                    wait(150, msec);
 
                     ringIntake2.spin(forward, 100, percent);
                     intake_interrupt = false;

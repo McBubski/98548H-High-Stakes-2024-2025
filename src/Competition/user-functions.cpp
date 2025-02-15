@@ -18,7 +18,7 @@ void initializeUserControl(void) {
 
     // Sets lift stopping to hold
     ringLift.setStopping(hold);
-    ringLiftArm.setStopping(hold);
+    ringLiftArm.setStopping(coast);
 
     // Sets intake stopping to brake
     ringIntake.setStopping(brake);
@@ -89,7 +89,7 @@ void cycleRingArmTarget(void) {
   ringLiftArm.setStopping(hold);
   goalArmPos++;
 
-  if (goalArmPos > 2) {
+  if (goalArmPos > 3) {
     goalArmPos = 1;
   }
 }

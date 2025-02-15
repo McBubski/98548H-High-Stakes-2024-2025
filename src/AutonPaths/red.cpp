@@ -34,7 +34,7 @@ void Goal_Fill_Left_Auton(void) {
 
     // Grab to last ring 
     
-    driveTo(-12, 58.5, 100, forward);
+    driveTo(-10.5, 58.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
@@ -48,14 +48,14 @@ void Goal_Fill_Left_Auton(void) {
     // Get corner ring
 
     //driveTo(60, 64, 100, forward);
-    driveTo(-80, 84, 45, forward);
+    driveTo(-80, 88, 45, forward);
     wait(200, msec);
-    driveFor(-14, 100);
+    driveFor(-16, 100);
 
     // Get middle ring
 
     task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao);
-    driveTo(-54, 8, 100, forward);
+    driveTo(-58.5, 6, 100, forward);
     lifted_intake.set(false);
 
     driveFor(-6, 100);
@@ -274,7 +274,7 @@ void Red_Elims(void) {
 
     task raiseArm = createRaiseArmTask(64);
 
-    driveTo(-19 , 34, 50, reverse);
+    driveTo(-19.5 , 36.5, 50, reverse);
     goal_clamp.set(true);
 //
     // Put on first ring
@@ -284,7 +284,7 @@ void Red_Elims(void) {
 
     // Grab third ring
 
-    driveTo(-17.25, 46, 90, forward);
+    driveTo(-17.75, 46, 90, forward);
     wait(25, msec);
 
     // Grab to last ring 
@@ -294,31 +294,24 @@ void Red_Elims(void) {
     //driveFor(16, 100);
     //wait(100, msec);
     driveFor(-10, 100);
+    raiseArm = createRaiseArmTask(245);
 
     // Grab second ring
 
-    //driveTo(24, 54, 60, forward);
-    //wait(100, msec);
-
-    // Get corner ring
-
-    //driveTo(60, 64, 100, forward);
-    driveTo(-84, 87, 45, forward);
+    driveTo(-78, 88, 45, forward);
     wait(200, msec);
-    driveFor(-12, 60);
-    //lifted_intake.set(true);
-    //driveFor(12, 100);
-    //lifted_intake.set(false);
-    //driveFor(-12, 100);
+    driveFor(-16, 100);
 
     // Get middle ring
 
     task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao);
-    driveTo(-57.5, 8, 100, forward);
+    driveTo(-59.5, 6, 100, forward);
+    raiseArm = createRaiseArmTask(64);
     lifted_intake.set(false);
 
     driveFor(-6, 100);
-    //driveTo(-24, -48, 100, forward); 
+    driveTo(-75, -30, 100, reverse);
+    //driveTo(-24,-48, 100, forward); 
     //driveFor(-4, 100);
     //raiseArm = createRaiseArmTask(200);
     //turnToHeading(95, 100);

@@ -7,9 +7,9 @@
 
 using namespace vex;
 
-int auton_path = 1;
+int auton_path = 12;
 
-double startingPositions[11][3] = {
+double startingPositions[12][3] = {
     {-48.6, -36.0, 112}, // Goal Rush Right (1)
     {60, 21, 144.7}, // Goal Fill Right (2)
     {48.5, -58, 294}, // Goal Rush Left (3)
@@ -20,7 +20,8 @@ double startingPositions[11][3] = {
     {60, 21, 144.7}, // Elims Blue (8)
     {-60, 21, 215.3}, // Elims Red (9)
     {60, 21, 144.7}, // Sig Point Blue (10)
-    {-60, 21, 215.3} // Sig Point Red (11)
+    {-60, 21, 215.3}, // Sig Point Red (11)
+    {-60.5, -6, 287.6} // New Skills (12)
 };
 
 void autonomous(void) {
@@ -71,6 +72,10 @@ void autonomous(void) {
             setColorSort();
             Red_Sig_Point();
             break;
+        case 12:
+            setColorSort();
+            New_Skills_Auton();
+            break;
         default:
             setColorSort();
             Blue_Win_Point();
@@ -80,7 +85,7 @@ void autonomous(void) {
     float totalTime = (endTime - startTime) / 1000000.0000;
     float timeLeft;
 
-    if (auton_path == 5) { // Skills
+    if (auton_path == 5 || auton_path == 12) { // Skills
         timeLeft = 60.0 - totalTime;
     } else {
         timeLeft = 15.0 - totalTime;
@@ -124,6 +129,9 @@ void setColorSort() {
         case 11:
             auton_color = 0;
             break;
+        case 12:
+            auton_color = 0;
+            break;
         default:
             auton_color = 1;
     }
@@ -133,8 +141,8 @@ void changeAuton(int direction) {
     auton_path += direction;
 
     if (auton_path < 1) {
-        auton_path = 11;
-    } else if (auton_path > 11) {
+        auton_path = 12;
+    } else if (auton_path > 12) {
         auton_path = 1;
     }
 

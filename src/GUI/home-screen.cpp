@@ -56,7 +56,7 @@ void drawHomeScreen(void) {
 
     // Show Progression
 
-    Brain.Screen.printAt(260, 150, "(%d/11)", auton_path);
+    Brain.Screen.printAt(260, 150, "(%d/12)", auton_path);
 
     // Display Buttons
 
@@ -146,6 +146,9 @@ void UpdateAutonInformation(void) {
             break;
         case 11:
             auton = "Sigpoint Red";
+            break;
+        case 12:
+            auton = "New Skills";
             break;
         default:
             auton = "Blue Auton";

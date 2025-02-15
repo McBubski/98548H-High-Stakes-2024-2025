@@ -12,9 +12,10 @@ bool skillsSetupHasRun = false;
 
 // Change these values for arm position
 
-float armPositions[5] = {
-  84,    // Rest position
-  101,    // First ring position
+float armPositions[6] = {
+  85.5,    // Rest position
+  100,    // First ring position
+  125,    // Temp arm fix
   222,   // Wall stake position
   275,   // Alliance stake position
   150     // Hang position
@@ -63,11 +64,13 @@ void usercontrol(void) {
       float goalArmAngle = armPositions[goalArmPos];
       float error = goalArmAngle - currentArmAngle;
 
-      if (std::abs(error) >= 1.0) {
-        ringLiftArm.spin(reverse, error * 1.6, percent);
-      } else {
-        ringLiftArm.stop();
-      }
+      //std::cout << error << ", " << currentArmAngle << ", " << goalArmAngle << std::endl;
+      std::cout << lift_arm_potentiometer.angle(turns) << std::endl;
+      //if (std::abs(error) >= 0.5) {
+        ringLiftArm.spin(reverse, error * 1.8, percent);
+      //} else {
+        //ringLiftArm.stop();
+      //}
     }
 
     // Sets intakeSpeed to however fast it should be
