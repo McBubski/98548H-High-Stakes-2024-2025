@@ -29,7 +29,7 @@ void turnToHeading(double heading, double turnSpeed) {
     double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.43) + 450);
 
     bool notDone = true;
-    PID turnPid = PID(0.59, 0.0001, 0.71, 0.5, 5, 100, &notDone, timeout, 230);//.61, 0, 1.05
+    PID turnPid = PID(0.59, 0.0001, 0.71, 0.5, 5, 100, &notDone, timeout, 180);//.61, 0, 1.05
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -172,7 +172,7 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
         currentArmAngle = lift_arm_potentiometer.angle(degrees);
         error = goalArmAngle - currentArmAngle;
 
-        ringLiftArm.spin(reverse, error * 1.6, percent);
+        ringLiftArm.spin(forward, error * 2.1, percent);
     }
 
     ringLiftArm.stop();

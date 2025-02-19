@@ -80,7 +80,7 @@ void cycleRingArmTarget(void) {
 
   if (armOverride == true) {
     armOverride = false;
-    goalArmPos = 1;
+    goalArmPos = 2;
     return;
   }
 
