@@ -110,8 +110,9 @@ void Goal_Rush_Right_Auton(void) {
 
     goal_rush_arm_clamp.set(false);
     goal_rush_arm.set(false);
-    turnToHeading(270, 100);
-    driveFor(-18, 40);
+    turnToHeading(273, 100);
+    turnToHeading(273, 100);
+    driveFor(-19.5, 40);
     goal_clamp.set(true);
     goal_rush_arm.set(true);
     ringIntake.spin(forward, 100, percent);
@@ -124,7 +125,7 @@ void Goal_Rush_Right_Auton(void) {
     //driveTo(-60, -48, 70, forward);
     //ringIntake.spin(forward, 100, percent);
 
-    driveTo(-52, -63, 80, forward);
+    driveTo(-55, -58, 50, forward);
     turnToHeading(310, 30);
 
     turnToHeading(0, 100);
@@ -134,12 +135,12 @@ void Goal_Rush_Right_Auton(void) {
     turnToHeading(285, 100);
     driveFor(-14, 100);
 
-    driveTo(-18, -27, 45, reverse);
+    driveTo(-19.5, -26, 45, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
     //ringIntake.spin(forward, 100, percent);
 
-    driveTo(-22, -54, 100, forward);
+    driveTo(-26, -54, 100, forward);
     //raiseArm = createRaiseArmTask(180);
 //
     //turnToHeading(131, 100);//pointAt(0.75, -72, 90, forward);
@@ -404,4 +405,79 @@ void Red_Sig_Point(void) {
     task armTask = createRaiseArmTask(100);
     turnToHeading(45, 100);
     driveFor(8, 100);
+}
+
+void Positive_Elims_Red(void) {
+    auton_color = 2;
+    ringIntake1.spin(forward, 100, percent);
+    ringIntake2.stop();
+
+    task raiseArm = createRaiseArmTask(209);
+
+    // Grab first ring
+
+    driveFor(28, 100);
+
+    // Grab goal
+
+    driveTo(-23, -14.5, 40, reverse);
+    goal_clamp.set(true);
+
+    ringIntake.spin(forward, 100, percent);
+    wait(200, msec);
+
+    // Put arm down on ring across
+
+    pointAt(-8.5, -10, 100, forward);
+    ringIntake2.stop();
+    driveTo(-8.5, -10, 80, forward);
+    turnToHeading(inertial_sensor.heading(degrees) + 4, 100);
+
+    goal_rush_arm_clamp.set(true);
+    goal_rush_arm.set(true);
+
+    wait(300, msec);
+
+    goal_rush_arm_clamp.set(false);
+
+    // Pull ring across
+
+    driveFor(-24, 100);
+    auton_color = 0;
+
+    // Point At Ring Stack
+
+    turnToHeading(305, 100);
+    goal_rush_arm.set(false);
+
+    // Drive to ring stack
+
+    ringIntake.spin(forward, 100, percent);
+    driveTo(-39, -10, 100, forward);
+
+    // Get lifted ring
+
+    lifted_intake.set(true);
+    driveFor(12, 80);
+    lifted_intake.set(false);
+
+    // Reverse
+
+    driveFor(-7, 100);
+    raiseArm = createRaiseArmTask(75);
+
+    // Get corner
+
+    driveTo(-73, -50.5, 90, forward);
+    //driveFor(12, 40);
+    driveFor(-16, 100);
+
+    // Put in corner
+
+    goal_rush_arm.set(true);
+    wait(150, msec);
+    driveFor(12, 100);
+    turnToHeading(inertial_sensor.heading(degrees) + 115, 100);
+    raiseArm = createRaiseArmTask(209);
+    driveFor(12, 100);
 }

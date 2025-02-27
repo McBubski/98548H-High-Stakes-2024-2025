@@ -8,6 +8,8 @@ void turnToHeading(double heading, double turnSpeed);
 void pointAt(double x, double y, double turnSpeed, vex::directionType dir);
 void driveFor(double distance, double speed);
 void driveTo(double x, double y, double speed, vex::directionType dir);
+void driveCurve(double distance, double speed, double curve);
+void curveToPoint(double x, double y, double speed, vex::directionType dir);
 
 double getDistance(double x1, double y1, double x2, double y2);
 double wrapAngleDeg(double angle);

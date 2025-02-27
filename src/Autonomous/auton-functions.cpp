@@ -100,6 +100,91 @@ void driveFor(double distance, double speed) {
     rightDrive.stop();
 }
 
+void driveCurve(double distance, double speed, double curve) {
+    //std::cout << "-------------------" << std::endl;
+    double targetHeading = inertial_sensor.heading();
+    double encoderStart = forwardTrackingWheel.position(turns);
+
+
+    bool driving = true;
+    bool turning = true;
+
+    int timeout = (std::abs(distance) / 12) * 260 + 450;
+
+    PID drivePID = PID(5.3, 0.001, 0.70, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID turnPID = PID(0.5875, 0.0001, 0.705, 100, 3, speed, &turning, 9999999, 100);
+
+    double driveError = distance;
+    double turnError = wrapAngleDeg(targetHeading - inertial_sensor.heading());
+
+    double previousTime = Brain.Timer.system();
+
+    double cumulativeCurve = 0;
+
+    while (driving) {
+        double encoderChange = forwardTrackingWheel.position(turns) - encoderStart;
+        double inchesMoved = encoderChange * 1.75 * M_PI; // Circumference of Wheels
+
+        driveError = distance - inchesMoved;
+
+        turnError = wrapAngleDeg((targetHeading + cumulativeCurve) - inertial_sensor.heading());
+        cumulativeCurve += curve;
+
+        double dt = (Brain.Timer.system() - previousTime);
+
+        double driveOutput = drivePID.Update(driveError, dt);
+        double turnOutput = turnPID.Update(turnError, dt);
+
+        leftDrive.spin(forward, (driveOutput + turnOutput), percent);
+        rightDrive.spin(forward, (driveOutput - turnOutput), percent);
+
+        previousTime = Brain.Timer.system();
+
+        wait(10, msec);
+
+        //std::cout << "Error: " << driveError << std::endl;
+    }
+
+    //std::cout << "Drive Error: " << driveError << std::endl;
+
+    leftDrive.stop();
+    rightDrive.stop();
+}
+
+void curveToPoint(double x, double y, double speed, vex::directionType dir) {
+
+
+    //std::cout << "-------------------" << std::endl;
+    //double targetHeading = inertial_sensor.heading();
+    //double encoderStart = forwardTrackingWheel.position(turns);
+//
+    //bool driving = true;
+    //bool turning = true;
+//
+    //int timeout = (std::abs(36) / 12) * 260 + 450 + 2000;
+//
+    //PID drivePID = PID(5.3, 0.001, 0.70, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    //PID turnPID = PID(0.5875, 0.0001, 0.705, 100, 3, speed, &turning, timeout, 100);
+//
+    //double previousTime = Brain.Timer.system();
+//
+    //double num = pow((x - Position_Tracking.GlobalXPos), 2) + pow((y - Position_Tracking.GlobalYPos), 2);
+    //double denom = 2 * (cos(inertial_sensor.heading() * M_PI / 180.0) * (y - Position_Tracking.GlobalYPos) - sin(inertial_sensor.heading() * M_PI / 180.0) * (x - Position_Tracking.GlobalXPos));
+//
+    //double R = num / denom;
+    //double absR = std::abs(R);
+//
+    //double xc = Position_Tracking.GlobalXPos + R * sin(inertial_sensor.heading() * M_PI / 180.0);
+    //double yc = Position_Tracking.GlobalYPos - R * cos(inertial_sensor.heading() * M_PI / 180.0);
+//
+    //double d = sqrt(pow((Position_Tracking.GlobalXPos - xc), 2)) + sqrt(pow((Position_Tracking.GlobalYPos - yc), 2));
+//
+    //double turnError = d - absR;
+    //double driveError = sqrt(pow((x - Position_Tracking.GlobalXPos), 2)) + sqrt(pow((y - Position_Tracking.GlobalYPos), 2));
+
+    // NOT DONE
+}
+
 void pointAt(double x, double y, double turnSpeed, vex::directionType dir) {
     float targetOrientation = atan2(x - Position_Tracking.GlobalXPos, y - Position_Tracking.GlobalYPos);
 
@@ -218,7 +303,7 @@ int sortColorTask(void) {
         }
 
         if (previousSwitchState == 1 && ring_switch.value() == 0) {
-            if (colorSortColor != auton_color) {
+            if (colorSortColor != auton_color && auton_color != 2) {
                 if (color_sort_override == false) {
                     wait(80, msec);
                     

@@ -7,9 +7,9 @@
 
 using namespace vex;
 
-int auton_path = 12;
+int auton_path = 13;
 
-double startingPositions[12][3] = {
+double startingPositions[14][3] = {
     {-48.6, -36.0, 112}, // Goal Rush Right (1)
     {60, 21, 144.7}, // Goal Fill Right (2)
     {48.5, -58, 294}, // Goal Rush Left (3)
@@ -21,7 +21,9 @@ double startingPositions[12][3] = {
     {-60, 21, 215.3}, // Elims Red (9)
     {60, 21, 144.7}, // Sig Point Blue (10)
     {-60, 21, 215.3}, // Sig Point Red (11)
-    {-60.5, -6, 287.6} // New Skills (12)
+    {-60.5, -6, 287.6}, // New Skills (12)
+    {-48.6, -36.0, 112}, // Positive Elims Red
+    {48.5, -58, 294} //  Positive Elims Blue
 };
 
 void autonomous(void) {
@@ -76,9 +78,18 @@ void autonomous(void) {
             setColorSort();
             New_Skills_Auton();
             break;
+        case 13:
+            setColorSort();
+            Positive_Elims_Red();
+            break;
+        case 14:
+            setColorSort();
+            Positive_Elims_Blue();
+            break;
         default:
             setColorSort();
             Blue_Win_Point();
+            break;
     }
 
     float endTime = Brain.Timer.systemHighResolution();
@@ -132,6 +143,12 @@ void setColorSort() {
         case 12:
             auton_color = 0;
             break;
+        case 13:
+            auton_color = 0;
+            break;
+        case 14:
+            auton_color = 1;
+            break;
         default:
             auton_color = 1;
     }
@@ -141,8 +158,8 @@ void changeAuton(int direction) {
     auton_path += direction;
 
     if (auton_path < 1) {
-        auton_path = 12;
-    } else if (auton_path > 12) {
+        auton_path = 14;
+    } else if (auton_path > 14) {
         auton_path = 1;
     }
 
