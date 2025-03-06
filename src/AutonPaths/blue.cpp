@@ -358,7 +358,7 @@ void Positive_Elims_Blue(void) {
 
     // Grab goal
 
-    driveTo(25, -24, 40, reverse);
+    driveTo(26, -24, 40, reverse);
     goal_clamp.set(true);
 
     ringIntake.spin(forward, 100, percent);
@@ -366,9 +366,9 @@ void Positive_Elims_Blue(void) {
 
     // Put arm down on ring across
 
-    pointAt(13, -9, 100, forward);
+    pointAt(11, -9, 100, forward);
     ringIntake.stop();
-    driveTo(13, -9, 80, forward);
+    driveTo(11, -9, 60, forward);
 
     goal_rush_arm_clamp.set(true);
     goal_rush_arm.set(true);
@@ -384,39 +384,49 @@ void Positive_Elims_Blue(void) {
 
     // Point At Ring Stack
 
-    turnToHeading(55, 100);
+    turnToHeading(52, 100);
     goal_rush_arm.set(false);
 
     // Drive to ring stack
 
     ringIntake.spin(forward, 100, percent);
-    driveTo(41, -12, 100, forward);
+    lifted_intake.set(true);
+    driveTo(50, -1, 100, forward);
 
     // Get lifted ring
 
-    lifted_intake.set(true);
-    driveFor(12, 80);
+    //driveFor(12, 80);
     lifted_intake.set(false);
+    //wait(200, msec);
 
     // Reverse
 
-    driveFor(-7, 100);
-    raiseArm = createRaiseArmTask(75);
+    driveTo(44, -49, 100, reverse);
+    ringIntake2.spinFor(reverse, 40, degrees);
+    ringIntake.spin(forward, 100, percent);
+    //raiseArm = createRaiseArmTask(75);
 
     // Get corner
 
-    driveTo(73, -50.5, 90, forward);
-    //driveFor(12, 40);
-    driveFor(-16, 100);
+    driveTo(75, -60.5, 60, forward);
+    ringIntake2.spin(forward, 50, percent);
+    moveLiftToAngle(186, false);
+    driveFor(-8, 100);
+
+    // Get second corner ring
+    raiseArm = createRaiseArmTask(209);
+    driveFor(-8, 100);
+    ringIntake2.spin(forward, 100, percent);
 
     // Put in corner
 
     goal_rush_arm.set(true);
     wait(150, msec);
     driveFor(12, 100);
-    turnToHeading(inertial_sensor.heading(degrees) + 115, 100);
+    turnToHeading(inertial_sensor.heading(degrees) + 165, 100);
+    goal_rush_arm.set(false);
     raiseArm = createRaiseArmTask(209);
-    driveFor(12, 100);
+    //driveFor(12, 100);
 
     //driveCurve(30, 30, 0.65);
 }
