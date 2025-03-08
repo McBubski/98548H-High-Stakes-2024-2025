@@ -14,7 +14,7 @@ bool skillsSetupHasRun = false;
 
 float armPositions[6] = {
   209,//87.5,    // Rest position
-  196,    // First ring position
+  198,    // First ring position
   168,    // Mid Position
   110,   // Wall stake position
   60,   // Alliance stake position

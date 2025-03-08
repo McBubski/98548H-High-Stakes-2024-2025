@@ -162,7 +162,7 @@ void Skills_Auton(void) {
 
 int skillsRaiseArmTask() {
     wait(800, msec);
-    task arm = createRaiseArmTask(196);
+    task arm = createRaiseArmTask(198);
     return 1;
 }
 
@@ -190,12 +190,13 @@ void New_Skills_Auton(void) {
     ringIntake.spin(forward, 90, percent);
 
     // Line up to wall stake
-    driveTo(-2, -40, 100, reverse);
+    driveTo(-3, -40, 100, reverse);
     ringIntake.spin(forward, 100, percent);
 
     // Score wallstake
-    turnToHeading(171, 100);
+    turnToHeading(172, 100);
     raiseArm = createRaiseArmTask(165);
+    wait(200, msec);
     ringIntake.spinFor(reverse, 30, degrees);
     driveFor(30, 50);
 
@@ -212,7 +213,7 @@ void New_Skills_Auton(void) {
     driveFor(-14, 100);
     ringLiftArm.stop();
     raiseArm = createRaiseArmTask(168);
-    driveTo(-48.5, -57.5, 60, forward);
+    driveTo(-49.5, -61.5, 60, forward);
     wait(100, msec);
 
     //turnToHeading(280, 100);
@@ -237,6 +238,7 @@ void New_Skills_Auton(void) {
 
     // Grab second goal
 
+    turnToHeading(120, 100);
     pointAt(62, -7, 100, reverse);
     driveTo(62, -7, 35, reverse);
     //ringIntake.stop();
@@ -244,6 +246,8 @@ void New_Skills_Auton(void) {
     goal_clamp.set(true);
 
     // Put goal in corner
+
+    // 180 degree fix
 
     turnToHeading(330, 100);
     turnToHeading(330, 100);
@@ -253,15 +257,15 @@ void New_Skills_Auton(void) {
 
     // Grab third goal
 
-    pointAt(37.5, 17, 100, reverse);
-    driveTo(37.5, 17, 35, reverse);
+    pointAt(36, 16.5, 100, reverse);
+    driveTo(36, 16.5, 35, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
     // Line up with alliance stake
 
     raiseArm = createRaiseArmTask(196);
-    turnToHeading(90.5, 100);
+    turnToHeading(89.5, 100);
     driveFor(24, 50);
 
     // Alliance Stake Macro
@@ -299,7 +303,7 @@ void New_Skills_Auton(void) {
     driveFor(-12, 100);
     turnToHeading(115, 100);
     driveFor(-18, 100);
-    raiseArm = createRaiseArmTask(196);
+    raiseArm = createRaiseArmTask(198);
     ringIntake.spinFor(reverse, 25, degrees);
     goal_clamp.set(false);
 
@@ -310,7 +314,7 @@ void New_Skills_Auton(void) {
 
     // Get last goal
 
-    driveTo(-52.5, 19, 55, reverse);
+    driveTo(-50.0, 19, 55, reverse);
     goal_clamp.set(true);
 
     // Drive to wallstake
@@ -322,6 +326,7 @@ void New_Skills_Auton(void) {
 
     turnToHeading(359, 100);
     raiseArm = createRaiseArmTask(168);
+    wait(200, msec);
     ringIntake.spinFor(reverse, 30, degrees);
     driveFor(24, 60);
 
@@ -345,7 +350,8 @@ void New_Skills_Auton(void) {
 //
     //driveTo(38, 47, 100, forward);
 
-    driveTo(52, 64.5, 60, forward);
+    //turnToHeading(90, 100);
+    driveTo(52, 62.0, 60, forward);
     driveFor(-12, 100);
     driveTo(36, 62, 70, forward);
 //
@@ -360,6 +366,6 @@ void New_Skills_Auton(void) {
     driveFor(16, 100);
 //
     raiseArm = createRaiseArmTask(166);
-    //pointAt(0, 0, 100, reverse);
+    pointAt(6, 8, 100, reverse);
     driveTo(6, 8, 80, reverse);
 }
