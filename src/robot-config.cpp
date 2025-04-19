@@ -38,7 +38,7 @@ inertial inertial_sensor = inertial(PORT9);
 rotation sidewaysTrackingWheel = rotation(PORT13, false);
 rotation forwardTrackingWheel = rotation(PORT11, true);
 
-optical color_sensor = optical(PORT15);
+optical color_sensor = optical(PORT19);
 distance distance_sensor = distance(PORT12);
 
 digital_in ring_switch = digital_in(Brain.ThreeWirePort.C);
