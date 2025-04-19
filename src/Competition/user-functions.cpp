@@ -17,7 +17,6 @@ void initializeUserControl(void) {
     rightDrive.setStopping(coast);
 
     // Sets lift stopping to hold
-    ringLift.setStopping(hold);
     ringLiftArm.setStopping(coast);
 
     // Sets intake stopping to brake

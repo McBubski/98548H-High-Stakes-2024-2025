@@ -25,7 +25,6 @@ extern motor_group rightDrive;
 
 extern motor ringIntake1;
 extern motor ringIntake2;
-extern motor ringLift;
 extern motor ringLiftArm;
 
 extern motor_group ringIntake;
@@ -33,14 +32,14 @@ extern motor_group ringIntake;
 // Sensors
 
 //extern rotation lift_arm_potentiometer;
-extern pot lift_arm_potentiometer;
+extern rotation lift_arm_potentiometer;
 extern inertial inertial_sensor;
 
 extern rotation sidewaysTrackingWheel;
 extern rotation forwardTrackingWheel;
 
 extern optical color_sensor;
-extern aivision ai_sensor;
+extern distance distance_sensor;
 
 extern digital_in ring_switch;
 

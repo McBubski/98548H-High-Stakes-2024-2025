@@ -26,15 +26,17 @@ void turnToHeading(double heading, double turnSpeed) {
     double error = wrapAngleDeg(heading - inertial_sensor.heading());
     double previousTime = Brain.Timer.system();
 
-    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.43) + 450);
+    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.45) + 500);
 
     bool notDone = true;
-    PID turnPid = PID(0.59, 0.0001, 0.71, 0.5, 5, 100, &notDone, timeout, 180);//.61, 0, 1.05
+    PID turnPid = PID(0.525, 0.0005, 0.3, 0.5, 5, 100, &notDone, timeout, 180);//0.59, 0.0001, 0.71
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
 
         double speed = turnPid.Update(error, (Brain.Timer.system() - previousTime));
+
+        //std::cout << error << std::endl;
 
         leftDrive.spin(forward, speed * (turnSpeed / 100), percent);
         rightDrive.spin(reverse, speed * (turnSpeed / 100), percent);
@@ -45,11 +47,18 @@ void turnToHeading(double heading, double turnSpeed) {
 
     }
 
+    //Controller.rumble("-");
+
     //std::cout << heading - inertial_sensor.heading() << std::endl;
+
+    leftDrive.setStopping(brake);
+    rightDrive.setStopping(brake);
 
     leftDrive.stop();
     rightDrive.stop();
 
+    leftDrive.setStopping(coast);
+    rightDrive.setStopping(coast);
 }
 
 void driveFor(double distance, double speed) {
@@ -61,10 +70,10 @@ void driveFor(double distance, double speed) {
     bool driving = true;
     bool turning = true;
 
-    int timeout = (std::abs(distance) / 12) * 260 + 450;
+    int timeout = (std::abs(distance) / 12) * 300 + 500;
 
-    PID drivePID = PID(5.3, 0.001, 0.70, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
-    PID turnPID = PID(0.5875, 0.0001, 0.705, 100, 3, speed, &turning, 9999999, 100);
+    PID drivePID = PID(4.0, 0.001, 0.70, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID turnPID = PID(0.525, 0.0005, 0.3, 0.5, 5, 100, &turning, 9999999, 180);
 
     double driveError = distance;
     double turnError = wrapAngleDeg(targetHeading - inertial_sensor.heading());
@@ -91,7 +100,7 @@ void driveFor(double distance, double speed) {
 
         wait(10, msec);
 
-        //std::cout << "Error: " << driveError << std::endl;
+        std::cout << "Error: " << driveError << std::endl;
     }
 
     //std::cout << "Drive Error: " << driveError << std::endl;
@@ -221,14 +230,19 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
     float currentArmAngle = lift_arm_potentiometer.angle(degrees);
     float goalArmAngle = targetAngle;
     float error = goalArmAngle - currentArmAngle;
+    float previousWallstakeArmError = error;
+    float derivative = error - previousWallstakeArmError;
+
+    float kP = 0.7;
+    float kD = 0.8;
 
     float startTime = Brain.Timer.system();
     float timeSinceStart = Brain.Timer.system() - startTime;
 
     while (std::abs(error) >= 1.5) {
-        if (ringLiftArm.torque(Nm) >= 0.8) {
-            break;
-        }
+        //if (ringLiftArm.torque(Nm) >= 0.8) {
+        //    break;
+        //}
 
         if (pushing) {
             float shakeVal = (Brain.Timer.system() / 200.00) * 3.14;
@@ -243,22 +257,27 @@ void moveLiftToAngle(float targetAngle, bool pushing) {
 
         timeSinceStart = Brain.Timer.system() - startTime;
 
-        if (timeSinceStart >= 1500) {
-            ringLiftArm.stop();
-            
-            if (pushing) {
-                leftDrive.stop();
-                rightDrive.stop(); 
-            }
-
-            return;
-        }
+       if (timeSinceStart >= 1500) {
+           ringLiftArm.stop();
+           
+           if (pushing) {
+               leftDrive.stop();
+               rightDrive.stop(); 
+           }
+           return;
+       }
 
         currentArmAngle = lift_arm_potentiometer.angle(degrees);
         error = goalArmAngle - currentArmAngle;
 
-        ringLiftArm.spin(forward, error * 2.1, percent);
+        //std::cout << Brain.Timer.system() << ", " << error << std::endl;
+
+        ringLiftArm.spin(forward, error * kP + derivative * kD, percent);
+
+        previousWallstakeArmError = error;
     }
+
+    std::cout << "Done" << std::endl;
 
     ringLiftArm.stop();
     
@@ -277,8 +296,11 @@ vex::task createRaiseArmTask(int targetAngle) {
     }, new int(targetAngle));
 }
 
-int previousSwitchState = 0;
 int previousColor = 0;
+int detectedColor = 0;
+
+int previousDistanceSensorState = 0;
+int currentDistanceSensorState = 0;
 
 int sortColorTask(void) {
     color_sensor.setLight(ledState::on);
@@ -298,29 +320,52 @@ int sortColorTask(void) {
             detectedColor = 2;
         }
 
+        // Sets color we need to look out for
+
         if (previousColor != detectedColor && detectedColor == 2) {
             colorSortColor = previousColor;
         }
 
-        if (previousSwitchState == 1 && ring_switch.value() == 0) {
+        //std::cout << colorToSort << std::endl;
+
+        // Sets current distance sensor status
+
+        if (distance_sensor.objectDistance(distanceUnits::mm) <= 40) {
+            currentDistanceSensorState = 1;
+        } else {
+            currentDistanceSensorState = 0;
+        }
+
+        // Ejects ring if needed
+
+        if (previousDistanceSensorState == 1 && currentDistanceSensorState == 0) { // When we stop sensing the ring (it's at the peak of travel)
+            //std::cout << colorToSort << ", " << robot.Alliance_Color << std::endl;
             if (colorSortColor != auton_color && auton_color != 2) {
+                // Ejection sequence
                 if (color_sort_override == false) {
-                    wait(80, msec);
-                    
+                    color_sort_override = true;
+
+                    ringIntake.setStopping(brake);
+                    ringIntake.stop();
+
+                    std::cout << "Stop!" << std::endl;
+
                     Controller.rumble("-");
-                    intake_interrupt = true;
-                    ringIntake2.stop();
 
-                    wait(150, msec);
+                    wait(250, msec);
 
-                    ringIntake2.spin(forward, 100, percent);
-                    intake_interrupt = false;
+                    color_sort_override = false;
+
+                    ringIntake.setStopping(coast);
+                    ringIntake.spin(forward, 100, percent);
+
+                    std::cout << "Resume" << std::endl;
                 }
             }
         }
-        
-        previousSwitchState = ring_switch.value();
+
         previousColor = detectedColor;
+        previousDistanceSensorState = currentDistanceSensorState;
         wait(10, msec);
     }
     return 1;

@@ -9,21 +9,26 @@ using namespace vex;
 
 bool intakeSpinning = false;
 bool skillsSetupHasRun = false;
+int previousWallstakeArmError = 0;
+float Wallstake_Arm_kP = 0.7;
+float Wallstake_Arm_kD = 0.8;
 
 // Change these values for arm position
 
 float armPositions[6] = {
-  209,//87.5,    // Rest position
-  198,    // First ring position
-  168,    // Mid Position
-  110,   // Wall stake position
-  60,   // Alliance stake position
-  166     // Hang position
+  280.0,//87.5,    // Rest position
+  261.0,    // First ring position
+  210.0,    // Mid Position
+  130.0,   // Wall stake position
+  85.0,   // Alliance stake position
+  210.0     // Hang position
 };
 
 void usercontrol(void) {
   // Initializes robot before driving
   initializeUserControl();
+
+  goal_rush_arm.set(true);
 
   while (1) {
     wait(20, msec);
@@ -38,19 +43,19 @@ void usercontrol(void) {
 
     // PID for arm lift
 
-    if (Controller.ButtonB.pressing()) {
+    if (Controller.ButtonY.pressing()) {
       armOverride = true;
-      ringLiftArm.spin(reverse, 100, percent);
-    } else if (Controller.ButtonY.pressing()) {
+      ringLiftArm.spin(forward, 100, percent);
+    } else if (Controller.ButtonB.pressing()) {
       if (auton_path == 5) {
-        ringLiftArm.spin(reverse, 100, percent);
+        ringLiftArm.spin(forward, 100, percent);
         ringIntake2.spinFor(reverse, 25, degrees, false);
         driveFor(-7.5, 100);
         wait(150, msec);
         ringLiftArm.stop();
       } else {
         armOverride = true;
-        ringLiftArm.spin(forward, 100, percent);
+        ringLiftArm.spin(reverse, 100, percent);
       }
     } else {
       if (armOverride) {
@@ -60,19 +65,33 @@ void usercontrol(void) {
     } 
 
     if (!armOverride) {
-      float currentArmAngle = lift_arm_potentiometer.angle(degrees);
-      float goalArmAngle = armPositions[goalArmPos];
-      float error = goalArmAngle - currentArmAngle;
+        // Calculate how far the arm needs to travel to be at target
+
+        float currentArmAngle = lift_arm_potentiometer.angle(degrees);
+        float goalArmAngle = armPositions[goalArmPos];
+ 
+        float error = goalArmAngle - currentArmAngle;
+        float derivative = error - previousWallstakeArmError;
+
+        float kP = Wallstake_Arm_kP;
+        float kD = Wallstake_Arm_kD;
+
+        if (goalArmPos <= 1 && previousGoalArmPos > 1) { // If we're moving forward, basically.
+          kP = 0.4;
+          kD = 0.08;
+         } 
 
       //std::cout << error << ", " << currentArmAngle << ", " << goalArmAngle << std::endl;
 
-      std::cout << lift_arm_potentiometer.angle(degrees) << std::endl;
+      //std::cout << lift_arm_potentiometer.angle(degrees) << std::endl;
 
       if (std::abs(error) >= 0.5) {
-       ringLiftArm.spin(forward, error * 2.1, percent);
+       ringLiftArm.spin(forward, error * kP + derivative * kD, percent);
       } else {
        ringLiftArm.stop();
       }
+
+      previousWallstakeArmError = error;
     }
 
     // Sets intakeSpeed to however fast it should be
