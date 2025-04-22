@@ -471,3 +471,7 @@ void Positive_Elims_Red(void) {
     driveTo(-16, Position_Tracking.GlobalYPos, 100, reverse);
     //driveTo(-18, -46, 100, reverse);
 }
+
+void Corner_Clear_Red(void) {
+    
+}

@@ -156,6 +156,12 @@ void UpdateAutonInformation(void) {
         case 14:
             auton = "Pos. Elims Blue";
             break;
+        case 15:
+            auton = "Corner Clear Red";
+            break;
+        case 16:
+            auton = "Corner Clear Blue";
+            break;
         default:
             auton = "Blue Auton";
     }

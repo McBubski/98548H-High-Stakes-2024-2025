@@ -1,7 +1,7 @@
 #include "vex.h"
 
 extern int auton_path;
-extern double startingPositions[14][3];
+extern double startingPositions[16][3];
 
 void setColorSort(void);
 void autonomous(void);

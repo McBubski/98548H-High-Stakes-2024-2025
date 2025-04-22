@@ -49,7 +49,7 @@ digital_out goal_clamp = digital_out(Brain.ThreeWirePort.A);
 digital_out lifted_intake = digital_out(Brain.ThreeWirePort.B);
 
 digital_out goal_rush_arm = digital_out(Brain.ThreeWirePort.C);
-digital_out goal_rush_arm_clamp = digital_out(Brain.ThreeWirePort.F);
+digital_out goal_rush_arm_clamp = digital_out(Brain.ThreeWirePort.D);
 
 // Odometry
 
