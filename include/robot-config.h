@@ -51,6 +51,9 @@ extern digital_out lifted_intake;
 extern digital_out goal_rush_arm;
 extern digital_out goal_rush_arm_clamp;
 
+extern digital_out goal_rush_arm_right;
+extern digital_out goal_rush_arm_right_clamp;
+
 // Odometry
 
 extern Odometry Position_Tracking;

@@ -473,5 +473,53 @@ void Positive_Elims_Red(void) {
 }
 
 void Corner_Clear_Red(void) {
-    
+    task raiseArm = createRaiseArmTask(210);
+
+    // Grab goal
+
+    driveTo(-22, -22, 45, reverse);
+    goal_clamp.set(true);
+
+    // Get first ring
+
+    ringIntake.spin(forward, 100, percent);
+    driveTo(-25.5, -48, 100, forward);
+
+    // Get second ring
+
+    driveTo(-50, -50, 100, forward);
+
+    // Get corner
+
+    pointAt(-72, -73, 100, forward);
+    driveFor(26, 40);
+    wait(200, msec);
+
+    // Clear corner
+    driveFor(-6, 60);
+    //goal_rush_arm_right.set(true);
+    //goal_rush_arm_right_clamp.set(true);
+    //wait(400, msec);
+    //driveFor(8, 80);
+
+    lifted_intake.set(true);
+    driveFor(6, 40);
+
+    //turnToHeading(105, 70);
+    //goal_rush_arm_right.set(false);
+    //goal_rush_arm_right_clamp.set(false);
+    //driveFor(10, 100);
+    driveFor(-6, 100);
+    lifted_intake.set(false);
+
+    // Wallstake
+
+    driveTo(-9, -56, 100, forward);
+    pointAt(3, -72, 100, forward);
+    driveFor(5, 100);
+    raiseArm = createRaiseArmTask(130);
+
+    // This is where you add the part to make the arm stay out for driver. I hope this comment isn't
+    // foreshadowing anything, that would be funny. Please add this back. If this causes problems,
+    // at least I recognized it in advance lmao.
 }
