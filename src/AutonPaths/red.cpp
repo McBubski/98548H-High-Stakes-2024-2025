@@ -16,7 +16,7 @@ void Goal_Fill_Left_Auton(void) {
     // Score first ring
 
     ringLiftArm.spin(reverse, 100, percent);
-    wait(500, msec);
+    wait(250, msec);
     ringLiftArm.stop();
     driveFor(-6, 100);
 
@@ -32,12 +32,12 @@ void Goal_Fill_Left_Auton(void) {
 
     // Grab third ring
 
-    driveTo(-12.5, 49, 90, forward);
+    driveTo(67.5, 49, 90, forward);
     wait(25, msec);
 
     // Grab to last ring 
     
-    driveTo(-9, 57.5, 100, forward);
+    driveTo(-6.5, 58.5, 100, forward);
     //turnToHeading(355, 100);
     //driveFor(16, 100);
     //wait(100, msec);
@@ -59,7 +59,7 @@ void Goal_Fill_Left_Auton(void) {
 
     //ringIntake.stop();
     task raiseLift = task(delayRaiseIntakeButOnlyForThisSpecificAutonButRedLmao);
-    driveTo(-52, 7, 100, forward);
+    driveTo(-54, 7, 100, forward);
     lifted_intake.set(false);
 
     driveFor(-6, 100);

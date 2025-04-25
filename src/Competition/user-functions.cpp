@@ -28,7 +28,7 @@ void initializeUserControl(void) {
     Controller.ButtonL2.pressed(cycleRingArmTarget);
     Controller.ButtonL1.pressed(lowerRingArm);
     Controller.ButtonA.pressed(toggleColorSorter);
-    Controller.ButtonUp.pressed(toggleLiftedIntake);
+    Controller.ButtonUp.pressed(toggleLiftedIntake); // Actually doinker
 
     Controller.ButtonLeft.pressed(toggleGoalRushArm);
     Controller.ButtonX.pressed(toggleGoalRushArmClamp);
@@ -57,7 +57,7 @@ void toggleGoalRushArmClamp(void) {
 }
 
 void toggleLiftedIntake(void) {
-  lifted_intake.set(!lifted_intake.value());
+  goal_rush_arm_right.set(!goal_rush_arm_right.value());
 }
 
 void toggleElevation(void) {

@@ -124,7 +124,7 @@ void Goal_Fill_Right_Auton(void) {
     // Score first ring
 
     ringLiftArm.spin(reverse, 100, percent);
-    wait(500, msec);
+    wait(300, msec);
     ringLiftArm.stop();
     driveFor(-6, 100);
 

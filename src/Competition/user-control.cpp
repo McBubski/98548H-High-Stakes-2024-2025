@@ -28,8 +28,6 @@ void usercontrol(void) {
   // Initializes robot before driving
   initializeUserControl();
 
-  goal_rush_arm.set(true);
-
   while (1) {
     wait(20, msec);
   
