@@ -182,7 +182,7 @@ void Blue_Win_Point(void) {
     // Get alliance stake
 
     ringLiftArm.spin(reverse, 100, percent);
-    wait(900, msec);
+    wait(300, msec);
     ringLiftArm.stop();
     driveFor(-6, 100);
 
@@ -190,14 +190,14 @@ void Blue_Win_Point(void) {
 
     // Grab goal
 
-    driveTo(17, -25.5, 40, reverse);
+    driveTo(17, -28, 40, reverse);
     goal_clamp.set(true);
     
     // Get lifted ring
     
     lifted_intake.set(true);
     ringIntake.spin(forward, 100, percent);
-    driveTo(44, -5, 100, forward);
+    driveTo(46.5, -5, 100, forward);
     lifted_intake.set(false);
     driveFor(-12, 100);
 
@@ -205,20 +205,26 @@ void Blue_Win_Point(void) {
 
     driveTo(28, -50, 100, forward);
 
+    raiseArm = createRaiseArmTask(120);
+
     // Get corner ring
 
-    driveTo(66, -70, 60, forward);
-    driveFor(-4, 100);
-    driveFor(8, 100);
+    driveTo(66, -70, 50, forward);
+    driveFor(-8, 100);
+    lifted_intake.set(true);
+    driveFor(12, 100);
+    lifted_intake.set(false);
 
     // Touch bar
 
     driveTo(28, -50, 100, reverse);
 
-    raiseArm = createRaiseArmTask(90);
+    //raiseArm = createRaiseArmTask(125);
 
-    driveTo(21, -21, 60, forward);
-    turnToHeading(315, 100);
+    driveTo(18, -18, 60, forward);
+    //turnToHeading(315, 100);
+
+    //driveFor(4, 100);
 }
 
 void Blue_Elims(void) {
@@ -444,36 +450,40 @@ void Corner_Clear_Blue(void) {
     // Get first ring
 
     ringIntake.spin(forward, 100, percent);
-    driveTo(23.5, -46, 100, forward);
+    driveTo(23.5, -44, 100, forward);
 
     // Get second ring
 
-    driveTo(56, -48, 100, forward);
+    driveTo(50, -44, 100, forward);
 
     // Get corner
 
-    pointAt(68.5,- 70, 100, forward);
-    driveFor(14, 40);
+    pointAt(72, -73, 100, forward);
+    driveFor(26, 40);
     wait(200, msec);
 
     // Clear corner
-    driveFor(-14, 100);
-    goal_rush_arm.set(true);
-    goal_rush_arm_clamp.set(true);
-    wait(400, msec);
-    driveFor(8, 80);
+    driveFor(-6, 100);
+    //goal_rush_arm.set(true);
+    //goal_rush_arm_clamp.set(true);
+    //wait(400, msec);
+    //driveFor(8, 80);
 
-    turnToHeading(255, 70);
-    goal_rush_arm.set(false);
-    goal_rush_arm_clamp.set(false);
-    driveFor(10, 100);
-    driveFor(-4, 100);
+    lifted_intake.set(true);
+    driveFor(8, 100);
+
+    //turnToHeading(255, 70);
+    //goal_rush_arm.set(false);
+    //goal_rush_arm_clamp.set(false);
+    //driveFor(10, 100);
+    driveFor(-6, 100);
+    lifted_intake.set(false);
 
     // Wallstake
 
-    driveTo(9.5, -59, 100, forward);
+    driveTo(10.5, -56, 100, forward);
     pointAt(-12, -72, 100, forward);
-    driveFor(4, 100);
+    driveFor(5, 100);
     raiseArm = createRaiseArmTask(130);
 
     // This is where you add the part to make the arm stay out for driver. I hope this comment isn't

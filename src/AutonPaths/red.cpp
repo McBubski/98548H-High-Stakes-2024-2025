@@ -195,7 +195,7 @@ void Red_Win_Point(void) {
     // Get alliance stake
 
     ringLiftArm.spin(reverse, 100, percent);
-    wait(900, msec);
+    wait(300, msec);
     ringLiftArm.stop();
     driveFor(-6, 100);
 
@@ -203,91 +203,41 @@ void Red_Win_Point(void) {
 
     // Grab goal
 
-    driveTo(-19, -27.5, 40, reverse);
+    driveTo(-17, -28, 40, reverse);
     goal_clamp.set(true);
     
     // Get lifted ring
     
     lifted_intake.set(true);
     ringIntake.spin(forward, 100, percent);
-    driveTo(-44.5, -6, 100, forward);
+    driveTo(-46.5, -5, 100, forward);
     lifted_intake.set(false);
     driveFor(-12, 100);
 
     // Get second ring
 
-    pointAt(-28, -50, 100, forward);
-    raiseArm = createRaiseArmTask(110);
     driveTo(-28, -50, 100, forward);
+
+    raiseArm = createRaiseArmTask(120);
 
     // Get corner ring
 
-    driveTo(-66, -73, 50, forward);
-    driveFor(-4, 100);
-    driveFor(8, 100);
+    driveTo(-66, -70, 50, forward);
+    driveFor(-8, 100);
+    lifted_intake.set(true);
+    driveFor(12, 100);
+    lifted_intake.set(false);
 
     // Touch bar
 
     driveTo(-28, -50, 100, reverse);
-    raiseArm = createRaiseArmTask(120);
 
-    driveTo(-23.5, -23.5, 100, forward);
-    turnToHeading(45, 100);
+    //raiseArm = createRaiseArmTask(125);
 
-    //driveFor(-18, 100);
-    //ringLift.spinFor(reverse, 150, degrees, false);
-    //turnToHeading(300, 100);
-    //driveFor(-14, 20);
-    //goal_clamp.set(true);
-    //ringIntake.spin(forward, 100, percent);
-//
-    //// Second goal
-//
-    //driveTo(-51, -24, 100, forward);
-    //driveTo(-51, 32, 40, forward);
-    //
-    //ringIntake.stop();
-    //ringIntake1.spin(forward, 100, percent);
-    ////wait(1300, msec);
-    //driveFor(-6, 100);
-    //goal_clamp.set(false);
-//
-    //pointAt(-20, 22, 100, reverse);
-    //driveTo(-18, 22, 35, reverse);
-    //goal_clamp.set(true);
-    //ringIntake.spin(forward, 100, percent);
-//
-    //// Get next ring
-    //driveTo(-26, 44, 90, forward);
-    //driveFor(-20, 100);
-//
-    //// Touch bar
-//
-    //driveTo(-13.5, 13.5, 100, forward);
-    //moveLiftToAngle(100, false);
-    //driveTo(-54, 0.2, 100, reverse);
-    //turnToHeading(90, 100);
-    //driveFor(-11.5, 100);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //wait(500, msec);
-    //ringIntake.stop();
-//
-    //driveFor(12, 100);
-//
-    //driveTo(-19.5, 26, 40, reverse);
-    //goal_clamp.set(true);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //driveTo(-9.5, 41, 80, forward);
-    //wait(1000, msec);
-    //driveFor(-16, 100);
-    //driveTo(-21, 48, 100, forward);
-    //driveTo(-17, 15.5, 100, forward);
-//
-    //turnToHeading(135, 100);
-    //driveFor(2, 100);
-    //moveLiftToAngle(100, false);
+    driveTo(-18, -18, 60, forward);
+    //turnToHeading(315, 100);
+
+    //driveFor(4, 100);
 }
 
 void Red_Elims(void) {

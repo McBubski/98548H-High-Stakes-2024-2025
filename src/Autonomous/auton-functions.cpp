@@ -26,10 +26,10 @@ void turnToHeading(double heading, double turnSpeed) {
     double error = wrapAngleDeg(heading - inertial_sensor.heading());
     double previousTime = Brain.Timer.system();
 
-    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.45) + 500);
+    double timeout = ((std::abs(wrapAngleDeg(heading - inertial_sensor.heading())) * 2.45) + 350);
 
     bool notDone = true;
-    PID turnPid = PID(0.525, 0.0005, 0.3, 0.5, 5, 100, &notDone, timeout, 180);//0.59, 0.0001, 0.71
+    PID turnPid = PID(0.525, 0.0005, 0.38, 0.5, 5, 100, &notDone, timeout, 180);//0.59, 0.0001, 0.71
 
     while (notDone) {
         error = wrapAngleDeg(heading - inertial_sensor.heading());
@@ -47,7 +47,6 @@ void turnToHeading(double heading, double turnSpeed) {
 
     }
 
-    //Controller.rumble("-");
 
     //std::cout << heading - inertial_sensor.heading() << std::endl;
 
@@ -70,9 +69,9 @@ void driveFor(double distance, double speed) {
     bool driving = true;
     bool turning = true;
 
-    int timeout = (std::abs(distance) / 12) * 300 + 500;
+    int timeout = (std::abs(distance) / 12) * 300 + 300;
 
-    PID drivePID = PID(4.0, 0.001, 0.70, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
+    PID drivePID = PID(4.0, 0.001, 0.65, 0.15, 10, speed, &driving, timeout, 100); // 3.5, 0, 1, 0.25
     PID turnPID = PID(0.525, 0.0005, 0.3, 0.5, 5, 100, &turning, 9999999, 180);
 
     double driveError = distance;
@@ -102,6 +101,8 @@ void driveFor(double distance, double speed) {
 
         std::cout << "Error: " << driveError << std::endl;
     }
+
+    Controller.rumble("-");
 
     //std::cout << "Drive Error: " << driveError << std::endl;
 
