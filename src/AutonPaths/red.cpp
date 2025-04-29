@@ -226,7 +226,7 @@ void Red_Win_Point(void) {
     // Get corner ring
 
     driveTo(-66, -70, 50, forward);
-    driveFor(-6, 100);
+    driveFor(-4, 100);
     lifted_intake.set(true);
     driveFor(12, 100);
     lifted_intake.set(false);
@@ -432,7 +432,7 @@ void Corner_Clear_Red(void) {
 
     // Grab goal
 
-    driveTo(-22, -22, 45, reverse);
+    driveFor(-getDistance(-22, -22, Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos), 45);
     goal_clamp.set(true);
 
     // Get first ring
@@ -442,35 +442,36 @@ void Corner_Clear_Red(void) {
 
     // Get second ring
 
-    driveTo(-50, -50, 100, forward);
+    driveTo(-50, -56, 100, forward);
 
     // Get corner
 
     pointAt(-72, -73, 100, forward);
-    driveFor(26, 40);
+    driveFor(30, 40);
     wait(200, msec);
 
     // Clear corner
-    driveFor(-6, 60);
+    driveFor(-6, 40);
     //goal_rush_arm_right.set(true);
     //goal_rush_arm_right_clamp.set(true);
     //wait(400, msec);
     //driveFor(8, 80);
 
     lifted_intake.set(true);
-    driveFor(6, 40);
+    driveFor(12, 40);
+    lifted_intake.set(false);
 
     //turnToHeading(105, 70);
     //goal_rush_arm_right.set(false);
     //goal_rush_arm_right_clamp.set(false);
     //driveFor(10, 100);
-    driveFor(-6, 100);
-    lifted_intake.set(false);
+    driveFor(-10, 100);
 
     // Wallstake
 
-    driveTo(-9, -56, 100, forward);
-    pointAt(3, -72, 100, forward);
+    driveTo(-10, -62, 100, forward);
+    ///turnToHeading(135, 100);
+    pointAt(0, -70, 100, forward);
     driveFor(5, 100);
     raiseArm = createRaiseArmTask(130);
 

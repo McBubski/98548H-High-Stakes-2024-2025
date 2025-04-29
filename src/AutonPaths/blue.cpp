@@ -442,21 +442,21 @@ void Corner_Clear_Blue(void) {
 
     // Grab goal
 
-    driveTo(22, -22, 45, reverse);
+    driveFor(-getDistance(22, -22, Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos), 45);
     goal_clamp.set(true);
 
     // Get first ring
 
     ringIntake.spin(forward, 100, percent);
-    driveTo(23.5, -44, 100, forward);
+    driveTo(26.5, -48, 100, forward);
 
     // Get second ring
 
-    driveTo(50, -44, 100, forward);
+    driveTo(50, -50, 100, forward);
 
     // Get corner
 
-    pointAt(72, -73, 100, forward);
+    pointAt(74, -73, 100, forward);
     driveFor(26, 40);
     wait(200, msec);
 
@@ -467,21 +467,25 @@ void Corner_Clear_Blue(void) {
     //wait(400, msec);
     //driveFor(8, 80);
 
-    lifted_intake.set(true);
-    driveFor(8, 100);
+    driveFor(12, 70);
+    driveFor(-6, 100);
+    driveFor(12, 70);
+
+    //lifted_intake.set(true);
+    //driveFor(12, 100);
+    //lifted_intake.set(false);
 
     //turnToHeading(255, 70);
     //goal_rush_arm.set(false);
     //goal_rush_arm_clamp.set(false);
     //driveFor(10, 100);
-    driveFor(-6, 100);
-    lifted_intake.set(false);
+    driveFor(-8, 100);
 
     // Wallstake
 
-    driveTo(10.5, -56, 100, forward);
-    pointAt(-12, -72, 100, forward);
-    driveFor(5, 100);
+    driveTo(10.5, -62, 100, forward);
+    pointAt(-7.5, -72, 100, forward);
+    driveFor(6.5, 100);
     raiseArm = createRaiseArmTask(130);
 
     // This is where you add the part to make the arm stay out for driver. I hope this comment isn't
