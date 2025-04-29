@@ -63,7 +63,7 @@ void toggleLiftedIntake(void) {
 void toggleElevation(void) {
   armOverride = false;
   previousGoalArmPos = goalArmPos;
-  goalArmPos = 4;
+  goalArmPos = 5;
 }
 
 void toggleIntakeSpeed(void) {

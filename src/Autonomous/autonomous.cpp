@@ -31,10 +31,6 @@ double startingPositions[16][3] = {
 void autonomous(void) {
     float startTime = Brain.Timer.systemHighResolution();   
 
-    driveFor(24, 100);
-    //turnToHeading(55.3, 100);
-    return;
-
     switch (auton_path) {
         case 1:
             setColorSort();

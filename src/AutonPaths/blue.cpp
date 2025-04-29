@@ -292,7 +292,7 @@ void Blue_Sig_Point(void) {
     // Score first ring
 
     ringLiftArm.spin(reverse, 100, percent);
-    wait(700, msec);
+    wait(300, msec);
     ringLiftArm.stop();
     driveFor(-6, 100);
 
@@ -300,28 +300,25 @@ void Blue_Sig_Point(void) {
 
     driveTo(18.5 , 36, 50, reverse);
     goal_clamp.set(true);
-//
-    // Put on first ring
 
     ringIntake.spin(forward, 100, percent);
-    wait(25, msec);
 
     // Grab third ring
 
-    driveTo(18.5, 47.5, 80, forward);
+    driveTo(11.5, 49.5, 80, forward);
     wait(25, msec);
 
     // Grab to last ring 
 
     driveFor(-6, 100);    
-    driveTo(28, 52, 100, forward);
+    driveTo(24, 54, 100, forward);
 
     // Get ring stack
 
-    ringIntake1.spin(forward, 100, percent);
-    pointAt(58.5, 10, 100, forward);
+    ringIntake.spin(forward, 100, percent);
+    pointAt(47, 10, 100, forward);
     lifted_intake.set(true);
-    driveFor(getDistance(Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos, 58.5, 10), 100);
+    driveFor(getDistance(Position_Tracking.GlobalXPos, Position_Tracking.GlobalYPos, 55.5, 10), 100);
 
     lifted_intake.set(false);
     //ringIntake1.spin(forward, 100, percent);
@@ -335,21 +332,22 @@ void Blue_Sig_Point(void) {
     // Get next goal
 
     pointAt(26.5, -12.5, 100, reverse);
-    ringIntake2.stop();
+    ringIntake.spin(forward, 15, percent);
+    //ringIntake2.stop();
     driveTo(24.5, -14.5, 55, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
 
     // Get final ring
 
-    driveTo(34, -37.5, 100, forward);
+    driveTo(28, -37.5, 100, forward);
 
     // Touch
 
     driveFor(-24, 100);
-    task armTask = createRaiseArmTask(100);
+    task armTask = createRaiseArmTask(120);
     turnToHeading(315, 100);
-    driveFor(7, 100);
+    driveFor(10, 100);
 }
 
 void Positive_Elims_Blue(void) {

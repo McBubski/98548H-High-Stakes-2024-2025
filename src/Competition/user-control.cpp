@@ -21,7 +21,7 @@ float armPositions[6] = {
   210.0,    // Mid Position
   130.0,   // Wall stake position
   85.0,   // Alliance stake position
-  210.0     // Hang position
+  220.0     // Hang position
 };
 
 void usercontrol(void) {

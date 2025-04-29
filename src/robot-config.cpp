@@ -32,7 +32,7 @@ motor_group ringIntake = motor_group(ringIntake1, ringIntake2);
 // Sensors
 
 //rotation lift_arm_potentiometer = rotation(PORT17, false);
-rotation lift_arm_potentiometer = rotation(PORT4, false);
+rotation lift_arm_potentiometer = rotation(PORT6, false);
 inertial inertial_sensor = inertial(PORT9);
 
 rotation sidewaysTrackingWheel = rotation(PORT13, false);
