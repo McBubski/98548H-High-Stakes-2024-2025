@@ -7,7 +7,7 @@
 
 using namespace vex;
 
-int auton_path = 16;
+int auton_path = 12;
 
 double startingPositions[16][3] = {
     {-48.6, -36.0, 112}, // Goal Rush Right (1)
@@ -21,7 +21,7 @@ double startingPositions[16][3] = {
     {-60, 21, 215.3}, // Elims Red (9)
     {60, 21, 144.7}, // Sig Point Blue (10)
     {-60, 21, 215.3}, // Sig Point Red (11)
-    {-60.5, -6, 287.6}, // New Skills (12)
+    {-59, -12, 317.6}, // New Skills (12)
     {-48.6, -36.0, 112}, // Positive Elims Red
     {48.5, -58, 294}, //  Positive Elims Blue
     {-54, -40, 242.7}, // Corner Clear New Red
@@ -30,6 +30,12 @@ double startingPositions[16][3] = {
 
 void autonomous(void) {
     float startTime = Brain.Timer.systemHighResolution();   
+
+    turnToHeading(47, 100);
+    driveFor(4, 100);
+    return;
+  
+    
 
     switch (auton_path) {
         case 1:

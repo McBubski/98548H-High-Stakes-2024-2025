@@ -28,14 +28,17 @@ void initializeUserControl(void) {
     Controller.ButtonL2.pressed(cycleRingArmTarget);
     Controller.ButtonL1.pressed(lowerRingArm);
     Controller.ButtonA.pressed(toggleColorSorter);
-    Controller.ButtonUp.pressed(toggleLiftedIntake); // Actually doinker
+    Controller.ButtonX.pressed(toggleLiftedIntake); // Actually doinker
 
-    Controller.ButtonLeft.pressed(toggleGoalRushArm);
-    Controller.ButtonX.pressed(toggleGoalRushArmClamp);
+    Controller.ButtonUp.pressed(toggleGoalRushArm);
+    Controller.ButtonLeft.pressed(toggleGoalRushArmClamp);
 
     color_sort_override = true;
     
     // Macro
+
+    goal_rush_arm_clamp.set(true);
+    goal_rush_arm_right_clamp.set(true);
 
     Controller.ButtonB.pressed(setRingArmTargetToAllianceStake);
 }
@@ -54,6 +57,7 @@ void toggleGoalRushArm(void) {
 
 void toggleGoalRushArmClamp(void) {
   goal_rush_arm_clamp.set(!goal_rush_arm_clamp.value());
+  goal_rush_arm_right_clamp.set(!goal_rush_arm_right_clamp.value());
 }
 
 void toggleLiftedIntake(void) {
