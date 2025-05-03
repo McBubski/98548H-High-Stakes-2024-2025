@@ -56,7 +56,7 @@ void drawHomeScreen(void) {
 
     // Show Progression
 
-    Brain.Screen.printAt(260, 150, "(%d/14)", auton_path);
+    Brain.Screen.printAt(260, 150, "(%d/16)", auton_path);
 
     // Display Buttons
 
