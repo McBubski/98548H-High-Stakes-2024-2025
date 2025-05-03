@@ -75,122 +75,58 @@ void Goal_Fill_Left_Auton(void) {
 int dumbArmTask(void) {
     //ringIntake.spin(forward, 100, percent);
     wait(100, msec);
-    goal_rush_arm.set(true);
+    goal_rush_arm_right.set(true);
 
     return 1;
 }
 
 void Goal_Rush_Right_Auton(void) {
     // Do everything really fast 
-    task raiseArm = createRaiseArmTask(280);
+    goal_rush_arm_right_clamp.set(true);
+    task raiseArm = createRaiseArmTask(210);
     task rushArm = task(dumbArmTask);
-    ringIntake1.spin(forward, 100, percent);
-    ringIntake2.stop();
+    ringIntake.spin(forward, 10, percent);
 
     // Rush and grab goal
-    driveFor(31.5, 100);
-    goal_rush_arm_clamp.set(true);
-    //driveFor(-20, 100);
-    
-    double encoderStart = forwardTrackingWheel.position(turns);
-    double error = -20;
+    driveFor(33.5, 100);
+    goal_rush_arm_right_clamp.set(false);
 
-    while (std::abs(error) >= 0.5) {
-        double encoderChange = forwardTrackingWheel.position(turns) - encoderStart;
-        double inchesMoved = encoderChange * 1.75 * M_PI; // Circumference of Wheels
-        error = -20 - inchesMoved;
+    driveFor(-20, 100);
 
-        //std::cout << forwardTrackingWheel.position(turns) << ", " << error << std::endl;
-
-        leftDrive.spin(reverse, 100, percent);
-        rightDrive.spin(reverse, 100, percent);
-
-        wait(20, msec);
-    }
-
-    leftDrive.stop();
-    rightDrive.stop();
-
-    // Put on goal
-
-    goal_rush_arm_clamp.set(false);
-    goal_rush_arm.set(false);
-    turnToHeading(273, 100);
-    turnToHeading(273, 100);
-    driveFor(-19.5, 40);
+    // Grab goal 
+    goal_rush_arm_right_clamp.set(true);
+    goal_rush_arm_right.set(false);
+    turnToHeading(255, 100);
+    driveFor(-24, 30);
     goal_clamp.set(true);
-    goal_rush_arm.set(true);
     ringIntake.spin(forward, 100, percent);
-    wait(400, msec);
-    ringIntake.stop();
-    //ringIntake.spinFor(reverse, 50, degrees);
-    //ringLiftArm.spin(reverse, 100, percent);
-    //raiseArm = createRaiseArmTask(64);
-    //goal_clamp.set(false);
-    //driveTo(-60, -48, 70, forward);
-    //ringIntake.spin(forward, 100, percent);
+    driveTo(-50, -48, 70, forward);
 
-    driveTo(-55, -58, 50, forward);
-    turnToHeading(310, 30);
+    driveTo(-74, -70, 35, forward);
 
-    turnToHeading(0, 100);
-    goal_rush_arm.set(false);
-    goal_clamp.set(false);
+    // Grab Corner Ring
+    ringIntake.spin(forward, 10, percent);
+    driveFor(-16, 100);
+    goal_rush_arm_right.set(true);
+    goal_rush_arm_right_clamp.set(true);
     driveFor(4, 100);
-    turnToHeading(285, 100);
-    driveFor(-14, 100);
+    turnToHeading(113, 100);
+    goal_rush_arm_right.set(false);
+    goal_rush_arm_right_clamp.set(false);
 
-    driveTo(-19.5, -26, 45, reverse);
+    turnToHeading(330, 100);
+    goal_clamp.set(false);
+    ringIntake.stop();
+
+    driveTo(-21, -21, 50, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
-    //ringIntake.spin(forward, 100, percent);
 
-    driveTo(-26, -54, 100, forward);
-    //raiseArm = createRaiseArmTask(180);
-//
-    //turnToHeading(131, 100);//pointAt(0.75, -72, 90, forward);
-    //driveFor(6, 60);
-    //goalArmPos = 2;
-    //ringLiftArm.spin(reverse, 20, percent);
-    //wait(650, msec);
-    //ringLiftArm.stop();
+    driveTo(-24, -48, 100, forward);
 
-    //goal_rush_arm_clamp.set(false);
-    //goal_rush_arm.set(false);
-    //turnToHeading(90, 100);
-    //driveFor(4, 100);
-    //ringIntake.spinFor(reverse, 17, degrees);
-    //ringLiftArm.spin(reverse, 100, percent);
-    //wait(1000, msec);
-    //ringLiftArm.stop();
-    //raiseArm = createRaiseArmTask(48);
-    //driveFor(-8, 100);
-//
-    //// Get next goal
-//
-    //ringIntake2.spin(reverse, 100, percent);
-    ////pointAt(-22.5, -19.5, 55, reverse);
-    ////driveFor(12, 100);
-    //driveTo(-18.5, -23.5, 55, reverse);
-    //goal_clamp.set(true);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //driveTo(-64, -48, 60, forward);
-    //turnToHeading(200, 100);
-    //driveFor(46, 40);
-//
-    //// Clear corner
-    //driveFor(-10, 100);
-    //goal_rush_arm.set(true);
-    //driveFor(3, 100);
-    //turnToHeading(315, 100);
-    //turnToHeading(315, 100);
-    //goal_rush_arm.set(false);
-    //goal_clamp.set(false);
-    //driveFor(4, 100);
-//
-    //driveTo(-24, -46, 60, reverse);
-    ////goal_clamp.set(true);
+    driveTo(-10, -65, 100, forward);
+    raiseArm = createRaiseArmTask(130);
+    pointAt(0, -72, 100, forward);
 }
 
 void Red_Win_Point(void) {

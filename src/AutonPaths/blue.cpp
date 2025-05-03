@@ -14,104 +14,52 @@ int dumbArmTask2(void) {
 
 void Goal_Rush_Left_Auton(void) {
     // Do everything really fast 
+    goal_rush_arm_clamp.set(true);
     task raiseArm = createRaiseArmTask(210);
     task rushArm = task(dumbArmTask2);
-    ringIntake1.spin(forward, 100, percent);
-    ringIntake2.stop();
+    ringIntake.spin(forward, 10, percent);
 
     // Rush and grab goal
-    driveFor(30.5, 100);
-    goal_rush_arm_clamp.set(true);
-   
-    double encoderStart = forwardTrackingWheel.position(turns);
-    double error = -20;
-
-    while (std::abs(error) >= 0.5) {
-        double encoderChange = forwardTrackingWheel.position(turns) - encoderStart;
-        double inchesMoved = encoderChange * 1.75 * M_PI; // Circumference of Wheels
-        error = -20 - inchesMoved;
-
-        //std::cout << forwardTrackingWheel.position(turns) << ", " << error << std::endl;
-
-        leftDrive.spin(reverse, 100, percent);
-        rightDrive.spin(reverse, 100, percent);
-
-        wait(20, msec);
-    }
-
-    leftDrive.stop();
-    rightDrive.stop();
-
-    // Put on goal
-
+    driveFor(33.5, 100);
     goal_rush_arm_clamp.set(false);
+
+    driveFor(-20, 100);
+
+    // Grab goal 
+    goal_rush_arm_clamp.set(true);
     goal_rush_arm.set(false);
-    turnToHeading(95, 100);
-    driveFor(-18, 30);
+    turnToHeading(105, 100);
+    driveFor(-24, 30);
     goal_clamp.set(true);
-    //ringIntake.spinFor(reverse, 50, degrees);
-    //ringLiftArm.spin(reverse, 100, percent);
     ringIntake.spin(forward, 100, percent);
-    //wait(950, msec);
-    //raiseArm = createRaiseArmTask(64);
-    //goal_clamp.set(false);
-    driveTo(60, -48, 70, forward);
+    driveTo(50, -48, 70, forward);
 
-    driveTo(66, -64, 30, forward);
-    ringIntake.stop();
-    ringIntake1.spin(forward, 100, percent);
-    //wait(200, msec);
+    driveTo(74, -70, 35, forward);
 
-    driveFor(-10, 100);
+    // Grab Corner Ring
+    ringIntake.spin(forward, 10, percent);
+    driveFor(-16, 100);
     goal_rush_arm.set(true);
     goal_rush_arm_clamp.set(true);
-    driveFor(2, 100);
+    driveFor(4, 100);
     turnToHeading(247, 100);
     goal_rush_arm.set(false);
     goal_rush_arm_clamp.set(false);
 
     turnToHeading(30, 100);
     goal_clamp.set(false);
+    ringIntake.stop();
 
-    driveTo(15, -21, 60, reverse);
+    driveTo(18.5, -23, 60, reverse);
     goal_clamp.set(true);
     ringIntake.spin(forward, 100, percent);
-    //ringIntake.spin(forward, 100, percent);
 
-    driveTo(22, -40, 100, forward);
-    //raiseArm = createRaiseArmTask(125);
+    driveTo(24, -56, 100, forward);
 
-    //turnToHeading(225, 100);//
-    pointAt(6, -72, 90, forward);
-    driveFor(17, 40);
+    driveTo(9, -65, 100, forward);
     raiseArm = createRaiseArmTask(130);
-
-    //pointAt(71, -0.5, 100, forward);
-    //ringLiftArm.spin(reverse, 100, percent);
-    //driveFor(2, 100);
-
-    // Get next goal
-
-    //ringIntake2.spin(reverse, 50, percent);
-    //driveTo(21.5, -13.5, 55, reverse);
-    //goal_clamp.set(true);
-//
-    //ringIntake.spin(forward, 100, percent);
-    //driveTo(64, -58, 60, forward);
-    //turnToHeading(160, 100);
-    //driveFor(24, 30);
-//
-    //// Clear corner
-    //driveFor(-8, 100);
-    //goal_rush_arm.set(true);
-    //driveFor(3, 100);
-    //turnToHeading(227, 100);
-    //goal_rush_arm.set(false);
-    //goal_clamp.set(false);
-//
-    //driveTo(24, -50, 60, reverse);
+    pointAt(0, -72, 100, forward);
 }
-
 
 int delayRaiseIntakeButOnlyForThisSpecificAutonLmao() {
     wait(800, msec);
